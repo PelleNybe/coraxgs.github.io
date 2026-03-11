@@ -2,7 +2,7 @@
 
 // Internationalization (i18n) System
 const i18n = {
-  currentLanguage: 'sv',
+  currentLanguage: 'en',
   
   translations: {
     sv: {
@@ -141,7 +141,7 @@ const i18n = {
 
   init() {
     // Load saved language preference
-    this.currentLanguage = localStorage.getItem('corax-language') || 'sv';
+    this.currentLanguage = localStorage.getItem('corax-language') || 'en';
     document.documentElement.lang = this.currentLanguage;
     this.updateLanguageToggle();
     this.translatePage();

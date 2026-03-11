@@ -1,8 +1,8 @@
 # 🔬 Corax CoLAB - Showcase Website
 
-> **Future-Forward Innovation in AI, Web3 & Blockchain**
+> **The Catalyst for Transformation Towards a Sustainable Future**
 
-A modern, responsive, and feature-rich showcase website for Corax CoLAB - an independent research & engineering studio focused on building innovative solutions at the intersection of **AI, IT, Web3 and Blockchain**. We develop both open-source projects and advanced proprietary systems like GAP and GAPbot.
+A modern, responsive, and feature-rich showcase website for Corax CoLAB. This repository serves as a "Deep Tech Marketing Window," highlighting our flagship cyber-physical systems: the **Green Automated Platform (GAP)** and **GAPbot**.
 
 ## 🚀 Live Site
 
@@ -10,61 +10,28 @@ Visit: [https://coraxgs.github.io](https://coraxgs.github.io)
 
 ## ✨ Features
 
-### 🎨 Modern Design & UX
-- **Futuristic dark theme** with gradient accents and glassmorphism effects
-- **Responsive design** that works perfectly on all devices
-- **Smooth animations** and micro-interactions throughout
-- **Light/dark theme toggle** for user preference
-- **Mobile-first navigation** with hamburger menu and overlay
+### 🎨 Deep Tech Brand Identity
+- **Futuristic dark theme** with precise neon green and blue accents matching the official Corax CoLAB branding.
+- **Hero Section "Marketing Window"** featuring impactful typography and animated CSS background placeholders.
+- **Responsive design** that works perfectly on all devices.
+- **Modern typography** emphasizing readability and technical authority.
 
-### 🚀 Performance & PWA
-- **Progressive Web App (PWA)** - installable on mobile devices
-- **Service Worker** for offline functionality and caching
-- **Critical CSS loading** for optimal performance
-- **Lazy loading** and intersection observers for smooth scrolling
-- **Preloaded resources** for faster initial load
+### 🤖 Focus on Cyber-Physical Systems
+- Direct highlights of **GAP Platform**: Hybrid Cloud/Edge architecture, Explainable AI, and Post-Quantum Cryptography.
+- Direct highlights of **GAPbot**: Autonomous hexapod robotics, Neuro-Symbolic Hybrid AI, and 'Sun Bathing Mode'.
+- Integrated links to the [Open Source Architecture Overview](https://github.com/PelleNybe/CoraxCoLABs-GAP-GreenAutomatedPlatform---GAPbot).
 
-### 🔧 GitHub Integration
-- **Dynamic repository loading** from GitHub API
-- **Smart filtering** - excludes forks and prioritizes active repos
-- **Intelligent sorting** based on stars, activity, and content quality
-- **Language-specific colors** and technology tags
-- **Rate limiting and caching** for optimal API usage
-- **Comprehensive error handling** with fallback states
-
-### 📈 Analytics & Tracking  
-- **Privacy-friendly analytics** with Plausible integration
-- **Performance monitoring** and error tracking
-- **User interaction tracking** for continuous improvement
-- **PWA installation prompts** and usage analytics
-
-### 🌐 SEO & Accessibility
-- **Structured data** (JSON-LD) for better search engine understanding
-- **Comprehensive meta tags** for social media sharing
-- **Semantic HTML** structure for screen readers
-- **Keyboard navigation** support throughout
-- **Focus management** and ARIA labels
-- **Sitemap and robots.txt** for search engine optimization
+### 🚀 Performance & Dynamic Content
+- **Progressive Web App (PWA)** - installable on mobile devices.
+- **Dynamic repository loading** from GitHub API (showcasing other open-source tools).
+- **Service Worker** for offline functionality and caching.
 
 ## 🛠 Tech Stack
 
 ### Frontend
-- **HTML5** - Semantic structure with accessibility in mind
-- **CSS3** - Modern features including CSS Grid, Flexbox, and Custom Properties
-- **Vanilla JavaScript** - No frameworks, optimized for performance
-- **Web APIs** - Service Workers, Intersection Observer, Local Storage
-
-### Services & Integrations
-- **GitHub Pages** - Static hosting with HTTPS
-- **GitHub API** - Dynamic repository data
-- **Plausible Analytics** - Privacy-focused analytics
-- **Google Fonts** - Inter font family for modern typography
-
-### Performance Features
-- **Critical CSS inlining** for above-the-fold content
-- **Resource preloading** for faster navigation
-- **Image optimization** through SVG icons and data URIs
-- **Efficient caching** strategies via Service Worker
+- **HTML5** - Semantic structure with accessibility in mind.
+- **CSS3** - Modern features including CSS Grid, Flexbox, Custom Properties, and complex background gradients.
+- **Vanilla JavaScript** - No frameworks, optimized for performance.
 
 ## 📁 Project Structure
 
@@ -80,103 +47,6 @@ coraxgs.github.io/
 └── README.md         # This documentation
 ```
 
-## 🔧 Technical Features
+## 🌐 Official Website
 
-### GitHub API Integration
-```javascript
-class GitHubAPI {
-  // Smart caching with 5-minute TTL
-  // Rate limiting protection
-  // Comprehensive error handling
-  // Repository scoring algorithm
-}
-```
-
-### Performance Analytics
-```javascript
-const CoraxAnalytics = {
-  // Load time tracking
-  // Error monitoring  
-  // User interaction analytics
-  // Performance insights
-}
-```
-
-### PWA Capabilities
-- **Offline functionality** via Service Worker
-- **Install prompts** for mobile and desktop
-- **App-like experience** when installed
-- **Background sync** for future enhancements
-
-### About Corax CoLAB
-
----
-
-## Elevator pitch (short)
-Corax CoLAB develops practical, production-ready applications that combine AI-driven automation with Web3 and blockchain infrastructure — from garden-automation and sensor systems to autonomous robotics, decentralized apps (dApps) and developer tooling. We offer both open-source solutions for community benefit and advanced proprietary systems like GAP and GAPbot for commercial applications.
-
----
-
-## Mission
-Our mission is to accelerate adoption of responsible automation and decentralization by delivering high-quality, auditable, and resource-efficient software and hardware integrations. We aim to make advanced technologies accessible and useful for real-world problems — with sustainability, transparency and innovation as core values. We balance open-source community contributions with proprietary solutions for specialized commercial needs.
-
----
-
-## What we build
-We focus on four complementary domains:
-
-- **AI & Machine Learning** — Edge-friendly models and pipelines for computer vision, predictive control and resource optimization (low-power inference on Raspberry Pi and similar hardware).
-- **Automation & GreenTech** — Systems and controllers for gardens, small farms and industrial processes that reduce energy, water and nutrient usage.
-- **Web3 & Blockchain** — Decentralized applications, smart-contract tooling, wallets and integration layers for trust-minimized services and tokenized incentives.
-- **Developer Tooling & Infrastructure** — CLI tools, dashboards, deployment scripts and CI/CD patterns that make it easier to run reproducible systems and nodes (Cardano, Polkadot, etc.).
-
----
-
-## Key principles & values
-- **Balanced approach:** we develop both open-source projects for community benefit and proprietary solutions for advanced commercial applications.
-- **Open-source contribution:** when possible, we share code publicly for community benefit, using permissive licenses to maximize adoption.
-- **Practical decentralization:** apply blockchain where it adds trust, ownership or incentives — not as an end in itself.
-- **Resource efficiency:** prioritize low-power and cost-effective deployments across all our solutions.
-- **Interoperability:** design software to play well with existing ecosystems (APIs, MQTT, Grafana, Prometheus, container runtimes).
-- **Privacy and safety:** treat sensitive data carefully and maintain appropriate security levels for both open and proprietary systems.
-
----
-
-## Featured projects (examples)
-
-### Proprietary Solutions
-- **GAP (Green Automated Process)** — our flagship modular automation stack for irrigation, nutrient control and energy optimisation (commercial license).
-- **GAPbot** — advanced AI-powered automation companion for GAP systems with machine learning capabilities (commercial license).
-
-### Open Source Projects  
-> These are examples of our open-source contributions available on GitHub:
-
-- **CryptoP_AI_TA_Strategy** — hybrid trading strategy combining technical analysis with AI predictions for algorithmic trading (Freqtrade).
-- **CoraxHexa** — hexapod robotics platform with on-device vision for plant-health monitoring.
-- **PlantWatcher** — lightweight PlantCV-based image classification + MudPi integration for garden notifications.
-- **ChainGuardian** — simplified tooling for running Cardano/Polkadot nodes and monitoring staking rewards.
-
-*(Tip: include a short screenshot and a `README` excerpt for each featured project on your web showcase to increase conversions.)*
-
----
-
-## Tech stack & integrations
-Typical technologies we use:
-- Languages: Python, JavaScript/TypeScript, Go (occasionally Rust)
-- ML: TensorFlow Lite, ONNX, PlantDoc, PestNet, custom image pipelines
-- Infrastructure: Docker, systemd, Raspberry Pi, ARM devices, cloud for heavier workloads
-- Web: Static sites (GitHub Pages), React (for dashboards), Grafana/Prometheus for monitoring
-- Blockchain: Cardano, Polkadot, smart-contract tooling and node automation
-- CI/CD: GitHub Actions, automated builds and release artifacts
-
----
-
-## How to contribute (step-by-step)
-We welcome contributions — be it bug reports, code, docs or ideas.
-
-1. **Browse the repos:** start at `https://github.com/coraxgs`.
-2. **Find an issue or feature:** look for issues labeled `good first issue`, `help wanted` or `documentation`.
-3. **Fork the repository** you want to contribute to.
-4. **Create a branch** for your changes:
-   ```bash
-   git checkout -b feat/your-short-description
+For the full experience, please visit our main website at [https://coraxcolab.com](https://coraxcolab.com).
