@@ -174,7 +174,78 @@
         resource optimization, and the versatile hexapod designed to navigate
         complex environments autonomously.
       </p>
-    <div id="gapbot-3d-container" style="width: 100%; height: 400px; position: relative; margin-top: 2rem; border-radius: var(--border-radius); overflow: hidden; background: radial-gradient(circle at center, rgba(0, 255, 194, 0.05), transparent 70%);"></div>
+
+    <div class="configurator-wrapper" style="display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; background: var(--card-bg); border-radius: var(--border-radius); padding: 1.5rem; border: 1px solid rgba(0,255,194,0.2);">
+      <div id="gapbot-3d-container" style="width: 100%; height: 400px; position: relative; border-radius: var(--border-radius-small); overflow: hidden; background: radial-gradient(circle at center, rgba(0, 255, 194, 0.05), transparent 70%); flex: 2; cursor: grab;">
+        <div style="position: absolute; top: 10px; left: 10px; z-index: 10; font-family: monospace; color: var(--primary-color); font-size: 0.8rem; pointer-events: none;">
+          DRAG TO ROTATE <br> SCROLL TO ZOOM
+        </div>
+      </div>
+      <div class="configurator-controls" style="flex: 1; display: flex; flex-direction: column; gap: 1rem;">
+        <h3 style="color: var(--primary-color); border-bottom: 1px solid rgba(0,255,194,0.2); padding-bottom: 0.5rem;">GAPbot Configurator</h3>
+
+        <div class="config-group">
+          <label style="display: block; color: var(--text-secondary); margin-bottom: 0.5rem; font-size: 0.9rem;">Vision System (Edge AI)</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="config-btn active" data-module="vision" data-type="standard">Standard RGB</button>
+            <button class="config-btn" data-module="vision" data-type="multispectral">Multispectral</button>
+            <button class="config-btn" data-module="vision" data-type="lidar">LiDAR Array</button>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <label style="display: block; color: var(--text-secondary); margin-bottom: 0.5rem; font-size: 0.9rem;">Power System</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="config-btn active" data-module="power" data-type="battery">Li-ion Core</button>
+            <button class="config-btn" data-module="power" data-type="solar">Solar MPPT Wings</button>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <label style="display: block; color: var(--text-secondary); margin-bottom: 0.5rem; font-size: 0.9rem;">Chassis Armor</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="config-btn active" data-module="armor" data-type="light">Light (Agile)</button>
+            <button class="config-btn" data-module="armor" data-type="heavy">Heavy (Industrial)</button>
+          </div>
+        </div>
+
+        <div class="config-stats" style="margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+            <span style="color: var(--text-muted)">Processing Power:</span>
+            <span id="stat-proc" style="color: var(--primary-color); font-family: monospace;">85%</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+            <span style="color: var(--text-muted)">Energy Efficiency:</span>
+            <span id="stat-energy" style="color: var(--success-color); font-family: monospace;">90%</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span style="color: var(--text-muted)">Weight / Mobility:</span>
+            <span id="stat-weight" style="color: var(--warning-color); font-family: monospace;">75%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+      .config-btn {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: var(--text-secondary);
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        flex: 1;
+      }
+      .config-btn:hover { background: rgba(0,255,194,0.1); }
+      .config-btn.active {
+        background: rgba(0,255,194,0.15);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+    </style>
+
 
     <div class="grid-2" style="margin-top: 3rem;">
         <div class="feature-card product-card tilt-card">
@@ -228,6 +299,142 @@
         </div>
         <h3>Compliance-as-Code & PQC</h3>
         <p>Regulatory requirements (EUDR, CSRD/ESRS) hardcoded into system logic. Future-proofed with Post-Quantum Cryptography (PQC).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code as Architecture Hologram -->
+  <section id="hologram">
+    <h2 class="section-title">Code as Architecture</h2>
+    <p class="section-subtitle">
+      Interact with the holographic representation of a GAP-managed facility. Discover how our code translates to physical automation.
+    </p>
+
+    <div class="hologram-container" style="position: relative; height: 600px; max-width: 1000px; margin: 2rem auto; background: var(--card-bg); border-radius: var(--border-radius); border: 1px solid rgba(0, 255, 194, 0.2); overflow: hidden; perspective: 1200px;">
+
+      <!-- Hologram Grid Background -->
+      <div style="position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-image: linear-gradient(rgba(0, 255, 194, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 194, 0.1) 1px, transparent 1px); background-size: 50px 50px; transform: rotateX(60deg) translateZ(-200px); transform-origin: top; z-index: 0; pointer-events: none;"></div>
+
+      <!-- 3D Scene Wrapper -->
+      <div class="holo-scene" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; transform-style: preserve-3d; transition: transform 0.5s ease-out; z-index: 1;">
+
+        <!-- Interactive Nodes -->
+        <div class="holo-node" data-code="python" data-target="pump" style="top: 60%; left: 30%;">
+          <div class="node-marker"></div>
+          <span class="node-label">Irrigation Pump</span>
+        </div>
+
+        <div class="holo-node" data-code="cpp" data-target="sensor" style="top: 40%; left: 60%;">
+          <div class="node-marker"></div>
+          <span class="node-label">Edge Sensor Hub</span>
+        </div>
+
+        <div class="holo-node" data-code="rust" data-target="solar" style="top: 20%; left: 40%;">
+          <div class="node-marker"></div>
+          <span class="node-label">Solar MPPT Array</span>
+        </div>
+
+      </div>
+
+      <!-- Code Snippet Overlay -->
+      <div id="holo-code-overlay" style="position: absolute; top: 20px; right: 20px; width: 350px; background: rgba(5,5,5,0.9); border: 1px solid var(--primary-color); border-radius: var(--border-radius-small); padding: 1rem; color: #fff; font-family: monospace; z-index: 10; opacity: 0; pointer-events: none; transition: opacity 0.3s; box-shadow: 0 0 20px rgba(0,255,194,0.2);">
+        <div style="color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
+          <span id="holo-filename">pump_control.py</span>
+          <span style="color: var(--primary-color)">● LIVE</span>
+        </div>
+        <pre><code id="holo-code-content" style="color: #00ffcc; white-space: pre-wrap; font-size: 0.85rem;"></code></pre>
+      </div>
+
+    </div>
+
+    <style>
+      .holo-node {
+        position: absolute;
+        transform: translate(-50%, -50%) translateZ(50px);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s;
+      }
+      .holo-node:hover {
+        transform: translate(-50%, -50%) translateZ(80px) scale(1.1);
+      }
+      .node-marker {
+        width: 20px;
+        height: 20px;
+        background: rgba(0, 255, 194, 0.2);
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        box-shadow: 0 0 15px var(--primary-color);
+        animation: pulse-node 2s infinite;
+      }
+      .node-label {
+        margin-top: 10px;
+        color: #fff;
+        background: rgba(0,0,0,0.6);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        border: 1px solid rgba(0, 255, 194, 0.3);
+      }
+      @keyframes pulse-node {
+        0% { box-shadow: 0 0 0 0 rgba(0, 255, 194, 0.7); }
+        70% { box-shadow: 0 0 0 15px rgba(0, 255, 194, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(0, 255, 194, 0); }
+      }
+    </style>
+  </section>
+
+  <!-- Live AI Simulator -->
+  <section id="ai-simulator">
+    <h2 class="section-title">Neuro-Symbolic AI Simulator</h2>
+    <p class="section-subtitle">
+      Watch our hybrid AI process raw Edge data, identify anomalies, and output logical, explainable decisions in real-time.
+    </p>
+
+    <div class="ai-dashboard" style="display: flex; flex-direction: column; md:flex-row; gap: 1rem; max-width: 1000px; margin: 2rem auto; background: var(--dark-bg); border: 1px solid rgba(0,255,194,0.3); border-radius: var(--border-radius); padding: 1rem; box-shadow: 0 0 30px rgba(0,0,0,0.8);">
+
+      <!-- Top controls -->
+      <div class="ai-controls" style="display: flex; gap: 1rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <button class="cta-button secondary-cta sim-btn" data-scenario="nominal" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Scenario: Nominal</button>
+        <button class="cta-button secondary-cta sim-btn" data-scenario="pest" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-color: var(--warning-color); color: var(--warning-color);">Inject Pest Anomaly</button>
+        <button class="cta-button secondary-cta sim-btn" data-scenario="drought" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-color: var(--error-color); color: var(--error-color);">Inject Drought Risk</button>
+      </div>
+
+      <div style="display: flex; flex-direction: row; gap: 1rem; flex-wrap: wrap;">
+        <!-- Left: LiDAR/Vision Feed -->
+        <div class="ai-vision" style="flex: 1; min-width: 300px; position: relative; background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--border-radius-small); overflow: hidden; height: 300px;">
+          <div style="position: absolute; top: 10px; left: 10px; color: var(--primary-color); font-family: monospace; z-index: 10; font-size: 0.8rem; background: rgba(0,0,0,0.5); padding: 4px;">
+            YOLOv8-Seg (Edge) <span id="fps-counter" style="color: var(--warning-color);">60 FPS</span>
+          </div>
+          <!-- Simulated Matrix/LiDAR Canvas -->
+          <canvas id="vision-canvas" style="width: 100%; height: 100%; filter: contrast(1.5) sepia(1) hue-rotate(100deg) saturate(2); opacity: 0.8;"></canvas>
+
+          <!-- Bounding Boxes Overlay -->
+          <div id="bbox-overlay" style="position: absolute; border: 2px solid var(--primary-color); background: rgba(0,255,194,0.1); display: none; transition: all 0.2s;">
+            <span id="bbox-label" style="position: absolute; top: -20px; left: -2px; background: var(--primary-color); color: #000; font-size: 0.7rem; font-family: monospace; padding: 2px 4px; white-space: nowrap;">Target 99%</span>
+          </div>
+        </div>
+
+        <!-- Right: Symbolic Reasoning Output -->
+        <div class="ai-reasoning" style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 0.5rem;">
+          <div style="flex: 1; background: rgba(10,10,10,0.9); border: 1px solid rgba(0,255,194,0.2); padding: 1rem; font-family: monospace; border-radius: var(--border-radius-small); overflow-y: auto;">
+            <div style="color: var(--text-muted); font-size: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; margin-bottom: 0.5rem;">
+              Symbolic Logic Engine (XAI)
+            </div>
+            <div id="reasoning-log" style="font-size: 0.85rem; line-height: 1.4;">
+              <span style="color: var(--primary-color)">> SYSTEM INITIALIZED. Awaiting data...</span>
+            </div>
+          </div>
+
+          <div style="background: rgba(10,10,10,0.9); border: 1px solid rgba(0,255,194,0.2); padding: 1rem; font-family: monospace; border-radius: var(--border-radius-small); font-size: 0.9rem;">
+            <div style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0.5rem;">Current Action State</div>
+            <div id="action-state" style="color: var(--success-color); font-weight: bold; font-size: 1.1rem; text-shadow: 0 0 10px rgba(0,255,194,0.5);">
+              MONITORING
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
