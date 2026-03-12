@@ -79,6 +79,7 @@
   <nav id="navbar">
     <div class="nav-container">
       <button class="logo" onclick="scrollToTop()" aria-label="Go to top of page">
+        <img src="images/logo.png" alt="Corax CoLAB Logo" style="height: 40px; margin-right: 10px;">
         <span class="logo-text">Corax CoLAB</span>
       </button>
       <ul class="nav-links" id="nav-links">
@@ -109,7 +110,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-bg-video-placeholder"></div>
+    <div class="hero-bg-video-placeholder" style="background-image: url('images/hero-bg.svg'); background-size: cover; background-position: center; opacity: 0.5;"></div>
     <div class="hero-bg-overlay"></div>
     <div class="hero-content">
       <div class="terminal-boot-container">
@@ -136,37 +137,10 @@
           Explore Code
         </a>
       </div>
-    </nav>
+    </div>
+  </section>
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-bg-video-placeholder"></div>
-      <div class="hero-bg-overlay"></div>
-      <div class="hero-content">
-        <h1>
-          The Future of Autonomous Robotics, Edge AI, and Sustainable Ecosystems
-        </h1>
-        <p class="hero-subtitle">
-          Decentralized Autonomy and Global Ecosystem Leadership
-        </p>
-        <p class="hero-description">
-          We build AI-driven ecosystems that unite efficiency with
-          responsibility. We are the architects behind cyber-physical systems
-          that secure your future in an increasingly regulated world—creators of
-          the GAP Platform and GAPbot.
-        </p>
-        <div class="hero-ctas">
-          <a href="#platform" class="cta-button primary-cta">
-            Discover GAPbot
-          </a>
-          <a href="#featured" class="cta-button secondary-cta">
-            Explore Code
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Platform & GAPbot Section -->
+  <!-- Platform & GAPbot Section -->
     <section id="platform">
       <h2 class="section-title">🤖 Meet GAP and GAPbot</h2>
       <p class="section-subtitle">
@@ -174,6 +148,12 @@
         resource optimization, and the versatile hexapod designed to navigate
         complex environments autonomously.
       </p>
+
+    <div style="text-align: center; margin-top: 2rem;">
+        <img src="images/swarm-gapbot-fisheye-group.jpg" alt="GAPbot Swarm" style="max-width: 100%; border-radius: var(--border-radius); box-shadow: var(--shadow-soft);">
+    </div>
+
+    <div style="text-align: center; margin-bottom: 2rem;"><img src="images/gap_logga.jpg" alt="GAP Logo" style="height: 60px; border-radius: var(--border-radius-small);"></div>
     <div id="gapbot-3d-container" style="width: 100%; height: 400px; position: relative; margin-top: 2rem; border-radius: var(--border-radius); overflow: hidden; background: radial-gradient(circle at center, rgba(0, 255, 194, 0.05), transparent 70%);"></div>
 
     <div class="grid-2" style="margin-top: 3rem;">
@@ -209,14 +189,16 @@
     
     <div class="features-grid">
       <div class="feature-card tilt-card">
-        <div class="feature-illustration">
-          <div class="tech-icon-wrapper">🧠</div>
+                <div class="feature-illustration">
+          <img src="images/ai-illustration.svg" alt="AI Illustration" style="width: 100%; height: auto;">
         </div>
+        <h3>Neuro-Symbolic Hybrid AI</h3>
+        <p>Combining industrial Edge AI for ultra-low latency perception with Generative AI for complex cognition and autonomous reasoning.</p>
       </div>
       
       <div class="feature-card tilt-card">
         <div class="feature-illustration">
-          <div class="tech-icon-wrapper">🕸️</div>
+          <img src="images/automation-illustration.svg" alt="Automation Illustration" style="width: 100%; height: auto;">
         </div>
         <h3>Advanced Swarm Intelligence</h3>
         <p>Decentralized task allocation via CBBA (Consensus-Based Bundle Algorithm). Robots exchange information for conflict-free, coordinated work.</p>
@@ -224,7 +206,7 @@
       
       <div class="feature-card tilt-card">
         <div class="feature-illustration">
-          <div class="tech-icon-wrapper">🔒</div>
+          <img src="images/blockchain-illustration.svg" alt="Blockchain Illustration" style="width: 100%; height: auto;">
         </div>
         <h3>Compliance-as-Code & PQC</h3>
         <p>Regulatory requirements (EUDR, CSRD/ESRS) hardcoded into system logic. Future-proofed with Post-Quantum Cryptography (PQC).</p>
@@ -233,53 +215,6 @@
   </section>
 
   <!-- Featured GitHub Repositories -->
-  <section id="featured">
-    <h2 class="section-title">Featured Innovations</h2>
-    <p class="section-subtitle">
-      Explore our open-source and proprietary core repositories driving the GAP ecosystem and Web3 integrations.
-    </p>
-
-    <div class="projects-grid">
-      <!-- Repo 1: GAPbot -->
-      <div class="project-card tilt-card">
-        <div class="project-header">
-          <h3><a href="https://github.com/PelleNybe/CoraxCoLABs-GAP-GreenAutomatedPlatform---GAPbot" target="_blank" rel="noopener noreferrer">GAPbot Core</a></h3>
-          <div class="project-stats">
-            <span class="stat-item active">🔥 Deep Tech</span>
-          </div>
-          <h3>Neuro-Symbolic Hybrid AI</h3>
-          <p>
-            Combining industrial Edge AI for ultra-low latency perception with
-            Generative AI for complex cognition and autonomous reasoning.
-          </p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-illustration">
-            <div class="tech-icon-wrapper">🕸️</div>
-          </div>
-          <h3>Advanced Swarm Intelligence</h3>
-          <p>
-            Decentralized task allocation via CBBA (Consensus-Based Bundle
-            Algorithm). Robots exchange information for conflict-free,
-            coordinated work.
-          </p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-illustration">
-            <div class="tech-icon-wrapper">🔒</div>
-          </div>
-          <h3>Compliance-as-Code & PQC</h3>
-          <p>
-            Regulatory requirements (EUDR, CSRD/ESRS) hardcoded into system
-            logic. Future-proofed with Post-Quantum Cryptography (PQC).
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured GitHub Repositories -->
     <section id="featured">
       <h2 class="section-title">Featured Innovations</h2>
       <p class="section-subtitle">
@@ -398,30 +333,36 @@
         </div>
       </div>
 
-      <!-- Repo 3: PelleNybe Profile/Core -->
-      <div class="project-card tilt-card">
-        <div class="project-header">
-          <h3><a href="https://github.com/PelleNybe/PelleNybe" target="_blank" rel="noopener noreferrer">Founder's Core Insights</a></h3>
-          <div class="project-stats">
-            <span class="stat-item">Architecture</span>
-          </div>
-        </div>
-        <div
-          id="projects-grid"
-          class="projects-grid"
-          style="display: none"
-        ></div>
-        <div
-          id="error-message"
-          class="error-message"
-          style="display: none"
-        ></div>
+      <div id="projects-grid" class="projects-grid" style="display: none"></div>
+      <div id="error-message" class="error-message" style="display: none"></div>
+    </section>
+
+    <section id="gallery" style="margin-top: 4rem; text-align: center;">
+      <h3 style="color: var(--text-secondary); margin-bottom: 2rem;">Platform Dashboard Previews</h3>
+      <div class="projects-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        <div class="project-card"><img src="images/1773184753736.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773184753736.png"></div>
+        <div class="project-card"><img src="images/1773184772226.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773184772226.png"></div>
+        <div class="project-card"><img src="images/1773184783812.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773184783812.png"></div>
+        <div class="project-card"><img src="images/1773184794241.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773184794241.png"></div>
+        <div class="project-card"><img src="images/1773185420660.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773185420660.png"></div>
+        <div class="project-card"><img src="images/1773185446305.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773185446305.png"></div>
+        <div class="project-card"><img src="images/1773242699963.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773242699963.png"></div>
       </div>
     </section>
+
 
     <!-- About/Commitment Section -->
     <section id="about">
       <h2 class="section-title">The Corax Commitment</h2>
+      <div class="grid-2" style="margin-top: 3rem; margin-bottom: 3rem;">
+        <div>
+            <img src="images/gap_digital_bridge_between_old_industry_and_future_iot.png" alt="Digital Bridge" style="width: 100%; border-radius: var(--border-radius); box-shadow: var(--shadow-soft);">
+        </div>
+        <div>
+            <img src="images/GAPenterprise_grade_sec.png" alt="Enterprise Grade Security" style="width: 100%; border-radius: var(--border-radius); box-shadow: var(--shadow-soft);">
+        </div>
+      </div>
+
       <p class="section-subtitle">
         True global leadership is achieved by solving customers' most pressing
         challenges—from energy savings to mitigating fine risks via
@@ -615,50 +556,12 @@
           />
         </svg>
       </div>
-    </div>
+      <div id="arch-info" style="margin-top: 2rem; padding: 1rem; background: rgba(0, 255, 194, 0.1); border-left: 4px solid var(--primary-color); color: var(--text-primary); border-radius: var(--border-radius-small); min-height: 50px; text-align: center;">
+        Hover over a component to see details.
+      </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact">
-    <h2 class="section-title">Connect with Corax CoLAB</h2>
-    <p class="section-subtitle">
-      Ready to transform your operations with autonomous robotics and Edge AI?
-    </p>
-    
-    <div class="features-grid" style="max-width: 800px; margin: 0 auto;">
-      <div class="feature-card tilt-card" style="padding: 2rem;">
-        <span class="feature-icon">🌐</span>
-        <h3>Main Website</h3>
-        <p>Visit our primary domain for deep dives into our services, enterprise solutions, and booking a demo.</p>
-        <a href="https://coraxcolab.com" target="_blank" class="cta-button" style="margin-top: 1rem; width: 100%; justify-content: center;">
-          coraxcolab.com
-        </a>
-      </div>
-      
-      <div class="feature-card tilt-card" style="padding: 2rem;">
-        <span class="feature-icon">✉️</span>
-        <h3>Contact Us</h3>
-        <p>Reach out directly for consultation regarding AI, Web3, Blockchain, and advanced robotics integrations.</p>
-        <a href="mailto:info@coraxcolab.com" class="cta-button secondary-cta" style="margin-top: 1rem; width: 100%; justify-content: center;">
-          info@coraxcolab.com
-        </a>
-      <div
-        id="arch-info"
-        style="
-          margin-top: 2rem;
-          padding: 1rem;
-          background: rgba(0, 255, 194, 0.1);
-          border-left: 4px solid var(--primary-color);
-          color: var(--text-primary);
-          border-radius: var(--border-radius-small);
-          min-height: 50px;
-          text-align: center;
-        "
-      >
-        Hover over a component to see details.
-      </div>
-    </section>
-
     <section id="contact">
       <h2 class="section-title">Connect with Corax CoLAB</h2>
       <p class="section-subtitle">
@@ -703,7 +606,7 @@
 
     <footer>
       <div class="footer-content">
-        <div class="footer-links">
+        <img src="images/coraxcolabloggarund.png" alt="Corax CoLAB Footer Logo" style="height: 60px; margin-bottom: 1rem;"><br><div class="footer-links">
           <a href="https://coraxcolab.com" target="_blank">Official Website</a>
           <a href="https://github.com/coraxgs" target="_blank"
             >GitHub (CoraxGS)</a
