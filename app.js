@@ -1,3 +1,216 @@
+
+// Feature: Web Components (Componentization)
+class ProjectCardElement extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
+    this.render();
+  }
+
+  static get observedAttributes() {
+    return ['name', 'url', 'description', 'stars', 'language', 'color', 'topics', 'tag'];
+  }
+
+  attributeChangedCallback() {
+    this.render();
+  }
+
+  render() {
+    const name = this.getAttribute('name') || '';
+    const url = this.getAttribute('url') || '#';
+    const description = this.getAttribute('description') || '';
+    const stars = this.getAttribute('stars') || '0';
+    const language = this.getAttribute('language') || '';
+    const color = this.getAttribute('color') || '#ccc';
+    let topics = this.getAttribute('topics') || '';
+    const tag = this.getAttribute('tag') || ''; // 'Featured' or 'Core'
+
+    // Parse topics
+    try {
+       topics = JSON.parse(topics);
+    } catch(e) {
+       topics = [];
+    }
+
+    let topicsHtml = '';
+    if (Array.isArray(topics) && topics.length > 0) {
+      topicsHtml = topics.slice(0, 3).map(topic => `<span class="tag">${topic}</span>`).join('');
+    } else if (language) {
+      topicsHtml = `<span class="tag">${language}</span>`;
+    }
+
+    let languageHtml = '';
+    if (language) {
+      languageHtml = `
+        <span class="language">
+          <span class="language-color" style="background-color: ${color}"></span>
+          ${language}
+        </span>
+      `;
+    }
+
+    let statItemHtml = '';
+    if (tag) {
+       statItemHtml = `<span class="stat-item active">🔥 ${tag}</span>`;
+    } else if (stars !== '0') {
+       statItemHtml = `<span class="stat-item">⭐ ${stars}</span>`;
+    }
+
+    this.shadowRoot.innerHTML = `
+      <style>
+        :host {
+          display: block;
+          height: 100%;
+        }
+        .project-card {
+          background: var(--card-bg, rgba(10, 10, 10, 0.6));
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: var(--border-radius, 12px);
+          padding: 2rem;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          box-sizing: border-box;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+        .project-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: linear-gradient(90deg, var(--primary-color, #00FFC2), var(--secondary-color, #1A73E8));
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.3s ease;
+        }
+        .project-card:hover {
+          transform: translateY(-5px);
+          border-color: rgba(255, 255, 255, 0.2);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .project-card:hover::before {
+          transform: scaleX(1);
+        }
+        .project-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 1rem;
+        }
+        h3 {
+          margin: 0;
+          font-size: 1.25rem;
+          font-weight: 600;
+        }
+        a {
+          color: var(--text-primary, #ffffff);
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+        a:hover {
+          color: var(--primary-color, #00FFC2);
+        }
+        .project-description {
+          color: var(--text-secondary, #a0aab2);
+          margin-bottom: 1.5rem;
+          flex-grow: 1;
+          line-height: 1.6;
+          font-size: 0.95rem;
+        }
+        .project-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-bottom: 1.5rem;
+        }
+        .tag {
+          background: rgba(255, 255, 255, 0.05);
+          color: var(--text-secondary, #a0aab2);
+          padding: 0.25rem 0.75rem;
+          border-radius: 20px;
+          font-size: 0.8rem;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .project-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-top: 1rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          margin-top: auto;
+        }
+        .project-link {
+          color: var(--primary-color, #00FFC2);
+          font-size: 0.9rem;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+        .stat-item {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          font-size: 0.85rem;
+          color: var(--text-muted, #737c85);
+          background: rgba(255, 255, 255, 0.05);
+          padding: 0.2rem 0.6rem;
+          border-radius: 12px;
+        }
+        .stat-item.active {
+          color: var(--primary-color, #00FFC2);
+          border: 1px solid var(--primary-color, #00FFC2);
+          background: rgba(0, 255, 194, 0.1);
+        }
+        .language {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.85rem;
+          color: var(--text-muted, #737c85);
+        }
+        .language-color {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+        }
+      </style>
+      <div class="project-card">
+        <div class="project-header">
+          <h3>
+            <a href="${url}" target="_blank" rel="noopener noreferrer">${name}</a>
+          </h3>
+          <div class="project-stats">
+            ${statItemHtml}
+          </div>
+        </div>
+        <p class="project-description">${description}</p>
+        <div class="project-tags">
+          ${topicsHtml}
+        </div>
+        <div class="project-footer">
+          ${languageHtml}
+          <a href="${url}" target="_blank" rel="noopener noreferrer" class="project-link">
+            📂 View on GitHub &rarr;
+          </a>
+        </div>
+      </div>
+    `;
+  }
+}
+
+customElements.define('project-card', ProjectCardElement);
+
+
 // Corax CoLAB Enhanced Website JavaScript v2.0
 
 // Performance and Analytics
@@ -252,21 +465,34 @@ class ProjectRenderer {
   }
 
   createProjectCard(repo) {
-    const card = document.createElement("github-repo-card");
-    card.setAttribute("title", repo.name);
+    const card = document.createElement("project-card");
+    card.setAttribute("name", repo.name);
     card.setAttribute(
       "description",
       repo.description ||
-        "An exciting project from Corax CoLAB exploring new technical possibilities.",
+        "An exciting project from Corax CoLAB exploring new technical possibilities."
     );
     card.setAttribute("url", repo.html_url);
+    card.setAttribute("stars", repo.stargazers_count || "0");
+    if (repo.language) card.setAttribute("language", repo.language);
+
+    let color = "#ccc";
+    const langColors = {
+      Python: "#3572A5", JavaScript: "#f1e05a", TypeScript: "#3178c6",
+      HTML: "#e34c26", CSS: "#563d7c", "Jupyter Notebook": "#DA5B0B",
+      Vue: "#41b883", Rust: "#dea584", Go: "#00ADD8", "C++": "#f34b7d",
+      Shell: "#89e051"
+    };
+    if (repo.language && langColors[repo.language]) {
+      color = langColors[repo.language];
+    }
+    card.setAttribute("color", color);
 
     let tags = [];
-    if (repo.language) tags.push(repo.language);
-    if (repo.topics) tags = tags.concat(repo.topics.slice(0, 3));
-    if (tags.length > 0) {
-      card.setAttribute("tags", tags.join(","));
+    if (repo.topics && repo.topics.length > 0) {
+      tags = repo.topics.slice(0, 3);
     }
+    card.setAttribute("topics", JSON.stringify(tags));
 
     return card;
   }
@@ -1110,6 +1336,7 @@ document.addEventListener('DOMContentLoaded', () => {
       new HologramInteractive();
       new CoraxAudio();
       new AISimulator();
+      new GitHubActivityFeed();
           init3DGAPbot();
           initScrollAnimations();
   }, 100);
@@ -2048,5 +2275,120 @@ class AISimulator {
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+}
+
+
+
+// Feature: Live GitHub Activity Feed
+class GitHubActivityFeed {
+  constructor() {
+    this.container = document.getElementById('github-activity');
+    if (!this.container) return;
+    this.init();
+  }
+
+  async init() {
+    try {
+      this.container.innerHTML = '<div style="text-align: center; color: var(--primary-color);">Loading activity...</div>';
+
+      let response = await fetch('https://api.github.com/orgs/coraxgs/events');
+      if (!response.ok) {
+        response = await fetch('https://api.github.com/users/coraxgs/events');
+      }
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch GitHub activity');
+      }
+
+      const events = await response.json();
+      this.renderEvents(events);
+    } catch (error) {
+      console.error('Error fetching GitHub activity:', error);
+      this.container.innerHTML = '<div style="text-align: center; color: var(--error-color);">Unable to load activity feed.</div>';
+    }
+  }
+
+  renderEvents(events) {
+    this.container.innerHTML = '';
+
+    const relevantEvents = events.filter(e =>
+      ['PushEvent', 'PullRequestEvent', 'IssuesEvent', 'CreateEvent'].includes(e.type)
+    ).slice(0, 5);
+
+    if (relevantEvents.length === 0) {
+       this.container.innerHTML = '<div style="text-align: center; color: var(--text-muted);">No recent activity found.</div>';
+       return;
+    }
+
+    relevantEvents.forEach(event => {
+      const el = document.createElement('div');
+      el.style.cssText = `
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--border-radius-small);
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.3s ease;
+      `;
+
+      el.onmouseenter = () => {
+         el.style.borderColor = 'var(--primary-color)';
+         el.style.transform = 'translateX(5px)';
+      };
+      el.onmouseleave = () => {
+         el.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+         el.style.transform = 'translateX(0)';
+      };
+
+      const date = new Date(event.created_at).toLocaleDateString(undefined, {
+        month: 'short', day: 'numeric'
+      });
+
+      let icon = '📝';
+      let actionText = '';
+      let url = `https://github.com/${event.repo.name}`;
+
+      switch(event.type) {
+        case 'PushEvent':
+          icon = '⬆️';
+          const commitsCount = event.payload.commits ? event.payload.commits.length : 0;
+          actionText = `Pushed ${commitsCount} commit${commitsCount !== 1 ? 's' : ''} to `;
+          break;
+        case 'PullRequestEvent':
+          icon = '🔄';
+          actionText = `${event.payload.action} pull request in `;
+          if (event.payload.pull_request) url = event.payload.pull_request.html_url;
+          break;
+        case 'IssuesEvent':
+          icon = '⚠️';
+          actionText = `${event.payload.action} issue in `;
+          if (event.payload.issue) url = event.payload.issue.html_url;
+          break;
+        case 'CreateEvent':
+          icon = '✨';
+          actionText = `Created ${event.payload.ref_type} in `;
+          break;
+      }
+
+      el.innerHTML = `
+        <div style="font-size: 1.5rem; width: 30px; text-align: center;">${icon}</div>
+        <div style="flex: 1;">
+          <div style="font-size: 0.9rem; color: var(--text-primary);">
+            ${actionText}
+            <a href="${url}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">
+              ${event.repo.name.replace('coraxgs/', '')}
+            </a>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
+            ${date}
+          </div>
+        </div>
+      `;
+
+      this.container.appendChild(el);
+    });
   }
 }
