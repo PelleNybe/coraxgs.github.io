@@ -1337,6 +1337,8 @@ document.addEventListener('DOMContentLoaded', () => {
       new CoraxAudio();
       new AISimulator();
       new GitHubActivityFeed();
+      new Web3Demo();
+      new BlogSystem();
           init3DGAPbot();
           initScrollAnimations();
   }, 100);
@@ -2390,5 +2392,177 @@ class GitHubActivityFeed {
 
       this.container.appendChild(el);
     });
+  }
+}
+
+
+// Feature: Web3 Integration Demo
+class Web3Demo {
+  constructor() {
+    this.connectBtn = document.getElementById('connect-wallet-btn');
+    this.signBtn = document.getElementById('sign-message-btn');
+    this.statusText = document.getElementById('wallet-status');
+    this.actionsDiv = document.getElementById('web3-actions');
+    this.resultDiv = document.getElementById('signature-result');
+    this.account = null;
+
+    if (!this.connectBtn) return;
+    this.init();
+  }
+
+  init() {
+    this.connectBtn.addEventListener('click', async () => {
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          this.connectBtn.textContent = 'Connecting...';
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          this.account = accounts[0];
+
+          this.statusText.textContent = `Connected: ${this.account.substring(0, 6)}...${this.account.substring(38)}`;
+          this.statusText.style.color = 'var(--success-color)';
+
+          this.connectBtn.style.display = 'none';
+          this.actionsDiv.style.display = 'flex';
+
+          if(window.plausible) window.plausible('Wallet Connected');
+        } catch (error) {
+          console.error("User denied account access", error);
+          this.connectBtn.textContent = 'Connect Wallet (MetaMask)';
+          this.statusText.textContent = 'Connection Refused';
+          this.statusText.style.color = 'var(--error-color)';
+        }
+      } else {
+        this.statusText.textContent = 'MetaMask is not installed. Please install it to use this feature.';
+        this.statusText.style.color = 'var(--warning-color)';
+      }
+    });
+
+    this.signBtn.addEventListener('click', async () => {
+      if (!this.account) return;
+
+      try {
+        this.signBtn.textContent = 'Waiting for signature...';
+        const message = "Corax CoLAB GAPbot Authorization payload.\nTimestamp: " + Date.now();
+
+        // Use eth_personalSign
+        const signature = await window.ethereum.request({
+          method: 'personal_sign',
+          params: [message, this.account]
+        });
+
+        this.resultDiv.textContent = `Signature: ${signature}`;
+        this.signBtn.textContent = 'Message Signed ✓';
+        this.signBtn.style.borderColor = 'var(--success-color)';
+        this.signBtn.style.color = 'var(--success-color)';
+
+        if(window.plausible) window.plausible('Message Signed');
+      } catch (error) {
+        console.error("Signature failed", error);
+        this.signBtn.textContent = 'Sign GAPbot Auth Payload';
+        this.resultDiv.textContent = 'Signature rejected or failed.';
+        this.resultDiv.style.color = 'var(--error-color)';
+      }
+    });
+
+    // Listen for account changes
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', (accounts) => {
+        if (accounts.length > 0) {
+          this.account = accounts[0];
+          this.statusText.textContent = `Connected: ${this.account.substring(0, 6)}...${this.account.substring(38)}`;
+        } else {
+          this.account = null;
+          this.statusText.textContent = 'Status: Disconnected';
+          this.statusText.style.color = 'var(--text-muted)';
+          this.connectBtn.style.display = 'inline-block';
+          this.actionsDiv.style.display = 'none';
+          this.resultDiv.textContent = '';
+        }
+      });
+    }
+  }
+}
+
+
+// Feature: Insights & Updates (Blog)
+class BlogSystem {
+  constructor() {
+    this.container = document.getElementById('blog-grid');
+    if (!this.container) return;
+
+    // Simulate fetching markdown posts or an API endpoint
+    this.posts = [
+      {
+        title: 'Optimizing YOLOv8-Seg for Hailo-8L Edge Accelerators',
+        date: '2024-03-15',
+        excerpt: 'A deep dive into how we achieved ultra-low latency inference for the GAPbot vision system without compromising on segmentation accuracy.',
+        readTime: '8 min read',
+        tag: 'Edge AI'
+      },
+      {
+        title: 'Swarm Consensus: Beyond Basic Algorithms',
+        date: '2024-02-28',
+        excerpt: 'Exploring our custom implementation of the Consensus-Based Bundle Algorithm (CBBA) for decentralized task allocation among multiple GAPbot units.',
+        readTime: '12 min read',
+        tag: 'Robotics'
+      },
+      {
+        title: 'Integrating Post-Quantum Cryptography in MQTT',
+        date: '2024-02-10',
+        excerpt: 'Why we are future-proofing our IoT communications now, and how we implemented PQC algorithms to secure the GAP platform data streams.',
+        readTime: '10 min read',
+        tag: 'Security'
+      }
+    ];
+
+    this.init();
+  }
+
+  init() {
+    this.renderPosts();
+  }
+
+  renderPosts() {
+    this.container.innerHTML = '';
+
+    this.posts.forEach(post => {
+      const card = document.createElement('div');
+      card.className = 'feature-card tilt-card';
+      card.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2rem;
+        cursor: pointer;
+      `;
+
+      card.innerHTML = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <span class="tag" style="background: rgba(0, 255, 194, 0.1); color: var(--primary-color); border: 1px solid var(--primary-color);">${post.tag}</span>
+            <span style="color: var(--text-muted); font-size: 0.8rem;">${post.date}</span>
+          </div>
+          <h3 style="margin-bottom: 1rem; line-height: 1.4; font-size: 1.2rem;">${post.title}</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">${post.excerpt}</p>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+          <span style="color: var(--text-muted); font-size: 0.8rem;">⏱️ ${post.readTime}</span>
+          <span style="color: var(--primary-color); font-size: 0.9rem; font-weight: 500;">Read Article &rarr;</span>
+        </div>
+      `;
+
+      card.addEventListener('click', () => {
+        // In a real app, this would open a modal or navigate to the article page
+        alert(`Opening article: "${post.title}".\n\nIn a full deployment, this would load the markdown content.`);
+        if(window.plausible) window.plausible('Blog Read Click', {props: {title: post.title}});
+      });
+
+      this.container.appendChild(card);
+    });
+
+    // Re-initialize tilt effect for new cards
+    if(typeof TiltEffect !== 'undefined') {
+       new TiltEffect();
+    }
   }
 }

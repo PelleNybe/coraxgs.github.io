@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "playwright": "^1.58.2"
+    "finalhandler": "^2.1.1",
+    "playwright": "^1.58.2",
+    "puppeteer": "^24.39.1",
+    "serve-static": "^2.2.1"
   }
 }
