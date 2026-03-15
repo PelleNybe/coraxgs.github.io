@@ -1110,6 +1110,8 @@ document.addEventListener('DOMContentLoaded', () => {
       new HologramInteractive();
       new CoraxAudio();
       new AISimulator();
+          init3DGAPbot();
+          initScrollAnimations();
   }, 100);
 });
 
