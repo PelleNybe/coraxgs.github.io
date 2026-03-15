@@ -8,6 +8,14 @@ A modern, responsive, and feature-rich showcase website for Corax CoLAB - an ind
 
 Visit: [https://coraxgs.github.io](https://coraxgs.github.io)
 
+
+## 🌟 5 World-Class Interactive Features
+- **Interactive WebGL Particle Swarm**: A high-performance WebGL particle system simulating advanced swarm intelligence that reacts to the user's cursor organically.
+- **Immersive 3D GAPbot Configurator**: A fully interactive, browser-based configurator to explore the modularity of the GAPbot, allowing users to equip different payloads like Multispectral sensors or LiDAR arrays.
+- **"Code as Architecture" Interactive Hologram**: An interactive 3D isometric representation of physical automation translating into code logic, making "Compliance-as-Code" and "Edge AI" tangible.
+- **Reactive Web Audio Soundscape**: A responsive Web Audio API integration providing futuristic, scroll-linked hums and high-tech UI feedback sounds for an immersive browsing experience.
+- **Live "Neuro-Symbolic AI" Decision Simulator**: An engaging, split-screen simulation demonstrating GAPbot's decision-making process, integrating computer vision logic and symbolic reasoning trees in real-time.
+
 ## ✨ Features
 
 ### 🎨 Modern Design & UX
@@ -49,6 +57,11 @@ Visit: [https://coraxgs.github.io](https://coraxgs.github.io)
 ## 🛠 Tech Stack
 
 ### Frontend
+
+### Interactive Libraries
+- **Three.js** - For 3D WebGL rendering, particle swarms, and immersive model viewers
+- **GSAP** - For advanced scroll-linked animations and smooth visual transitions
+
 - **HTML5** - Semantic structure with accessibility in mind
 - **CSS3** - Modern features including CSS Grid, Flexbox, and Custom Properties
 - **Vanilla JavaScript** - No frameworks, optimized for performance
