@@ -1091,14 +1091,18 @@ class CustomCursor {
     if (!this.cursor || !this.follower) return;
 
     // Check if device supports hover (not a mobile device usually)
-    if (window.matchMedia("(any-hover: none)").matches) {
-      this.cursor.style.display = 'none';
-      this.follower.style.display = 'none';
-      return;
-    }
+    /* Disabled hover media query check */
 
     this.pos = { x: 0, y: 0 };
+    this.cursor.style.zIndex = '999999';
+    this.follower.style.zIndex = '999998';
+    this.cursor.style.display = 'block';
+    this.follower.style.display = 'block';
     this.followerPos = { x: 0, y: 0 };
+    this.cursor.style.zIndex = '999999';
+    this.follower.style.zIndex = '999998';
+    this.cursor.style.display = 'block';
+    this.follower.style.display = 'block';
     this.init();
   }
 

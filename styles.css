@@ -2076,3 +2076,8 @@ body {
 .tilt-card:hover .tilt-card-glare {
   opacity: 1;
 }
+
+.terminal-boot-container { pointer-events: auto !important; z-index: 100 !important; }
+.hero-content { z-index: 100 !important; pointer-events: auto !important; }
+
+.terminal-body { pointer-events: auto !important; z-index: 101 !important; }
