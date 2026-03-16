@@ -2570,3 +2570,25 @@ class BlogSystem {
     }
   }
 }
+// Interactive Architecture Diagram
+document.addEventListener('DOMContentLoaded', () => {
+  const archNodes = document.querySelectorAll('.arch-node');
+  const archInfo = document.getElementById('arch-info');
+
+  if (archNodes.length > 0 && archInfo) {
+    const defaultText = archInfo.textContent;
+
+    archNodes.forEach(node => {
+      node.addEventListener('mouseenter', () => {
+        const info = node.getAttribute('data-info');
+        if (info) {
+          archInfo.textContent = info;
+        }
+      });
+
+      node.addEventListener('mouseleave', () => {
+        archInfo.textContent = defaultText;
+      });
+    });
+  }
+});
