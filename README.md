@@ -10,7 +10,13 @@
     <a href="https://coraxcolab.com"><img src="https://img.shields.io/badge/Corax_CoLAB-181717?style=for-the-badge&logo=googlechrome&logoColor=00ffcc" alt="Corax CoLAB"></a>
     <a href="https://github.com/PelleNybe"><img src="https://img.shields.io/badge/GitHub-Pelle_Nyberg-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
     <a href="https://www.linkedin.com/in/pellenyberg/"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-  </p>
+      <a href="https://github.com/PelleNybe/PelleNybe.github.io/stargazers"><img src="https://img.shields.io/github/stars/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Stars"></a>
+    <a href="https://github.com/PelleNybe/PelleNybe.github.io/network/members"><img src="https://img.shields.io/github/forks/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Forks"></a>
+    <a href="https://github.com/PelleNybe/PelleNybe.github.io/watchers"><img src="https://img.shields.io/github/watchers/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Watchers"></a>
+    <a href="https://github.com/PelleNybe/PelleNybe.github.io/issues"><img src="https://img.shields.io/github/issues/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Issues"></a>
+    <a href="https://github.com/PelleNybe/PelleNybe.github.io/pulls"><img src="https://img.shields.io/github/issues-pr/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="PRs Welcome"></a>
+    <a href="https://github.com/PelleNybe/PelleNybe.github.io/blob/master/LICENSE"><img src="https://img.shields.io/github/license/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=open-source-initiative&color=00ffcc" alt="License"></a>
+</p>
 
   <p align="center">
     <!-- Animated typing SVG for cool visual effect -->
