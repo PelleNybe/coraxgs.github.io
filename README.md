@@ -6,7 +6,7 @@ A modern, responsive, and feature-rich showcase website for Corax CoLAB - an ind
 
 ## 🚀 Live Site
 
-Visit: [https://coraxgs.github.io](https://coraxgs.github.io)
+Visit: [https://PelleNybe.github.io](https://PelleNybe.github.io)
 
 
 ## 🌟 5 World-Class Interactive Features
@@ -82,7 +82,7 @@ Visit: [https://coraxgs.github.io](https://coraxgs.github.io)
 ## 📁 Project Structure
 
 ```
-coraxgs.github.io/
+PelleNybe.github.io/
 ├── index.html          # Main HTML file with semantic structure
 ├── styles.css          # Comprehensive CSS with modern features
 ├── app.js             # Enhanced JavaScript application
@@ -187,7 +187,7 @@ Typical technologies we use:
 ## How to contribute (step-by-step)
 We welcome contributions — be it bug reports, code, docs or ideas.
 
-1. **Browse the repos:** start at `https://github.com/coraxgs`.
+1. **Browse the repos:** start at `https://github.com/PelleNybe`.
 2. **Find an issue or feature:** look for issues labeled `good first issue`, `help wanted` or `documentation`.
 3. **Fork the repository** you want to contribute to.
 4. **Create a branch** for your changes:

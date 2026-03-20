@@ -12,14 +12,14 @@
     12	  <meta property="og:title" content="Corax CoLAB – The Future of Autonomous Robotics">
     13	  <meta property="og:description" content="Architects of cyber-physical systems uniting advanced robotics (GAPbot), industrial-grade Edge AI, and architectural compliance (GAP Platform)."/>
     14	  <meta property="og:type" content="website">
-    15	  <meta property="og:url" content="https://coraxgs.github.io">
-    16	  <meta property="og:image" content="https://coraxgs.github.io/images/logo.png">
+    15	  <meta property="og:url" content="https://PelleNybe.github.io">
+    16	  <meta property="og:image" content="https://PelleNybe.github.io/images/logo.png">
     17
     18	  <!-- Twitter Card -->
     19	  <meta name="twitter:card" content="summary_large_image">
     20	  <meta name="twitter:title" content="Corax CoLAB – The Future of Autonomous Robotics">
     21	  <meta name="twitter:description" content="Architects of cyber-physical systems uniting advanced robotics, industrial-grade Edge AI, and architectural compliance."/>
-    22	  <meta name="twitter:image" content="https://coraxgs.github.io/images/logo.png">
+    22	  <meta name="twitter:image" content="https://PelleNybe.github.io/images/logo.png">
     23
     24	  <!-- Favicon -->
     25	  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔬%3C/text%3E%3C/svg%3E">
@@ -38,9 +38,9 @@
     38	    "@type": "Organization",
     39	    "name": "Corax CoLAB",
     40	    "description": "Corax CoLAB operates at the intersection of advanced robotics, Edge AI, and global sustainability strategy. Creators of GAP and GAPbot.",
-    41	    "url": "https://coraxgs.github.io",
+    41	    "url": "https://PelleNybe.github.io",
     42	    "sameAs": [
-    43	      "https://github.com/coraxgs",
+    43	      "https://github.com/PelleNybe",
     44	      "https://coraxcolab.com"
     45	    ],
     46	    "foundingDate": "2024",
@@ -50,7 +50,7 @@
     50	  </script>
     51
     52	  <!-- Analytics -->
-    53	  <script defer data-domain="coraxgs.github.io" src="https://plausible.io/js/script.js"></script>
+    53	  <script defer data-domain="PelleNybe.github.io" src="https://plausible.io/js/script.js"></script>
     54
     55	  <!-- CSS -->
     56	  <link rel="stylesheet" href="styles.css">
@@ -330,7 +330,7 @@
    330	          <div class="project-header">
    331	            <h3>
    332	              <a
-   333	                href="https://github.com/coraxgs/Crypto-MCP-Server---by-Corax-CoLAB"
+   333	                href="https://github.com/PelleNybe/Crypto-MCP-Server---by-Corax-CoLAB"
    334	                target="_blank"
    335	                rel="noopener noreferrer"
    336	                >Crypto MCP Server</a
@@ -352,7 +352,7 @@
    352	          </div>
    353	          <div class="project-footer">
    354	            <a
-   355	              href="https://github.com/coraxgs/Crypto-MCP-Server---by-Corax-CoLAB"
+   355	              href="https://github.com/PelleNybe/Crypto-MCP-Server---by-Corax-CoLAB"
    356	              target="_blank"
    357	              rel="noopener noreferrer"
    358	              class="project-link"
@@ -705,8 +705,8 @@
    705	      <div class="footer-content">
    706	        <div class="footer-links">
    707	          <a href="https://coraxcolab.com" target="_blank">Official Website</a>
-   708	          <a href="https://github.com/coraxgs" target="_blank"
-   709	            >GitHub (CoraxGS)</a
+   708	          <a href="https://github.com/PelleNybe" target="_blank"
+   709	            >GitHub (PelleNybe)</a
    710	          >
    711	          <a href="https://github.com/PelleNybe" target="_blank"
    712	            >GitHub (PelleNybe)</a

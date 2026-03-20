@@ -394,7 +394,7 @@ class ProjectRenderer {
       <h3>${errorTitle}</h3>
       <p>${message}</p>
       <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
-        ${errorDescription} <a href="https://github.com/coraxgs" target="_blank" style="color: var(--primary-color);">${linkText}</a> 
+        ${errorDescription} <a href="https://github.com/PelleNybe" target="_blank" style="color: var(--primary-color);">${linkText}</a>
         directly to see all projects.
       </p>
     `;
@@ -519,7 +519,7 @@ class ProjectRenderer {
     `;
 
     card.addEventListener("click", () => {
-      window.open("https://github.com/coraxgs?tab=repositories", "_blank");
+      window.open("https://github.com/PelleNybe?tab=repositories", "_blank");
       if (window.plausible) {
         window.plausible("View All Projects Click");
       }
@@ -551,7 +551,7 @@ class ProjectRenderer {
 // Main Application
 class CoraxWebsite {
   constructor() {
-    this.githubAPI = new GitHubAPI("coraxgs");
+    this.githubAPI = new GitHubAPI("PelleNybe");
     this.projectRenderer = new ProjectRenderer(
       document.getElementById("projects-grid"),
       document.getElementById("error-message"),
@@ -2298,9 +2298,9 @@ class GitHubActivityFeed {
     try {
       this.container.innerHTML = '<div style="text-align: center; color: var(--primary-color);">Loading activity...</div>';
 
-      let response = await fetch('https://api.github.com/orgs/coraxgs/events');
+      let response = await fetch('https://api.github.com/orgs/PelleNybe/events');
       if (!response.ok) {
-        response = await fetch('https://api.github.com/users/coraxgs/events');
+        response = await fetch('https://api.github.com/users/PelleNybe/events');
       }
 
       if (!response.ok) {
@@ -2385,7 +2385,7 @@ class GitHubActivityFeed {
           <div style="font-size: 0.9rem; color: var(--text-primary);">
             ${actionText}
             <a href="${url}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">
-              ${event.repo.name.replace('coraxgs/', '')}
+              ${event.repo.name.replace('PelleNybe/', '')}
             </a>
           </div>
           <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
