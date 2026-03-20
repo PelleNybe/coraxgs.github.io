@@ -1733,14 +1733,15 @@ body {
   border-radius: 50px;
   border: 2px solid var(--primary-color);
   box-shadow: 0 0 10px rgba(0, 255, 194, 0.5);
-  cursor: none; /* Rely on custom cursor */
+  cursor: pointer; /* Changed to pointer to ensure interactive feel */
   transition:
     transform 0.3s,
     box-shadow 0.3s,
     background 0.3s;
-  z-index: 10;
+  z-index: 100; /* Increased z-index to ensure it is above other elements */
   font-weight: bold;
   text-align: center;
+  pointer-events: auto; /* Force pointer events */
 }
 
 .arch-node:hover {

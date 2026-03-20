@@ -2454,7 +2454,8 @@ class Web3Demo {
           params: [message, this.account]
         });
 
-        this.resultDiv.textContent = `Signature: ${signature}`;
+        this.resultDiv.style.display = 'block';
+        this.resultDiv.textContent = `Signature:\n${signature}`;
         this.signBtn.textContent = 'Message Signed ✓';
         this.signBtn.style.borderColor = 'var(--success-color)';
         this.signBtn.style.color = 'var(--success-color)';
@@ -2501,21 +2502,24 @@ class BlogSystem {
         date: '2024-03-15',
         excerpt: 'A deep dive into how we achieved ultra-low latency inference for the GAPbot vision system without compromising on segmentation accuracy.',
         readTime: '8 min read',
-        tag: 'Edge AI'
+        tag: 'Edge AI',
+        link: 'https://github.com/PelleNybe/CoraxCoLABs-GAP-GreenAutomatedPlatform---GAPbot'
       },
       {
         title: 'Swarm Consensus: Beyond Basic Algorithms',
         date: '2024-02-28',
         excerpt: 'Exploring our custom implementation of the Consensus-Based Bundle Algorithm (CBBA) for decentralized task allocation among multiple GAPbot units.',
         readTime: '12 min read',
-        tag: 'Robotics'
+        tag: 'Robotics',
+        link: 'https://github.com/PelleNybe/PelleNybe'
       },
       {
         title: 'Integrating Post-Quantum Cryptography in MQTT',
         date: '2024-02-10',
         excerpt: 'Why we are future-proofing our IoT communications now, and how we implemented PQC algorithms to secure the GAP platform data streams.',
         readTime: '10 min read',
-        tag: 'Security'
+        tag: 'Security',
+        link: 'https://github.com/PelleNybe/Crypto-MCP-Server---by-Corax-CoLAB'
       }
     ];
 
@@ -2555,11 +2559,18 @@ class BlogSystem {
         </div>
       `;
 
-      card.addEventListener('click', () => {
-        // In a real app, this would open a modal or navigate to the article page
-        alert(`Opening article: "${post.title}".\n\nIn a full deployment, this would load the markdown content.`);
-        if(window.plausible) window.plausible('Blog Read Click', {props: {title: post.title}});
-      });
+      if (post.link) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => {
+          window.open(post.link, '_blank');
+          if(window.plausible) window.plausible('Blog Read Click', {props: {title: post.title}});
+        });
+      } else {
+        card.addEventListener('click', () => {
+          alert(`Opening article: "${post.title}".\n\nIn a full deployment, this would load the markdown content.`);
+          if(window.plausible) window.plausible('Blog Read Click', {props: {title: post.title}});
+        });
+      }
 
       this.container.appendChild(card);
     });

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .arch-node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: #1a1a1a;
+    color: #00ffcc;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 10px rgba(0, 255, 194, 0.5);
+    cursor: pointer; /* Change to pointer to test */
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    z-index: 10;
+    font-weight: bold;
+    text-align: center;
+    pointer-events: auto; /* Ensure it receives events */
+  }
+</style>
+</head>
+<body>
+      <div
+        style="
+          position: relative;
+          max-width: 800px;
+          height: 400px;
+          margin: 0 auto;
+          padding: 2rem;
+          background: #333;
+        "
+      >
+        <div class="arch-node" style="top: 20%; left: 50%" data-info="Neuro-Symbolic Hybrid AI for Edge reasoning.">Edge AI</div>
+        <div class="arch-node" style="top: 50%; left: 20%" data-info="Advanced Swarm Intelligence via Consensus-Based Bundle Algorithm.">Swarm logic</div>
+
+        <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;">
+          <line x1="50%" y1="20%" x2="20%" y2="50%" stroke="#00ffcc" stroke-width="2" />
+        </svg>
+      </div>
+</body>
+</html>
