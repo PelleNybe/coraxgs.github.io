@@ -1,0 +1,5 @@
+Update README.md with visual elements and marketing info
+
+- Replaced old README with a new, highly visual structure.
+- Included badges, animations, dropdowns, and screenshots.
+- Highlighted Corax CoLAB features and Pelle Nyberg.
