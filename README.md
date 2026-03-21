@@ -1,26 +1,27 @@
 <div align="center">
-  <img src="images/logo.png" alt="Corax CoLAB Logo" width="150" style="border-radius: 50%; box-shadow: 0 0 20px #00ffcc;" />
+  <img src="images/logo.png" alt="Corax CoLAB Logo" width="180" style="border-radius: 50%; box-shadow: 0 0 30px #00ffcc;" />
 
-  <h1 style="color: #00ffcc; font-weight: 900; letter-spacing: 2px;">🚀 Corax CoLAB 🔬</h1>
-
-  <h3><strong>Future-Forward Innovation in AI, Web3 & Blockchain</strong></h3>
-
-  <p align="center">
-    <a href="https://PelleNybe.github.io"><img src="https://img.shields.io/badge/Live_Site-00ffcc?style=for-the-badge&logo=vercel&logoColor=black" alt="Live Site"></a>
-    <a href="https://coraxcolab.com"><img src="https://img.shields.io/badge/Corax_CoLAB-181717?style=for-the-badge&logo=googlechrome&logoColor=00ffcc" alt="Corax CoLAB"></a>
-    <a href="https://github.com/PelleNybe"><img src="https://img.shields.io/badge/GitHub-Pelle_Nyberg-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
-    <a href="https://www.linkedin.com/in/pellenyberg/"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-      <a href="https://github.com/PelleNybe/PelleNybe.github.io/stargazers"><img src="https://img.shields.io/github/stars/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Stars"></a>
-    <a href="https://github.com/PelleNybe/PelleNybe.github.io/network/members"><img src="https://img.shields.io/github/forks/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Forks"></a>
-    <a href="https://github.com/PelleNybe/PelleNybe.github.io/watchers"><img src="https://img.shields.io/github/watchers/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Watchers"></a>
-    <a href="https://github.com/PelleNybe/PelleNybe.github.io/issues"><img src="https://img.shields.io/github/issues/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Issues"></a>
-    <a href="https://github.com/PelleNybe/PelleNybe.github.io/pulls"><img src="https://img.shields.io/github/issues-pr/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="PRs Welcome"></a>
-    <a href="https://github.com/PelleNybe/PelleNybe.github.io/blob/master/LICENSE"><img src="https://img.shields.io/github/license/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=open-source-initiative&color=00ffcc" alt="License"></a>
-</p>
+  <h1 style="color: #00ffcc; font-weight: 900; letter-spacing: 3px; font-size: 3em; margin-bottom: 0;">🚀 Corax CoLAB 🔬</h1>
+  <h2 style="font-weight: 600; color: #a0aec0; margin-top: 5px;">Digital Showcase & Engineering Portfolio</h2>
 
   <p align="center">
     <!-- Animated typing SVG for cool visual effect -->
-    <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=24&pause=1000&color=00FFCC&center=true&vCenter=true&width=600&lines=Autonomous+Robotics;Edge+AI+Innovation;Web3+%26+Blockchain;Sustainable+GreenTech" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=26&pause=1000&color=00FFCC&center=true&vCenter=true&width=700&lines=Autonomous+Robotics+%26+Edge+AI;Web3+%26+Blockchain+Infrastructure;Sustainable+GreenTech+Innovations;Compliance-as-Code+Architecture" alt="Typing SVG" />
+  </p>
+
+  <p align="center">
+    <a href="https://pellenybe.github.io"><img src="https://img.shields.io/badge/Live_Showcase-00ffcc?style=for-the-badge&logo=vercel&logoColor=black" alt="Live Site"></a>
+    <a href="https://coraxcolab.com"><img src="https://img.shields.io/badge/Corax_CoLAB_Official-181717?style=for-the-badge&logo=googlechrome&logoColor=00ffcc" alt="Corax CoLAB"></a>
+    <a href="https://cryptop.coraxcolab.com"><img src="https://img.shields.io/badge/CryptoP_Trading-F7931A?style=for-the-badge&logo=bitcoin&logoColor=white" alt="CryptoP"></a>
+    <a href="https://github.com/PelleNybe"><img src="https://img.shields.io/badge/GitHub-Pelle_Nyberg-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+    <a href="https://www.linkedin.com/in/pellenyberg/"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+  </p>
+
+  <p align="center">
+    <a href="https://github.com/PelleNybe/PelleNybe.github.io/stargazers"><img src="https://img.shields.io/github/stars/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Stars"></a>
+    <a href="https://github.com/PelleNybe/PelleNybe.github.io/network/members"><img src="https://img.shields.io/github/forks/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Forks"></a>
+    <a href="https://github.com/PelleNybe/PelleNybe.github.io/issues"><img src="https://img.shields.io/github/issues/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=github&color=00ffcc" alt="Issues"></a>
+    <a href="https://github.com/PelleNybe/PelleNybe.github.io/blob/master/LICENSE"><img src="https://img.shields.io/github/license/PelleNybe/PelleNybe.github.io?style=for-the-badge&logo=open-source-initiative&color=00ffcc" alt="License"></a>
   </p>
 </div>
 
@@ -28,35 +29,24 @@
 
 ## 🌟 The Vision
 
-Welcome to the digital showcase of **Corax CoLAB**—an independent research & engineering studio architecting the cyber-physical systems of tomorrow. We forge solutions at the intersection of **AI, IT, Web3, and Blockchain**.
+Welcome to the digital showcase of **Corax CoLAB**—an independent research & engineering studio architecting the cyber-physical systems of tomorrow. This repository hosts our highly interactive, immersive portfolio demonstrating our capabilities at the intersection of **AI, IT, Web3, and Blockchain**.
 
 Our flagship proprietary systems, like the **GAP Platform** and **GAPbot**, are designed to accelerate the adoption of responsible automation, while our open-source contributions empower a global developer community.
 
 ---
 
-## 📸 System Previews
+## 📸 System Previews & Features
+
+Experience a web platform that pushes the boundaries of modern browser capabilities.
 
 <div align="center">
-  <img src="images/fullpage_screenshot.png" alt="Corax CoLAB Fullpage" width="100%" style="border-radius: 10px; border: 2px solid #00ffcc; box-shadow: 0 10px 20px rgba(0, 255, 204, 0.2);" />
+  <img src="images/fullpage_screenshot.png" alt="Corax CoLAB Fullpage" width="100%" style="border-radius: 12px; border: 2px solid #00ffcc; box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3); margin-bottom: 20px;" />
   <p><i>The highly interactive, immersive Corax CoLAB showcase platform.</i></p>
 </div>
 
-<br>
+### 🔥 World-Class Interactive Elements
 
-<div align="center">
-  <table style="border: none;">
-    <tr>
-      <td align="center"><img src="images/swarm-gapbot-fisheye-group.jpg" alt="GAPbot Swarm" width="400" style="border-radius: 8px;" /><br><b>GAPbot Swarm Architecture</b></td>
-      <td align="center"><img src="images/GAPenterprise_grade_sec.png" alt="Enterprise Security" width="400" style="border-radius: 8px;" /><br><b>Enterprise Grade Security</b></td>
-    </tr>
-  </table>
-</div>
-
----
-
-## ✨ 5 World-Class Interactive Features
-
-Our showcase site isn't just a portfolio; it's a technical demonstration of what's possible on the modern web. Click the dropdowns below to explore!
+Click the dropdowns below to explore the technical demonstrations of what's possible on the modern web within this showcase:
 
 <details>
 <summary><b>1️⃣ Interactive WebGL Particle Swarm 🐝</b></summary>
@@ -88,149 +78,133 @@ A responsive Web Audio API integration providing futuristic, scroll-linked hums 
 An engaging, split-screen simulation demonstrating GAPbot's decision-making process, integrating computer vision logic and symbolic reasoning trees in real-time.
 </details>
 
+<details>
+<summary><b>6️⃣ Web3 Payload Signing Demo ⛓️</b></summary>
+<br>
+Connect your MetaMask wallet directly in the browser to test signing cryptographic payloads, demonstrating our decentralized architecture.
+</details>
+
+---
+
+## 🏗️ v2.0 Visual & Technical Overhaul
+
+We've recently shipped massive updates to ensure optimal performance, accessibility, and breathtaking visual fidelity:
+
+<div align="center">
+  <table style="border: none; width: 100%;">
+    <tr>
+      <td align="center"><img src="images/v1_boot_screen.png" alt="Corax OS Boot Sequence" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>Corax OS Boot Sequence</b></td>
+      <td align="center"><img src="images/v2_main_hero.png" alt="Reactive Particle Swarm" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>Reactive Particle Swarm</b></td>
+    </tr>
+    <tr>
+      <td align="center"><img src="images/v4_scrolled_nav.png" alt="Dynamic Floating Navbar" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>Dynamic Floating Navbar</b></td>
+      <td align="center"><img src="images/v5_3d_parallax_card.png" alt="3D Parallax Depth Cards" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>3D Parallax Depth Cards</b></td>
+    </tr>
+  </table>
+</div>
+
+### 🛠️ Architecture Upgrades
+- **Dynamic Event Bus Architecture:** Robust global `EventBus` for decoupled state management across complex components.
+- **Resilient API Fetching:** Exponential backoff and retry mechanisms to gracefully handle API rate limiting.
+- **Optimized WebGL Rendering:** `IntersectionObserver` integration automatically pauses render loops when out of viewport, saving CPU/GPU.
+- **Web3 Session Persistence:** Persisting Ethereum connection states using `localStorage` for a seamless dApp experience.
+
 ---
 
 ## 👨‍💻 Meet the Mastermind: Pelle Nyberg
 
 <div align="center">
-  <img src="https://github.com/PelleNybe.png" alt="Pelle Nyberg" width="120" style="border-radius: 50%; border: 3px solid #00ffcc; margin-bottom: 15px;" />
+  <img src="https://github.com/PelleNybe.png" alt="Pelle Nyberg" width="150" style="border-radius: 50%; border: 4px solid #00ffcc; box-shadow: 0 0 15px #00ffcc; margin-bottom: 15px;" />
 
-  <h3>Pelle Nyberg</h3>
-  <p><i>Founder, Lead Engineer, and Visionary Innovator</i></p>
+  <h2 style="color: #00ffcc; margin-bottom: 5px;">Pelle Nyberg</h2>
+  <h4 style="color: #a0aec0; margin-top: 0;">Founder, CEO & Deep Tech Visionary</h4>
 
   <p>
-    <a href="https://github.com/PelleNybe"><img src="https://img.shields.io/badge/GitHub-Pelle_Nybe-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub"></a>
-    <a href="https://www.linkedin.com/in/pellenyberg/"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-    <a href="https://pellenybe.github.io"><img src="https://img.shields.io/badge/Portfolio-PelleNybe.github.io-00ffcc?style=flat-square&logo=vercel&logoColor=black" alt="Portfolio"></a>
+    <a href="https://github.com/PelleNybe"><img src="https://img.shields.io/badge/GitHub-@PelleNybe-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+    <a href="https://www.linkedin.com/in/pellenyberg/"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+    <a href="https://pellenybe.github.io"><img src="https://img.shields.io/badge/Portfolio-PelleNybe.github.io-00ffcc?style=for-the-badge&logo=vercel&logoColor=black" alt="Portfolio"></a>
   </p>
 </div>
 
-Pelle Nyberg is the visionary force behind **Corax CoLAB**. With deep expertise spanning algorithmic trading, machine learning, and hardware robotics, Pelle builds production-ready applications that combine AI-driven automation with Web3 infrastructure.
+Pelle Nyberg is the driving force and visionary behind **Corax CoLAB**. With profound expertise spanning algorithmic trading, machine learning, and hardware robotics, Pelle builds production-ready applications that seamlessly combine AI-driven automation with Web3 infrastructure. He is the architect of the **GAP Platform** and the **GAPbot** hexapod, bridging the gap between digital intelligence and biological reality.
 
-🔥 **Featured Project:** Explore Pelle's cutting-edge AI-assisted trading strategy, **[CryptoP](https://cryptop.coraxcolab.com)**, designed for next-gen algorithmic trading.
+🔥 **Featured Project:** Explore Pelle's cutting-edge AI-assisted trading strategy platform, **[CryptoP](https://cryptop.coraxcolab.com)**, designed for next-gen algorithmic trading, arbitrage scanning, and AI market sentiment analysis.
 
 ---
 
 ## 🏢 About Corax CoLAB
 
-**[Corax CoLAB](https://coraxcolab.com)** develops practical, production-ready applications spanning four complementary domains:
-
-*   **🧠 AI & Machine Learning:** Edge-friendly models and pipelines for computer vision, predictive control, and resource optimization (low-power inference on ARM devices).
-*   **🌱 Automation & GreenTech:** Systems and controllers for gardens, small farms, and industrial processes to reduce energy, water, and nutrient usage.
-*   **⛓️ Web3 & Blockchain:** Decentralized applications, smart-contract tooling, wallets, and integration layers for trust-minimized services and tokenized incentives.
-*   **🛠️ Developer Tooling:** CLI tools, dashboards, deployment scripts, and CI/CD patterns for reproducible systems and nodes (Cardano, Polkadot).
-
-### Key Principles
-- **Balanced approach:** We develop both open-source projects for community benefit and proprietary solutions for advanced commercial applications.
-- **Resource efficiency:** Prioritize low-power and cost-effective deployments across all solutions.
-- **Interoperability:** Design software to play well with existing ecosystems (APIs, MQTT, Grafana, Prometheus).
-
----
-
-## 🛠️ Tech Stack & Architecture
-
-This platform leverages cutting-edge, performant web technologies:
-
-| Category | Technologies |
-|:---:|:---|
-| **🎨 Interactive 3D** | `Three.js`, `GSAP`, `WebGL` |
-| **💻 Frontend Foundation** | `HTML5 (Semantic)`, `CSS3 (Grid/Flex/Custom Props)`, `Vanilla JavaScript` |
-| **🔌 APIs & Services** | `GitHub API`, `Web Audio API`, `Intersection Observer`, `Plausible Analytics` |
-| **⚡ Performance** | `Progressive Web App (PWA)`, `Service Workers`, `Critical CSS`, `Lazy Loading` |
-| **🌐 Infrastructure** | `GitHub Pages`, `Cloudflare`, `GitHub Actions (CI/CD)` |
-
----
-
-## 🏗️ Project Structure
-
-```bash
-PelleNybe.github.io/
-├── 📄 index.html          # Main HTML entry with semantic structure
-├── 🎨 styles.css          # Cyberpunk-inspired modern CSS
-├── ⚙️ app.js              # Core application logic & API integrations
-├── 📱 manifest.json       # PWA manifest for native-like install
-├── 🔄 sw.js               # Service Worker for offline functionality
-├── 🤖 robots.txt          # SEO configuration
-└── 📁 images/             # Stunning visuals, logos, and screenshots
-```
-
----
-
-## 🤝 How to Contribute
-
-We believe in the power of open-source! Here's how you can collaborate with us:
-
-1. **Browse the repos:** Start your journey at [PelleNybe's GitHub](https://github.com/PelleNybe).
-2. **Find an issue:** Look for `good first issue` or `help wanted` tags.
-3. **Fork it:** Fork the repository to your own account.
-4. **Branch & Commit:**
-   ```bash
-   git checkout -b feat/your-awesome-feature
-   # Make your changes
-   git commit -m "Add some awesome feature"
-   ```
-5. **Push & PR:** Push to your fork and submit a Pull Request! We review all contributions carefully.
-
----
-
 <div align="center">
-  <img src="images/gap_digital_bridge_between_old_industry_and_future_iot.png" alt="GAP Digital Bridge" width="100%" style="border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.4);" />
-  <br><br>
-  <h3><i>Securing the future with robust, compliant, and edge-ready automation.</i></h3>
-
-  <p>Made with 💚, ☕ and ⚡ by <b><a href="https://coraxcolab.com" style="color:#00ffcc; text-decoration:none;">Corax CoLAB</a></b></p>
+  <a href="https://coraxcolab.com">
+    <img src="images/gap_digital_bridge_between_old_industry_and_future_iot.png" alt="GAP Digital Bridge" width="100%" style="border-radius: 12px; border: 2px solid #333; box-shadow: 0 5px 25px rgba(0,0,0,0.5);" />
+  </a>
 </div>
 
----
+**[Corax CoLAB](https://coraxcolab.com)** is the catalyst for transformation towards a sustainable future. We develop practical, production-ready applications spanning four complementary domains:
 
-## 🚀 Recent Improvements
+*   **🧠 AI & Machine Learning:** Edge-friendly models (YOLOv8, Hailo-8) and pipelines for computer vision, predictive control, and resource optimization.
+*   **🌱 Automation & GreenTech:** Systems and controllers (GAP Platform) for agriculture and industrial processes to reduce energy, water, and nutrient usage by up to 30-50%.
+*   **⛓️ Web3 & Blockchain:** Decentralized applications, smart-contract tooling, and integration layers for trust-minimized services and 100% regulatory traceability.
+*   **🛠️ Developer Tooling:** CLI tools, dashboards, deployment scripts, and CI/CD patterns for reproducible systems.
 
-
-### Advanced Technical Improvements (v2.0)
-1. **Dynamic Event Bus Architecture:** Implemented a robust global `EventBus` for decoupled state management across complex components like Web3 connectivity and Theme toggling.
-2. **Resilient API Fetching:** Upgraded the GitHub integration with exponential backoff and retry mechanisms to gracefully handle API rate limiting.
-3. **Optimized WebGL Rendering:** Introduced `IntersectionObserver` integration for heavy Three.js scenes (Swarm and GAPbot). Render loops now automatically pause when out of the viewport, significantly reducing CPU/GPU overhead.
-4. **Web3 Session Persistence:** Enhanced the dApp experience by persisting Ethereum connection states using `localStorage`, allowing silent reconnections and a seamless user experience.
-5. **Robust CSS Architecture:** Refactored the theming system to leverage `data-theme` attributes on the root HTML element, deeply scoping CSS Custom Properties for cleaner, more scalable code.
-
-
-### World-Class Visual Improvements (v2.0)
-1. **Interactive Corax OS Boot Screen:** A brand new, immersive terminal-style boot sequence overlay masks the initial load, providing a futuristic first impression.
-2. **Reactive Swarm Intelligence:** The WebGL particle swarm now dynamically reacts to user scrolling (increased rotation velocity) and clicks (ripple distortion effect).
-3. **Immersive 3D Parallax Cards:** Upgraded the `TiltEffect` to utilize true Z-axis translation on child elements, creating a stunning holographic depth effect as cards tilt.
-4. **Pill-Shaped Dynamic Navbar:** The navigation bar now elegantly morphs from a full-width header into a sleek, floating pill shape with dynamic glassmorphism when scrolling down the page.
-5. **Cyberpunk Form Interactions:** Input fields and terminal interfaces now feature custom, high-tech glowing focus states that align perfectly with the deep-tech aesthetic.
-
-
-## 📸 v2.0 Feature Showcase
+### The GAP Ecosystem
+Our flagship architecture involves **GAP Platform** (The Brain: a hybrid cloud/edge industrial control center) and **GAPbot** (The Body: autonomous hexapod robotics for unstructured environments).
 
 <div align="center">
   <table style="border: none;">
     <tr>
-      <td align="center"><img src="images/v1_boot_screen.png" alt="Corax OS Boot Sequence" width="400" style="border-radius: 8px;" /><br><b>Corax OS Boot Sequence</b></td>
-      <td align="center"><img src="images/v2_main_hero.png" alt="Reactive Particle Swarm" width="400" style="border-radius: 8px;" /><br><b>Reactive Particle Swarm</b></td>
-    </tr>
-    <tr>
-      <td align="center"><img src="images/v4_scrolled_nav.png" alt="Dynamic Floating Navbar" width="400" style="border-radius: 8px;" /><br><b>Dynamic Floating Navbar</b></td>
-      <td align="center"><img src="images/v5_3d_parallax_card.png" alt="3D Parallax Depth Cards" width="400" style="border-radius: 8px;" /><br><b>3D Parallax Depth Cards</b></td>
+      <td align="center"><img src="images/swarm-gapbot-fisheye-group.jpg" alt="GAPbot Swarm" width="400" style="border-radius: 8px;" /><br><b>GAPbot Swarm Architecture</b></td>
+      <td align="center"><img src="images/GAPenterprise_grade_sec.png" alt="Enterprise Security" width="400" style="border-radius: 8px;" /><br><b>Enterprise Grade Security & Compliance-as-Code</b></td>
     </tr>
   </table>
 </div>
 
+---
 
-### Legacy Improvements (v1.0)
-We have recently shipped significant updates to the platform to ensure optimal performance, accessibility, and visual fidelity:
+## 💻 Tech Stack Arsenal
 
-### Technical Advancements
-1. **Minification Pipeline:** Automated HTML, CSS, and JS minification using `html-minifier`, `clean-css`, and `terser` to drastically reduce bundle size and improve load times.
-2. **Lighthouse CI/CD:** Integrated automated Lighthouse CI auditing in GitHub Actions to continuously monitor performance, accessibility, SEO, and best practices.
-3. **Lazy Loading:** All imagery now utilizes native `loading="lazy"` attributes, significantly improving the initial First Contentful Paint (FCP).
-4. **Accessibility (a11y) Polish:** Added semantic `aria-labels` across interactive elements and `role="img"` to CSS-rendered icons, paired with improved keyboard focus states.
-5. **Deferred WebGL Initialization:** WebGL canvases and Three.js scenes now initialize on-demand via `IntersectionObserver` when scrolled into view, unblocking the main thread during initial page load.
+This showcase is built with a high-performance, modern web stack, reflecting the same engineering rigor applied to our cyber-physical systems.
 
-### Visual & UX Enhancements
-1. **Dark/Light Mode Theme:** Introduced a fully responsive theme toggle with customized CSS variables, ensuring the cyberpunk aesthetic persists beautifully across high-contrast environments.
-2. **Refined Typography & Spacing:** Upgraded base font scaling, line-heights, and section paddings for a more readable, premium layout.
-3. **Scroll-Driven Animations:** Implemented subtle slide-up and fade-in animations on sections and cards as they enter the viewport using modern `IntersectionObserver` techniques.
-4. **Enhanced Interactions:** Added high-performance CSS hardware-accelerated transform effects (skew overlays, scaling, glowing box-shadows) on hover for cards and buttons.
-5. **Glassmorphic Hero Section:** Redesigned the Hero section with a sleek, blurred backdrop filter overlay (`backdrop-filter`) and text gradients for improved readability over the WebGL background.
+<div align="center">
+  <p>
+    <a href="https://skillicons.dev">
+      <img src="https://skillicons.dev/icons?i=html,css,js,ts,threejs,webgl&perline=6" />
+    </a>
+  </p>
+  <p>
+    <a href="https://skillicons.dev">
+      <img src="https://skillicons.dev/icons?i=githubactions,cloudflare,nodejs,bash,linux,docker&perline=6" />
+    </a>
+  </p>
+</div>
+
+| Category | Technologies |
+|:---:|:---|
+| **🎨 Interactive 3D** | `Three.js`, `GSAP`, `WebGL` |
+| **💻 Frontend** | `HTML5 (Semantic)`, `CSS3 (Grid/Variables)`, `Vanilla JS`, `TypeScript` |
+| **🔌 APIs & Services** | `Web Audio API`, `Intersection Observer`, `Ethers.js (Web3)` |
+| **⚡ Performance** | `Progressive Web App (PWA)`, `Service Workers`, `Lazy Loading` |
+| **🌐 Infrastructure** | `GitHub Pages`, `Cloudflare`, `GitHub Actions (CI/CD)` |
+
+---
+
+## 🤝 Open Source & Contributing
+
+Innovation thrives in the open. We believe in the power of open-source and actively share tools for machine learning, algorithmic trading, and multi-agent system simulations.
+
+1. **Browse:** Start your journey at [PelleNybe's GitHub](https://github.com/PelleNybe).
+2. **Find an issue:** Look for `good first issue` or `help wanted` tags.
+3. **Fork & Branch:**
+   ```bash
+   git checkout -b feat/your-awesome-feature
+   ```
+4. **Commit & PR:** We review all contributions carefully to build a better future together!
+
+---
+
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=000000&height=120&text=Corax%20CoLAB&fontSize=50&fontColor=ffffff&animation=twinkling&desc=Engineering%20for%20an%20Unstructured%20World&descAlign=50&descAlignY=75" alt="Corax CoLAB Banner">
+  <br><br>
+  <h3><i>Securing the future with robust, compliant, and edge-ready automation.</i></h3>
+  <p>Made with 💚, ☕ and ⚡ by <b><a href="https://coraxcolab.com" style="color:#00ffcc; text-decoration:none;">Corax CoLAB</a></b></p>
+</div>
