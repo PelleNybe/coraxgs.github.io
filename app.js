@@ -214,11 +214,48 @@ customElements.define('project-card', ProjectCardElement);
 // Corax CoLAB Enhanced Website JavaScript v2.0
 
 // Performance and Analytics
+
+// T2: Global Event Bus for state management
+class EventBus {
+  constructor() {
+    this.events = {};
+  }
+  on(event, listener) {
+    if (!this.events[event]) this.events[event] = [];
+    this.events[event].push(listener);
+  }
+  emit(event, data) {
+    if (this.events[event]) {
+      this.events[event].forEach(listener => listener(data));
+    }
+  }
+}
+const coraxEventBus = new EventBus();
+window.coraxEventBus = coraxEventBus;
+
 const CoraxAnalytics = {
   startTime: performance.now(),
   loadTime: 0,
   apiCallCount: 0,
   errors: [],
+
+
+  async checkConnection() {
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+      if (accounts.length > 0) {
+        this.account = accounts[0];
+        this.statusText.textContent = `Connected: ${this.account.substring(0, 6)}...${this.account.substring(38)}`;
+        this.statusText.style.color = 'var(--success-color)';
+        this.connectBtn.style.display = 'none';
+        this.actionsDiv.style.display = 'flex';
+      } else {
+        localStorage.removeItem('corax_web3_account');
+      }
+    } catch (e) {
+      console.error("Silent reconnect failed", e);
+    }
+  }
 
   init() {
     this.trackErrors();
@@ -280,36 +317,44 @@ class GitHubAPI {
       );
     }
 
-    try {
-      this.lastRequest = Date.now();
-      CoraxAnalytics.apiCallCount++;
+    let retries = 3;
+    let delay = 1000;
+    while (retries > 0) {
+      try {
+        this.lastRequest = Date.now();
+        CoraxAnalytics.apiCallCount++;
 
-      const response = await fetch(endpoint, {
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-          ...options.headers,
-        },
-        ...options,
-      });
+        const response = await fetch(endpoint, {
+          headers: {
+            Accept: "application/vnd.github.v3+json",
+            ...options.headers,
+          },
+          ...options,
+        });
 
-      if (!response.ok) {
-        throw new Error(
-          `GitHub API error: ${response.status} ${response.statusText}`,
-        );
+        if (!response.ok) {
+          if (response.status === 403 || response.status === 429) {
+            console.warn(`Rate limited (${response.status}). Retrying in ${delay}ms...`);
+            await new Promise(res => setTimeout(res, delay));
+            retries--;
+            delay *= 2; // Exponential backoff
+            continue;
+          }
+          throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        this.cache.set(cacheKey, { data, timestamp: Date.now() });
+        return data;
+      } catch (error) {
+        if (retries <= 1) {
+          console.error("GitHub API request failed after retries:", error);
+          throw error;
+        }
+        retries--;
+        await new Promise(res => setTimeout(res, delay));
+        delay *= 2;
       }
-
-      const data = await response.json();
-
-      // Cache successful responses
-      this.cache.set(cacheKey, {
-        data,
-        timestamp: Date.now(),
-      });
-
-      return data;
-    } catch (error) {
-      console.error("GitHub API request failed:", error);
-      throw error;
     }
   }
 
@@ -563,6 +608,31 @@ class CoraxWebsite {
 
   async init() {
     CoraxAnalytics.init();
+
+    // V1: Advanced Loading Screen Logic
+    const bootScreen = document.getElementById('corax-os-boot');
+    const bootFill = document.getElementById('boot-progress-fill');
+    const bootText = document.getElementById('boot-status-text');
+
+    if (bootScreen) {
+      const steps = [
+        { progress: 20, text: "Loading Kernel Modules..." },
+        { progress: 40, text: "Mounting Virtual DOM..." },
+        { progress: 60, text: "Initializing Swarm Protocols..." },
+        { progress: 80, text: "Establishing Secure Edge Uplink..." },
+        { progress: 100, text: "System Ready." }
+      ];
+
+      for (const step of steps) {
+        bootFill.style.width = step.progress + '%';
+        bootText.textContent = step.text;
+        await new Promise(r => setTimeout(r, 200 + Math.random() * 300));
+      }
+
+      bootScreen.style.opacity = '0';
+      setTimeout(() => bootScreen.remove(), 1000);
+    }
+
     this.initializeTheme();
     this.setupEventListeners();
     await this.loadProjects();
@@ -584,6 +654,7 @@ class CoraxWebsite {
     document.documentElement.setAttribute("data-theme", this.theme);
     localStorage.setItem("corax-theme", this.theme);
     this.updateThemeButton();
+    window.coraxEventBus.emit('themeChanged', this.theme);
 
     if (window.plausible) {
       window.plausible("Theme Toggle", { props: { theme: this.theme } });
@@ -950,6 +1021,21 @@ class NeuralNetwork {
     window.addEventListener('resize', this.onWindowResize.bind(this));
     window.addEventListener('mousemove', this.onMouseMove.bind(this));
 
+    // V2: Click ripple
+    this.rippleTime = 0;
+    window.addEventListener('click', () => { this.rippleTime = 2.0; });
+
+    this.isVisible = true;
+
+    // T3: IntersectionObserver for NeuralNetwork
+    this.observer = new IntersectionObserver((entries) => {
+      this.isVisible = entries[0].isIntersecting;
+      if (this.isVisible) this.animate();
+    }, { threshold: 0.1 });
+
+    const heroSection = document.querySelector('.hero');
+    if(heroSection) this.observer.observe(heroSection);
+
     this.animate();
   }
 
@@ -1059,6 +1145,7 @@ class NeuralNetwork {
   }
 
   animate() {
+    if (!this.isVisible) return; // Pause animation when not visible
     requestAnimationFrame(this.animate.bind(this));
 
     // Smooth mouse follow
@@ -1069,6 +1156,20 @@ class NeuralNetwork {
       // Rotate the entire swarm slowly
       this.particles.rotation.x += 0.0005;
       this.particles.rotation.y += 0.001;
+
+      // V2: Particle Swarm Reactivity (Scroll speed affects rotation)
+      const scrollSpeed = Math.abs(window.scrollY - (this.lastScrollY || 0));
+      this.lastScrollY = window.scrollY;
+      const rotationBoost = Math.min(scrollSpeed * 0.0001, 0.05);
+
+      this.particles.rotation.x += 0.0005 + rotationBoost;
+      this.particles.rotation.y += 0.001 + rotationBoost;
+
+      // Click ripple effect via event bus or local logic
+      if (this.rippleTime > 0) {
+        this.rippleTime -= 0.05;
+        this.particles.material.uniforms.time.value += this.rippleTime * 0.1;
+      }
 
       // Update shader uniforms
       this.particles.material.uniforms.time.value = performance.now() * 0.001;
@@ -1194,8 +1295,16 @@ class TiltEffect {
     const rotateX = ((y - centerY) / centerY) * -15; // Invert Y
     const rotateY = ((x - centerX) / centerX) * 15;
 
-    // Apply 3D transform
+    // V5: 3D Card Parallax Depth (Enhanced Transform)
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+    // Animate children dynamically based on depth
+    const children = card.querySelectorAll(':scope > *:not(.tilt-card-glare)');
+    children.forEach((child, index) => {
+      // Deeper elements move more
+      const depth = (index + 1) * 10;
+      child.style.transform = `translateZ(${depth}px) translateX(${rotateY * 0.5}px) translateY(${-rotateX * 0.5}px)`;
+    });
 
     // Move Glare gradient opposite to mouse
     if (glare) {
@@ -1209,6 +1318,13 @@ class TiltEffect {
 
     card.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+
+    // Reset V5 parallax children
+    const children = card.querySelectorAll(':scope > *:not(.tilt-card-glare)');
+    children.forEach((child) => {
+      child.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      child.style.transform = 'translateZ(30px) translateX(0px) translateY(0px)';
+    });
 
     if (glare) {
       glare.style.transition = 'opacity 0.5s ease';
@@ -1630,9 +1746,18 @@ function init3DGAPbot() {
     });
   });
 
+  // T3: Optimize GAPbot rendering
+  let isVisible = true;
+  const gapbotObserver = new IntersectionObserver((entries) => {
+    isVisible = entries[0].isIntersecting;
+    if (isVisible) animate();
+  }, { threshold: 0.1 });
+  gapbotObserver.observe(container);
+
   // Animation Loop
   let time = 0;
   function animate() {
+    if (!isVisible) return;
     requestAnimationFrame(animate);
 
     robotGroup.rotation.y += (targetRotation.y - robotGroup.rotation.y) * 0.1;
@@ -2416,6 +2541,12 @@ class Web3Demo {
   }
 
   init() {
+    // T4: Auto-connect if previously connected
+    const savedAccount = localStorage.getItem('corax_web3_account');
+    if (savedAccount && typeof window.ethereum !== 'undefined') {
+       this.checkConnection();
+    }
+
     this.connectBtn.addEventListener('click', async () => {
       if (typeof window.ethereum !== 'undefined') {
         try {
@@ -2429,6 +2560,7 @@ class Web3Demo {
           this.connectBtn.style.display = 'none';
           this.actionsDiv.style.display = 'flex';
 
+          localStorage.setItem('corax_web3_account', this.account);
           if(window.plausible) window.plausible('Wallet Connected');
         } catch (error) {
           console.error("User denied account access", error);
@@ -2478,6 +2610,7 @@ class Web3Demo {
           this.statusText.textContent = `Connected: ${this.account.substring(0, 6)}...${this.account.substring(38)}`;
         } else {
           this.account = null;
+          localStorage.removeItem('corax_web3_account');
           this.statusText.textContent = 'Status: Disconnected';
           this.statusText.style.color = 'var(--text-muted)';
           this.connectBtn.style.display = 'inline-block';

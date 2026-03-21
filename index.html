@@ -70,6 +70,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
+  <!-- V1: Advanced Loading Screen -->
+  <div id="corax-os-boot" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--primary-color); font-family: monospace; transition: opacity 1s ease-out;">
+    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 2rem; text-shadow: 0 0 20px var(--primary-color);">CORAX_OS v2.0</div>
+    <div id="boot-progress-bar" style="width: 300px; height: 4px; background: rgba(0,255,194,0.2); position: relative; border-radius: 2px; overflow: hidden; margin-bottom: 1rem;">
+      <div id="boot-progress-fill" style="width: 0%; height: 100%; background: var(--primary-color); box-shadow: 0 0 10px var(--primary-color); transition: width 0.1s;"></div>
+    </div>
+    <div id="boot-status-text" style="font-size: 0.8rem; color: var(--text-muted); min-height: 1.2rem;">Initializing boot sequence...</div>
+  </div>
+
   <div class="background-animation"></div>
   <canvas id="neural-canvas"></canvas>
   <div class="custom-cursor"></div>

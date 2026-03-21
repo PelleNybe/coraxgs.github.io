@@ -1,18 +1,40 @@
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 1329, in <module>
-    test(
-  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 1276, in test
-    with ServerClass(addr, HandlerClass) as httpd:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 457, in __init__
-    self.server_bind()
-  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 1323, in server_bind
-    return super().server_bind()
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 140, in server_bind
-    socketserver.TCPServer.server_bind(self)
-  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 478, in server_bind
-    self.socket.bind(self.server_address)
-OSError: [Errno 98] Address already in use
+127.0.0.1 - - [21/Mar/2026 20:14:15] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:15] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:15] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:15] "GET /manifest.json HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:15] "GET /images/hero-bg.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:15] "GET /images/logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:31] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:31] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:31] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:31] "GET /manifest.json HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:31] "GET /images/hero-bg.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:32] "GET /images/logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:47] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:47] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:47] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:47] "GET /manifest.json HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:47] "GET /images/hero-bg.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:47] "GET /images/logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:53] "GET /images/automation-illustration.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:53] "GET /images/blockchain-illustration.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:14:53] "GET /images/ai-illustration.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:15:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:15:41] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:15:41] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:15:42] "GET /images/hero-bg.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:15:42] "GET /images/ai-illustration.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:15:42] "GET /images/logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:15:42] "GET /images/automation-illustration.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:15:42] "GET /images/blockchain-illustration.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:30] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:30] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:30] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:30] "GET /images/hero-bg.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:30] "GET /images/logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:30] "GET /images/automation-illustration.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:30] "GET /images/ai-illustration.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:30] "GET /images/blockchain-illustration.svg HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:37] "GET /images/1773184753736.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:37] "GET /images/1773184772226.png HTTP/1.1" 200 -
+127.0.0.1 - - [21/Mar/2026 20:16:37] "GET /images/1773184783812.png HTTP/1.1" 200 -

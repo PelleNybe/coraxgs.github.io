@@ -1,5 +1,7 @@
-/* Corax CoLAB Styles v2.0 */
-:root {
+
+/* T5: Robust CSS custom properties scoping */
+html {
+  /* Default dark theme */
   --primary-color: #00ffc2;
   --secondary-color: #1a73e8;
   --accent-color: #ff6b35;
@@ -12,8 +14,8 @@
   --text-primary: #f8f9fa;
   --text-secondary: #e8eaed;
   --text-muted: #9aa0a6;
-  --gradient-primary: linear-gradient(135deg, #00ffc2, #1a73e8);
-  --gradient-secondary: linear-gradient(135deg, #ff6b35, #ffb347);
+  --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  --gradient-secondary: linear-gradient(135deg, var(--accent-color), var(--warning-color));
   --gradient-dark: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
   --shadow-glow: 0 0 30px rgba(0, 255, 204, 0.3);
   --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -29,6 +31,28 @@
   --spacing-lg: 3rem;
   --spacing-xl: 5rem;
 }
+
+html[data-theme="light"] {
+  --primary-color: #007bb5;
+  --secondary-color: #e81a73;
+  --accent-color: #356bff;
+  --success-color: #008f72;
+  --warning-color: #d17c00;
+  --error-color: #d32f2f;
+  --dark-bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-muted: #6c757d;
+  --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  --gradient-secondary: linear-gradient(135deg, var(--accent-color), var(--warning-color));
+  --gradient-dark: linear-gradient(135deg, #e9ecef, #dee2e6, #ced4da);
+  --shadow-glow: 0 0 30px rgba(0, 123, 181, 0.15);
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+/* Corax CoLAB Styles v2.0 */
+
 
 /* Reset and base styles */
 *,
@@ -1158,10 +1182,7 @@ footer::before {
 }
 
 @media (max-width: 1024px) {
-  :root {
-    --spacing-xl: 4rem;
-    --spacing-lg: 2.5rem;
-  }
+
 
   .hero::before {
     background: radial-gradient(
@@ -1173,11 +1194,7 @@ footer::before {
 }
 
 @media (max-width: 768px) {
-  :root {
-    --spacing-xl: 3rem;
-    --spacing-lg: 2rem;
-    --spacing-md: 1.5rem;
-  }
+
 
   .nav-links {
     display: none;
@@ -1275,11 +1292,7 @@ footer::before {
 }
 
 @media (max-width: 480px) {
-  :root {
-    --spacing-xl: 2rem;
-    --spacing-lg: 1.5rem;
-    --spacing-sm: 0.8rem;
-  }
+
 
   .logo-img {
     width: 24px;
@@ -1358,11 +1371,7 @@ footer::before {
 
 /* High contrast mode */
 @media (prefers-contrast: high) {
-  :root {
-    --primary-color: #00ffff;
-    --text-secondary: #ffffff;
-    --border-color: #ffffff;
-  }
+
 }
 
 /* Print styles */
@@ -2312,4 +2321,63 @@ body {
   background: linear-gradient(to right, #1a1a1a, var(--primary-color));
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+/* V3: Glowing Form Fields */
+input[type="text"], input[type="email"], textarea {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 194, 0.3);
+  color: var(--text-primary);
+  padding: 10px 15px;
+  border-radius: var(--border-radius-small);
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px rgba(0, 255, 194, 0.4), inset 0 0 10px rgba(0, 255, 194, 0.1);
+  background: rgba(0, 255, 194, 0.05);
+}
+
+/* V4: Enhanced Navigation Bar (Pill Shape on Scroll) */
+nav {
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  top: 0;
+  width: 100%;
+}
+
+nav.scrolled {
+  top: 20px;
+  width: calc(100% - 40px);
+  max-width: var(--max-width);
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50px;
+  background: rgba(10, 10, 10, 0.85);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(0, 255, 194, 0.2);
+  border: 1px solid rgba(0, 255, 194, 0.3);
+  padding: 8px 0;
+}
+
+@media (max-width: 768px) {
+  nav.scrolled {
+    width: calc(100% - 20px);
+    top: 10px;
+    border-radius: 25px;
+  }
+}
+
+/* Override input styling inside terminal to fit aesthetic */
+#terminal-input {
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  caret-color: var(--primary-color);
+}
+#terminal-input:focus {
+  box-shadow: none !important;
+  background: transparent !important;
 }
