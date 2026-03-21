@@ -1,8 +1,16 @@
 {
   "dependencies": {
     "finalhandler": "^2.1.1",
-    "playwright": "^1.58.2",
     "puppeteer": "^24.39.1",
     "serve-static": "^2.2.1"
+  },
+  "scripts": {
+    "build": "node minify.js"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "html-minifier-terser": "^7.2.0",
+    "playwright": "^1.58.2",
+    "terser": "^5.46.1"
   }
 }

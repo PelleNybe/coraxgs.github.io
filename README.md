@@ -180,3 +180,23 @@ We believe in the power of open-source! Here's how you can collaborate with us:
 
   <p>Made with 💚, ☕ and ⚡ by <b><a href="https://coraxcolab.com" style="color:#00ffcc; text-decoration:none;">Corax CoLAB</a></b></p>
 </div>
+
+---
+
+## 🚀 Recent Improvements
+
+We have recently shipped significant updates to the platform to ensure optimal performance, accessibility, and visual fidelity:
+
+### Technical Advancements
+1. **Minification Pipeline:** Automated HTML, CSS, and JS minification using `html-minifier`, `clean-css`, and `terser` to drastically reduce bundle size and improve load times.
+2. **Lighthouse CI/CD:** Integrated automated Lighthouse CI auditing in GitHub Actions to continuously monitor performance, accessibility, SEO, and best practices.
+3. **Lazy Loading:** All imagery now utilizes native `loading="lazy"` attributes, significantly improving the initial First Contentful Paint (FCP).
+4. **Accessibility (a11y) Polish:** Added semantic `aria-labels` across interactive elements and `role="img"` to CSS-rendered icons, paired with improved keyboard focus states.
+5. **Deferred WebGL Initialization:** WebGL canvases and Three.js scenes now initialize on-demand via `IntersectionObserver` when scrolled into view, unblocking the main thread during initial page load.
+
+### Visual & UX Enhancements
+1. **Dark/Light Mode Theme:** Introduced a fully responsive theme toggle with customized CSS variables, ensuring the cyberpunk aesthetic persists beautifully across high-contrast environments.
+2. **Refined Typography & Spacing:** Upgraded base font scaling, line-heights, and section paddings for a more readable, premium layout.
+3. **Scroll-Driven Animations:** Implemented subtle slide-up and fade-in animations on sections and cards as they enter the viewport using modern `IntersectionObserver` techniques.
+4. **Enhanced Interactions:** Added high-performance CSS hardware-accelerated transform effects (skew overlays, scaling, glowing box-shadows) on hover for cards and buttons.
+5. **Glassmorphic Hero Section:** Redesigned the Hero section with a sleek, blurred backdrop filter overlay (`backdrop-filter`) and text gradients for improved readability over the WebGL background.

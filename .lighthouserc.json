@@ -1,0 +1,12 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./dist",
+      "isSinglePageApplication": true,
+      "url": ["http://localhost/"]
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}
