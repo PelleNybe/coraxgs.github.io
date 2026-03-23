@@ -2628,39 +2628,22 @@ class BlogSystem {
   constructor() {
     this.container = document.getElementById('blog-grid');
     if (!this.container) return;
-
-    // Simulate fetching markdown posts or an API endpoint
-    this.posts = [
-      {
-        title: 'Optimizing YOLOv8-Seg for Hailo-8L Edge Accelerators',
-        date: '2024-03-15',
-        excerpt: 'A deep dive into how we achieved ultra-low latency inference for the GAPbot vision system without compromising on segmentation accuracy.',
-        readTime: '8 min read',
-        tag: 'Edge AI',
-        link: 'https://github.com/PelleNybe/CoraxCoLABs-GAP-GreenAutomatedPlatform---GAPbot'
-      },
-      {
-        title: 'Swarm Consensus: Beyond Basic Algorithms',
-        date: '2024-02-28',
-        excerpt: 'Exploring our custom implementation of the Consensus-Based Bundle Algorithm (CBBA) for decentralized task allocation among multiple GAPbot units.',
-        readTime: '12 min read',
-        tag: 'Robotics',
-        link: 'https://github.com/PelleNybe/PelleNybe'
-      },
-      {
-        title: 'Integrating Post-Quantum Cryptography in MQTT',
-        date: '2024-02-10',
-        excerpt: 'Why we are future-proofing our IoT communications now, and how we implemented PQC algorithms to secure the GAP platform data streams.',
-        readTime: '10 min read',
-        tag: 'Security',
-        link: 'https://github.com/PelleNybe/Crypto-MCP-Server---by-Corax-CoLAB'
-      }
-    ];
-
+    this.posts = [];
     this.init();
   }
 
-  init() {
+  async init() {
+    try {
+      // Fetch dynamically generated blog list from blogs.json instead of mocked array
+      const response = await fetch('blogs.json');
+      if (response.ok) {
+        this.posts = await response.json();
+      } else {
+        console.error('Failed to load real blog data.');
+      }
+    } catch (e) {
+      console.error('Error fetching blogs.json:', e);
+    }
     this.renderPosts();
   }
 

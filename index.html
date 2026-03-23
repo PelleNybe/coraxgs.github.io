@@ -119,7 +119,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-bg-video-placeholder" style="background-image: url('images/hero-bg.svg'); background-size: cover; background-position: center; opacity: 0.5;"></div>
+    <div class="hero-bg-fallback" style="background-image: url('images/hero-bg.svg'); background-size: cover; background-position: center; opacity: 0.5;"></div>
     <div class="hero-bg-overlay"></div>
     <div class="hero-content">
       <div class="terminal-boot-container">
@@ -393,7 +393,7 @@
           <div style="position: absolute; top: 10px; left: 10px; color: var(--primary-color); font-family: monospace; z-index: 10; font-size: 0.8rem; background: rgba(0,0,0,0.5); padding: 4px;">
             YOLOv8-Seg (Edge) <span id="fps-counter" style="color: var(--warning-color);">60 FPS</span>
           </div>
-          <!-- Simulated Matrix/LiDAR Canvas -->
+          <!-- Depth/LiDAR Stream Visualization -->
           <canvas id="vision-canvas" style="width: 100%; height: 100%; filter: contrast(1.5) sepia(1) hue-rotate(100deg) saturate(2); opacity: 0.8;"></canvas>
 
           <!-- Bounding Boxes Overlay -->

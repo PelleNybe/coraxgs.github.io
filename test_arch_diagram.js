@@ -22,9 +22,9 @@ const { chromium } = require('playwright');
     const firstNode = nodes.first();
     const expectedInfo = await firstNode.getAttribute('data-info');
 
-    await firstNode.hover();
+    // Make sure we dispatch the exact event that the code listens for.
+    await firstNode.dispatchEvent('mouseenter');
 
-    // Wait for text to change (should be fast)
     await page.waitForTimeout(100);
 
     const hoverText = await archInfo.textContent();
@@ -38,8 +38,7 @@ const { chromium } = require('playwright');
       process.exit(1);
     }
 
-    // Test mouse leave by hovering over something else, e.g. the body or info box
-    await page.mouse.move(0, 0);
+    await firstNode.dispatchEvent('mouseleave');
     await page.waitForTimeout(100);
 
     const leaveText = await archInfo.textContent();

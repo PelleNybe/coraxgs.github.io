@@ -5,7 +5,8 @@
     "serve-static": "^2.2.1"
   },
   "scripts": {
-    "build": "node minify.js"
+    "build": "node scripts/generate_blog_json.js && node minify.js",
+    "generate:blogs": "node scripts/generate_blog_json.js"
   },
   "devDependencies": {
     "clean-css-cli": "^5.6.3",
