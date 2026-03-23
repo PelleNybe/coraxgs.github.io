@@ -208,3 +208,17 @@ Innovation thrives in the open. We believe in the power of open-source and activ
   <h3><i>Securing the future with robust, compliant, and edge-ready automation.</i></h3>
   <p>Made with 💚, ☕ and ⚡ by <b><a href="https://coraxcolab.com" style="color:#00ffcc; text-decoration:none;">Corax CoLAB</a></b></p>
 </div>
+
+
+
+## ⚙️ Configuration
+
+If you'd like to run local tests or mock specific integrations, you can configure your environment via a `.env` file.
+
+1. Copy the example configuration:
+   ```bash
+   cp .env.example .env
+   ```
+2. Open `.env` and fill in the required variables for your setup (e.g., specific API keys if required).
+
+*Note: This repository is primarily a showcase and does not strictly require environment variables for the base visual experience.*
