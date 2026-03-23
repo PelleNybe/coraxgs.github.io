@@ -255,7 +255,7 @@ const CoraxAnalytics = {
     } catch (e) {
       console.error("Silent reconnect failed", e);
     }
-  }
+  },
 
   init() {
     this.trackErrors();
@@ -1016,7 +1016,7 @@ class NeuralNetwork {
     this.windowHalfY = window.innerHeight / 2;
 
     this.init();
-    this.initScrollAnimations();
+    // this.initScrollAnimations();
 
     window.addEventListener('resize', this.onWindowResize.bind(this));
     window.addEventListener('mousemove', this.onMouseMove.bind(this));
