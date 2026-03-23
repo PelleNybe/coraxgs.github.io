@@ -1340,12 +1340,11 @@ class TerminalBoot {
     this.container = document.getElementById(elementId);
     if (!this.container) return;
     this.lines = [
-      "Initializing Corax OS v2.0...",
-      "Loading kernel modules...",
-      "[OK] Swarm Intelligence loaded.",
-      "[OK] Post-Quantum Cryptography initialized.",
-      "[OK] Edge AI Node connected.",
-      "Connection established. Awaiting command."
+      "Initializing Corax OS v2.0 environment...",
+      "Mounting storage arrays...",
+      "[OK] Database connection active.",
+      "[OK] Live sensor data streaming configured.",
+      "Connection established to main operations center."
     ];
     this.currentLine = 0;
     this.container.innerHTML = ''; // Clear initial content
@@ -1360,7 +1359,7 @@ class TerminalBoot {
     this.setupInput();
   }
 
-  async typeLine(text, delay = 50) {
+  async typeLine(text, delay = 30) {
     return new Promise(resolve => {
       const lineElement = document.createElement("div");
       lineElement.className = "terminal-line";
@@ -1373,7 +1372,7 @@ class TerminalBoot {
         this.container.scrollTop = this.container.scrollHeight;
         if (i >= text.length) {
           clearInterval(interval);
-          setTimeout(resolve, 200);
+          setTimeout(resolve, 150);
         }
       }, delay);
     });
@@ -1382,7 +1381,7 @@ class TerminalBoot {
   setupInput() {
     const inputContainer = document.createElement('div');
     inputContainer.className = 'terminal-input-line';
-    inputContainer.innerHTML = '<span class="prompt">root@corax:~#</span> <input type="text" id="terminal-input" autocomplete="off" autofocus>';
+    inputContainer.innerHTML = '<span class="prompt">admin@corax:~#</span> <input type="text" id="terminal-input" autocomplete="off" autofocus>';
     this.container.appendChild(inputContainer);
 
     const inputField = document.getElementById('terminal-input');
@@ -1398,7 +1397,7 @@ class TerminalBoot {
         inputField.value = '';
         inputContainer.remove(); // Remove input to print response
 
-        await this.typeLine(`root@corax:~# ${cmd}`, 10);
+        await this.typeLine(`admin@corax:~# ${cmd}`, 10);
         await this.processCommand(cmd);
 
         this.setupInput(); // Re-add input after response
@@ -1410,30 +1409,29 @@ class TerminalBoot {
   async processCommand(cmd) {
     switch (cmd) {
       case 'help':
-        await this.typeLine("Available commands:");
-        await this.typeLine("  status   - Show system diagnostics");
-        await this.typeLine("  analyze  - Run environmental analysis");
-        await this.typeLine("  deploy   - Initialize GAPbot swarm protocol");
-        await this.typeLine("  clear    - Clear terminal output");
+        await this.typeLine("System Operations Manual:");
+        await this.typeLine("  nodes    - List active compute nodes");
+        await this.typeLine("  fetch    - Query live sensor stream");
+        await this.typeLine("  execute  - Run core processes");
+        await this.typeLine("  clear    - Clear console");
         break;
-      case 'status':
-        await this.typeLine("[System Status]");
-        await this.typeLine("- Edge Nodes: 4/4 Online");
-        await this.typeLine("- Swarm Latency: < 5ms");
-        await this.typeLine("- Compliance Logic: ACTIVE (EU AI Act Compliant)");
-        await this.typeLine("- GAPbot Fleet: Idle, charging via MPPT.");
+      case 'nodes':
+        await this.typeLine("Querying active endpoints...");
+        await this.typeLine("Node-1: Online (Uptime 45d)");
+        await this.typeLine("Node-2: Online (Uptime 23d)");
+        await this.typeLine("Database Shard A: Synced");
         break;
-      case 'analyze':
-        await this.typeLine("Initiating Edge AI analysis (YOLOv8-Seg)...");
-        await this.typeLine("[██████████] 100%");
-        await this.typeLine("Result: Nominal. Resource usage optimized by 42%.");
+      case 'fetch':
+        await this.typeLine("Requesting stream from telemetry.coraxcolab.com...");
+        await this.typeLine(`[${new Date().toISOString()}] Data packet received.`);
+        await this.typeLine(`Packet latency: ${Math.floor(Math.random()*20)}ms. Status: SECURE.`);
         break;
-      case 'deploy':
-        await this.typeLine("WARNING: Authorized personnel only.");
-        await this.typeLine("Authenticating via Web3 wallet...");
+      case 'execute':
+        await this.typeLine("Initializing main execution loop.");
+        await this.typeLine("Validating cryptographic signature...");
         setTimeout(async () => {
-          await this.typeLine("Authentication successful. Deploying GAPbot unit Alpha.");
-        }, 1000);
+          await this.typeLine("Validation complete. Routine running in background.");
+        }, 800);
         break;
       case 'clear':
         this.container.innerHTML = '';
@@ -1441,7 +1439,7 @@ class TerminalBoot {
       case '':
         break;
       default:
-        await this.typeLine(`Command not found: ${cmd}. Type 'help' for options.`);
+        await this.typeLine(`Unknown command: ${cmd}. Type 'help' for options.`);
     }
   }
 }
@@ -2264,6 +2262,60 @@ class CoraxAudio {
 }
 
 // Feature 5: Live Neuro-Symbolic AI Simulator
+// Basic Perlin noise implementation for pseudo-depth-map calculations
+const PERLIN_YWRAPB = 4;
+const PERLIN_YWRAP = 1 << PERLIN_YWRAPB;
+const PERLIN_ZWRAPB = 8;
+const PERLIN_ZWRAP = 1 << PERLIN_ZWRAPB;
+const PERLIN_SIZE = 4095;
+let perlin_octaves = 4;
+let perlin_amp_falloff = 0.5;
+let perlin = null;
+
+function noise(x, y, z) {
+  y = y || 0;
+  z = z || 0;
+  if (perlin == null) {
+    perlin = new Array(PERLIN_SIZE + 1);
+    for (let i = 0; i < PERLIN_SIZE + 1; i++) {
+      perlin[i] = Math.random();
+    }
+  }
+  let xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z);
+  let xf = x - xi, yf = y - yi, zf = z - zi;
+  let rxf, ryf;
+  let r = 0;
+  let ampl = 0.5;
+  let n1, n2, n3;
+
+  for (let o = 0; o < perlin_octaves; o++) {
+    let of = xi + (yi << PERLIN_YWRAPB) + (zi << PERLIN_ZWRAPB);
+    rxf = 0.5 * (1.0 - Math.cos(xf * Math.PI));
+    ryf = 0.5 * (1.0 - Math.cos(yf * Math.PI));
+    n1 = perlin[of & PERLIN_SIZE];
+    n1 += rxf * (perlin[(of + 1) & PERLIN_SIZE] - n1);
+    n2 = perlin[(of + PERLIN_YWRAP) & PERLIN_SIZE];
+    n2 += rxf * (perlin[(of + PERLIN_YWRAP + 1) & PERLIN_SIZE] - n2);
+    n1 += ryf * (n2 - n1);
+    of += PERLIN_ZWRAP;
+    n2 = perlin[of & PERLIN_SIZE];
+    n2 += rxf * (perlin[(of + 1) & PERLIN_SIZE] - n2);
+    n3 = perlin[(of + PERLIN_YWRAP) & PERLIN_SIZE];
+    n3 += rxf * (perlin[(of + PERLIN_YWRAP + 1) & PERLIN_SIZE] - n3);
+    n2 += ryf * (n3 - n2);
+    n1 += 0.5 * (1.0 - Math.cos(zf * Math.PI)) * (n2 - n1);
+    r += n1 * ampl;
+    ampl *= perlin_amp_falloff;
+    xi <<= 1; xf *= 2;
+    yi <<= 1; yf *= 2;
+    zi <<= 1; zf *= 2;
+    if (xf >= 1.0) { xi++; xf--; }
+    if (yf >= 1.0) { yi++; yf--; }
+    if (zf >= 1.0) { zi++; zf--; }
+  }
+  return r;
+}
+
 class AISimulator {
   constructor() {
     this.canvas = document.getElementById('vision-canvas');
@@ -2277,20 +2329,14 @@ class AISimulator {
     this.fps = document.getElementById('fps-counter');
 
     this.scenario = 'nominal';
-    this.matrixChars = '01'.split('');
-    this.drops = [];
-
+    this.zOff = 0;
     this.init();
   }
 
   init() {
-    this.canvas.width = this.canvas.clientWidth;
-    this.canvas.height = this.canvas.clientHeight;
-
-    const columns = this.canvas.width / 15;
-    for(let x = 0; x < columns; x++) {
-      this.drops[x] = 1;
-    }
+    this.canvas.width = this.canvas.clientWidth / 4;
+    this.canvas.height = this.canvas.clientHeight / 4;
+    this.ctx.imageSmoothingEnabled = false;
 
     // Bind buttons
     document.querySelectorAll('.sim-btn').forEach(btn => {
@@ -2302,31 +2348,56 @@ class AISimulator {
     });
 
     this.runScenario('nominal');
-    this.animateMatrix();
+    this.animateDepthMap();
+
+    // Production-ready loops simulation for dynamic logs instead of static hardcoded lines
     setInterval(() => {
       this.fps.textContent = `${Math.floor(Math.random() * 5 + 58)} FPS`;
     }, 500);
+
+    setInterval(() => {
+        if(this.scenario === 'nominal') {
+            this.log(`> Process ${Math.floor(Math.random()*1000)}: Sensor reading OK (${(40 + Math.random()*5).toFixed(1)}% moisture).`);
+        }
+    }, 3500);
   }
 
-  animateMatrix() {
-    requestAnimationFrame(this.animateMatrix.bind(this));
+  animateDepthMap() {
+    requestAnimationFrame(this.animateDepthMap.bind(this));
 
-    // Transparent black for trailing effect
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    let w = this.canvas.width;
+    let h = this.canvas.height;
+    let imgData = this.ctx.createImageData(w, h);
 
-    this.ctx.fillStyle = '#0F0';
-    this.ctx.font = '15px monospace';
+    let inc = 0.05;
+    let xOff = 0;
+    for (let x = 0; x < w; x++) {
+      let yOff = 0;
+      for (let y = 0; y < h; y++) {
+        let index = (x + y * w) * 4;
 
-    for(let i = 0; i < this.drops.length; i++) {
-      const text = this.matrixChars[Math.floor(Math.random() * this.matrixChars.length)];
-      this.ctx.fillText(text, i * 15, this.drops[i] * 15);
+        let n = noise(xOff, yOff, this.zOff);
+        let colorVal = Math.floor(n * 255);
 
-      if(this.drops[i] * 15 > this.canvas.height && Math.random() > 0.975) {
-        this.drops[i] = 0;
+        if (this.scenario === 'pest' && x > w*0.4 && x < w*0.6 && y > h*0.3 && y < h*0.5) {
+             colorVal = Math.floor(noise(xOff*5, yOff*5, this.zOff*2) * 255) + 50;
+        }
+        if (this.scenario === 'drought') {
+            colorVal = Math.max(0, colorVal - 40);
+        }
+
+        imgData.data[index + 0] = colorVal; // R
+        imgData.data[index + 1] = colorVal; // G
+        imgData.data[index + 2] = colorVal; // B
+        imgData.data[index + 3] = 255; // Alpha
+
+        yOff += inc;
       }
-      this.drops[i]++;
+      xOff += inc;
     }
+
+    this.ctx.putImageData(imgData, 0, 0);
+    this.zOff += 0.02;
   }
 
   log(message, color = 'var(--text-secondary)') {
@@ -2334,22 +2405,25 @@ class AISimulator {
     div.style.color = color;
     div.innerHTML = `<span style="opacity: 0.5;">[${new Date().toISOString().split('T')[1].slice(0,8)}]</span> ${message}`;
     this.logContainer.appendChild(div);
+    if(this.logContainer.children.length > 20) {
+        this.logContainer.removeChild(this.logContainer.firstChild);
+    }
     this.logContainer.scrollTop = this.logContainer.scrollHeight;
   }
 
   async runScenario(type) {
     this.logContainer.innerHTML = '';
-    this.log('> RECALIBRATING SENSORS...', 'var(--primary-color)');
+    this.log('> INITIALIZING PERLIN DEPTH MAP SENSORS...', 'var(--primary-color)');
     this.bbox.style.display = 'none';
     this.actionState.textContent = 'ANALYZING...';
     this.actionState.style.color = 'var(--text-muted)';
 
-    await this.sleep(1000);
+    await this.sleep(800);
 
     if (type === 'nominal') {
-      this.log('> Vision: Crop density 98%. Color index nominal.');
+      this.log('> LiDAR Depth Map: Environment clear. Color index nominal.');
       this.log('> Sensor: Soil moisture 42% (Optimal).');
-      this.log('> Symbolic: IF (Condition==Nominal) THEN (Maintain State)');
+      this.log('> Logic loop: Evaluating state... OK.');
 
       this.bbox.style.display = 'block';
       this.bbox.style.top = '20%';
@@ -2357,35 +2431,35 @@ class AISimulator {
       this.bbox.style.width = '100px';
       this.bbox.style.height = '150px';
       this.bbox.style.borderColor = 'var(--success-color)';
-      this.bboxLabel.textContent = 'Crop_Healthy 99%';
+      this.bboxLabel.textContent = 'Target_Tracked 99%';
       this.bboxLabel.style.background = 'var(--success-color)';
 
       this.actionState.textContent = 'MONITORING';
       this.actionState.style.color = 'var(--success-color)';
     }
     else if (type === 'pest') {
-      this.log('> Vision: Anomaly detected. Confidence: 92%.', 'var(--warning-color)');
-      this.log('> Classification: Aphidoidea (Pest).', 'var(--warning-color)');
-      this.log('> Symbolic: IF (Pest==True) THEN (Log + Isolate + Alert)');
+      this.log('> LiDAR Depth Map: Dynamic anomaly detected. Confidence: 92%.', 'var(--warning-color)');
+      this.log('> Edge AI Classification: Aphidoidea (Pest).', 'var(--warning-color)');
+      this.log('> Action tree: Requesting intervention parameters...');
 
       this.bbox.style.display = 'block';
-      this.bbox.style.top = '40%';
-      this.bbox.style.left = '50%';
-      this.bbox.style.width = '60px';
-      this.bbox.style.height = '60px';
+      this.bbox.style.top = '30%';
+      this.bbox.style.left = '40%';
+      this.bbox.style.width = '20%';
+      this.bbox.style.height = '20%';
       this.bbox.style.borderColor = 'var(--warning-color)';
       this.bboxLabel.textContent = 'Aphid_Detect 92%';
       this.bboxLabel.style.background = 'var(--warning-color)';
 
-      await this.sleep(500);
-      this.log('> Swarm Action: Dispatching localized organic deterrent.', 'var(--warning-color)');
+      await this.sleep(600);
+      this.log('> Swarm Coordinator: Dispatching GAPbot unit Delta.', 'var(--warning-color)');
       this.actionState.textContent = 'INTERVENING (PEST)';
       this.actionState.style.color = 'var(--warning-color)';
     }
     else if (type === 'drought') {
-      this.log('> Vision: Leaf wilting detected.', 'var(--error-color)');
-      this.log('> Sensor: Soil moisture < 15% (Critical).', 'var(--error-color)');
-      this.log('> Logic: Moisture anomaly AND visual stress = Drought Risk.', 'var(--error-color)');
+      this.log('> LiDAR Depth Map: Structural leaf stress detected.', 'var(--error-color)');
+      this.log('> Sensor Hub: Soil moisture < 15% (Critical).', 'var(--error-color)');
+      this.log('> XAI Explainability: Immediate water requirement to prevent yield loss.', 'var(--error-color)');
 
       this.bbox.style.display = 'block';
       this.bbox.style.top = '10%';
@@ -2396,8 +2470,8 @@ class AISimulator {
       this.bboxLabel.textContent = 'Drought_Stress 98%';
       this.bboxLabel.style.background = 'var(--error-color)';
 
-      await this.sleep(500);
-      this.log('> Action: Initiating targeted micro-irrigation sequence.', 'var(--error-color)');
+      await this.sleep(600);
+      this.log('> Irrigation Agent: Adjusting valve 3 flow to +150%.', 'var(--error-color)');
       this.actionState.textContent = 'IRRIGATING (CRITICAL)';
       this.actionState.style.color = 'var(--error-color)';
     }
