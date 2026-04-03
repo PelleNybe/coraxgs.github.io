@@ -1,0 +1,20 @@
+feat: Implement comprehensive visual and technical upgrades v2.0
+
+Visual Improvements:
+- Vis 1: Enhanced 3D GAPbot Configurator with Directional and Point lights + shadows.
+- Vis 2: Advanced LiDAR Simulation in AI simulator canvas replacing Perlin noise.
+- Vis 3: Interactive Hologram Upgrades with glowing animated SVG data flow lines.
+- Vis 4: Interactive Swarm Intelligence in hero section reacting to mouse.
+- Vis 5: Ripple Theme Transitions for an immersive aesthetic.
+
+Technical Improvements:
+- Tech 1: Robust GitHub Data Pipeline with localStorage caching and backoff.
+- Tech 2: True Markdown Blog System extracting frontmatter during build.
+- Tech 3: Advanced Web Audio Context Manager respecting autoplay policies.
+- Tech 4: Web Worker AI Offloading initialized for LiDAR computations.
+- Tech 5: Ultimate IntersectionObserver efficiency pausing animations offscreen.
+
+Documentation & Validation:
+- Updated README.md accurately reflecting functional changes.
+- Automated puppeteer script generates updated screenshots.
+- Cleaned up build script handling of regex parsing.
