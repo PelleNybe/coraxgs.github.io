@@ -1129,6 +1129,18 @@ class NeuralNetwork {
 
     this.particles = new THREE.Points(geometry, material);
     this.scene.add(this.particles);
+
+    // Vis 4: Interactive attractor point for swarm
+    this.attractor = new THREE.Vector3(0, 0, 0);
+    this.raycaster = new THREE.Raycaster();
+    this.mouseVec = new THREE.Vector2();
+
+    window.addEventListener('mousemove', (e) => {
+        this.mouseVec.x = (e.clientX / window.innerWidth) * 2 - 1;
+        this.mouseVec.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        this.raycaster.setFromCamera(this.mouseVec, this.camera);
+        this.raycaster.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,0,1), 0), this.attractor);
+    });
   }
 
   onWindowResize() {
@@ -1171,8 +1183,26 @@ class NeuralNetwork {
         this.particles.material.uniforms.time.value += this.rippleTime * 0.1;
       }
 
+      // Vis 4: Swarm behavior
+      const positions = this.particles.geometry.attributes.position.array;
+      const time = performance.now() * 0.001;
+      for(let i=0; i<this.particleCount; i++) {
+         const i3 = i*3;
+         const px = positions[i3];
+         const py = positions[i3+1];
+         // Very basic attraction logic in JS (for demo, real would be in shader)
+         const dx = this.attractor.x - px;
+         const dy = this.attractor.y - py;
+         const dist = Math.sqrt(dx*dx + dy*dy);
+         if(dist < 200 && dist > 10) {
+             positions[i3] += dx * 0.001;
+             positions[i3+1] += dy * 0.001;
+         }
+      }
+      this.particles.geometry.attributes.position.needsUpdate = true;
+
       // Update shader uniforms
-      this.particles.material.uniforms.time.value = performance.now() * 0.001;
+      this.particles.material.uniforms.time.value = time;
       this.particles.material.uniforms.mouse.value.set(this.mouse.x, this.mouse.y, 0);
     }
 
@@ -2123,6 +2153,7 @@ class HologramInteractive {
 }
 
 
+// Tech 3: Robust Web Audio Manager
 class CoraxAudio {
   constructor() {
     this.context = null;
@@ -2160,7 +2191,7 @@ class CoraxAudio {
     btn.addEventListener('mouseenter', () => btn.style.boxShadow = '0 0 10px rgba(0, 255, 194, 0.5)');
     btn.addEventListener('mouseleave', () => btn.style.boxShadow = 'none');
 
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
       this.isMuted = !this.isMuted;
       btn.innerHTML = this.isMuted ? '🔇 SOUND OFF' : '🔊 SOUND ON';
       btn.style.background = this.isMuted ? 'rgba(10, 10, 10, 0.8)' : 'rgba(0, 255, 194, 0.1)';
@@ -2330,6 +2361,7 @@ class AISimulator {
 
     this.scenario = 'nominal';
     this.zOff = 0;
+    // this.setupWorker(); // Future enhancement
     this.init();
   }
 
@@ -2498,6 +2530,16 @@ class GitHubActivityFeed {
     try {
       this.container.innerHTML = '<div style="text-align: center; color: var(--primary-color);">Loading activity...</div>';
 
+      // Tech 1: LocalStorage Cache for GitHub Feed
+      const cached = localStorage.getItem('corax_gh_feed');
+      if (cached) {
+         const { data, timestamp } = JSON.parse(cached);
+         if (Date.now() - timestamp < 3600000) { // 1 hour TTL
+            this.renderEvents(data);
+            return;
+         }
+      }
+
       let response = await fetch('https://api.github.com/orgs/PelleNybe/events');
       if (!response.ok) {
         response = await fetch('https://api.github.com/users/PelleNybe/events');
@@ -2508,6 +2550,7 @@ class GitHubActivityFeed {
       }
 
       const events = await response.json();
+      localStorage.setItem('corax_gh_feed', JSON.stringify({ data: events, timestamp: Date.now() }));
       this.renderEvents(events);
     } catch (error) {
       console.error('Error fetching GitHub activity:', error);
