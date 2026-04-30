@@ -1509,13 +1509,20 @@ class TerminalBoot {
   }
 
   async processCommand(cmd) {
-    switch (cmd) {
+    const parts = cmd.split(' ');
+    const mainCmd = parts[0];
+    const arg = parts[1];
+
+    switch (mainCmd) {
       case 'help':
         await this.typeLine("System Operations Manual:");
-        await this.typeLine("  nodes    - List active compute nodes");
-        await this.typeLine("  fetch    - Query live sensor stream");
-        await this.typeLine("  execute  - Run core processes");
-        await this.typeLine("  clear    - Clear console");
+        await this.typeLine("  nodes       - List active compute nodes");
+        await this.typeLine("  fetch       - Query live sensor stream");
+        await this.typeLine("  execute     - Run core processes");
+        await this.typeLine("  theme [str] - Set theme (light, dark, default, cyber, neon)");
+        await this.typeLine("  status      - Show system status");
+        await this.typeLine("  telemetry   - Toggle vital metrics dashboard");
+        await this.typeLine("  clear       - Clear console");
         break;
       case 'nodes':
         await this.typeLine("Querying active endpoints...");
@@ -1531,9 +1538,34 @@ class TerminalBoot {
       case 'execute':
         await this.typeLine("Initializing main execution loop.");
         await this.typeLine("Validating cryptographic signature...");
-        setTimeout(async () => {
-          await this.typeLine("Validation complete. Routine running in background.");
-        }, 800);
+        await new Promise(r => setTimeout(r, 800));
+        await this.typeLine("Validation complete. Routine running in background.");
+        break;
+      case 'theme':
+        if (['light', 'dark'].includes(arg)) {
+            document.documentElement.setAttribute('data-theme', arg);
+            await this.typeLine(`Theme set to ${arg}.`);
+        } else if (['default', 'cyber', 'neon'].includes(arg)) {
+            const btn = document.getElementById(`theme-btn-${arg}`);
+            if (btn) btn.click();
+            await this.typeLine(`Gradient theme set to ${arg}.`);
+        } else {
+            await this.typeLine("Available themes: light, dark, default, cyber, neon.");
+        }
+        break;
+      case 'status':
+        await this.typeLine(`User Agent: ${navigator.userAgent.substring(0, 50)}...`);
+        await this.typeLine(`Platform: ${navigator.platform}`);
+        await this.typeLine(`Language: ${navigator.language}`);
+        await this.typeLine(`Memory (approx): ${performance.memory ? performance.memory.jsHeapSizeLimit / (1024*1024) + 'MB' : 'N/A'}`);
+        await this.typeLine(`Web3 Connection: ${localStorage.getItem('corax_web3_account') ? 'ACTIVE' : 'DISCONNECTED'}`);
+        break;
+      case 'telemetry':
+        const panel = document.getElementById('telemetry-panel');
+        if (panel) {
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            await this.typeLine(`Telemetry dashboard ${panel.style.display === 'block' ? 'ACTIVATED' : 'DEACTIVATED'}.`);
+        }
         break;
       case 'clear':
         this.container.innerHTML = '';
@@ -1553,13 +1585,18 @@ document.addEventListener('DOMContentLoaded', () => {
     new NeuralNetwork('neural-canvas');
     new CustomCursor();
     new TiltEffect();
-    new TerminalBoot('terminal-body');
+    window.coraxTerminal = new TerminalBoot('terminal-body');
       new HologramInteractive();
       new CoraxAudio();
       new AISimulator();
       new GitHubActivityFeed();
       new Web3Demo();
       new BlogSystem();
+      new TelemetryMonitor();
+      new CyberGlobe('globe-container');
+      new TelemetryChart();
+      new GlowCards();
+      new ScrollAnimations();
           init3DGAPbot();
           initScrollAnimations();
   }, 100);
@@ -2390,6 +2427,24 @@ class CoraxAudio {
         this.playBlip(800 + Math.random()*200, 0.02, 'triangle');
       }
     });
+
+    // 3. Mouse position modulates drone and spatial feel
+    window.addEventListener('mousemove', (e) => {
+      if (!this.context || this.isMuted) return;
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+
+      // Mouse Y dynamically boosts filter slightly on top of scroll
+      const currentFreq = this.filterNode.frequency.value;
+      if (currentFreq < 800) {
+        this.filterNode.frequency.setTargetAtTime(currentFreq + (y * 200), this.context.currentTime, 0.2);
+      }
+
+      // Mouse X shifts the base frequency slightly
+      if(this.oscillators[0]) {
+         this.oscillators[0].frequency.setTargetAtTime(50 + (x * 5), this.context.currentTime, 0.5);
+      }
+    });
   }
 
   playBlip(freq, duration, type) {
@@ -2415,59 +2470,6 @@ class CoraxAudio {
 
 // Feature 5: Live Neuro-Symbolic AI Simulator
 // Basic Perlin noise implementation for pseudo-depth-map calculations
-const PERLIN_YWRAPB = 4;
-const PERLIN_YWRAP = 1 << PERLIN_YWRAPB;
-const PERLIN_ZWRAPB = 8;
-const PERLIN_ZWRAP = 1 << PERLIN_ZWRAPB;
-const PERLIN_SIZE = 4095;
-let perlin_octaves = 4;
-let perlin_amp_falloff = 0.5;
-let perlin = null;
-
-function noise(x, y, z) {
-  y = y || 0;
-  z = z || 0;
-  if (perlin == null) {
-    perlin = new Array(PERLIN_SIZE + 1);
-    for (let i = 0; i < PERLIN_SIZE + 1; i++) {
-      perlin[i] = Math.random();
-    }
-  }
-  let xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z);
-  let xf = x - xi, yf = y - yi, zf = z - zi;
-  let rxf, ryf;
-  let r = 0;
-  let ampl = 0.5;
-  let n1, n2, n3;
-
-  for (let o = 0; o < perlin_octaves; o++) {
-    let of = xi + (yi << PERLIN_YWRAPB) + (zi << PERLIN_ZWRAPB);
-    rxf = 0.5 * (1.0 - Math.cos(xf * Math.PI));
-    ryf = 0.5 * (1.0 - Math.cos(yf * Math.PI));
-    n1 = perlin[of & PERLIN_SIZE];
-    n1 += rxf * (perlin[(of + 1) & PERLIN_SIZE] - n1);
-    n2 = perlin[(of + PERLIN_YWRAP) & PERLIN_SIZE];
-    n2 += rxf * (perlin[(of + PERLIN_YWRAP + 1) & PERLIN_SIZE] - n2);
-    n1 += ryf * (n2 - n1);
-    of += PERLIN_ZWRAP;
-    n2 = perlin[of & PERLIN_SIZE];
-    n2 += rxf * (perlin[(of + 1) & PERLIN_SIZE] - n2);
-    n3 = perlin[(of + PERLIN_YWRAP) & PERLIN_SIZE];
-    n3 += rxf * (perlin[(of + PERLIN_YWRAP + 1) & PERLIN_SIZE] - n3);
-    n2 += ryf * (n3 - n2);
-    n1 += 0.5 * (1.0 - Math.cos(zf * Math.PI)) * (n2 - n1);
-    r += n1 * ampl;
-    ampl *= perlin_amp_falloff;
-    xi <<= 1; xf *= 2;
-    yi <<= 1; yf *= 2;
-    zi <<= 1; zf *= 2;
-    if (xf >= 1.0) { xi++; xf--; }
-    if (yf >= 1.0) { yi++; yf--; }
-    if (zf >= 1.0) { zi++; zf--; }
-  }
-  return r;
-}
-
 class AISimulator {
   constructor() {
     this.canvas = document.getElementById('vision-canvas');
@@ -2520,37 +2522,23 @@ class AISimulator {
 
     let w = this.canvas.width;
     let h = this.canvas.height;
-    let imgData = this.ctx.createImageData(w, h);
 
-    let inc = 0.05;
-    let xOff = 0;
-    for (let x = 0; x < w; x++) {
-      let yOff = 0;
-      for (let y = 0; y < h; y++) {
-        let index = (x + y * w) * 4;
-
-        let n = noise(xOff, yOff, this.zOff);
-        let colorVal = Math.floor(n * 255);
-
-        if (this.scenario === 'pest' && x > w*0.4 && x < w*0.6 && y > h*0.3 && y < h*0.5) {
-             colorVal = Math.floor(noise(xOff*5, yOff*5, this.zOff*2) * 255) + 50;
-        }
-        if (this.scenario === 'drought') {
-            colorVal = Math.max(0, colorVal - 40);
-        }
-
-        imgData.data[index + 0] = colorVal; // R
-        imgData.data[index + 1] = colorVal; // G
-        imgData.data[index + 2] = colorVal; // B
-        imgData.data[index + 3] = 255; // Alpha
-
-        yOff += inc;
-      }
-      xOff += inc;
+    if (!this.worker) {
+      this.worker = new Worker('worker.js');
+      this.worker.onmessage = (e) => {
+        const { pixels } = e.data;
+        let imgData = new ImageData(pixels, w, h);
+        this.ctx.putImageData(imgData, 0, 0);
+        this.isProcessing = false;
+      };
     }
 
-    this.ctx.putImageData(imgData, 0, 0);
-    this.zOff += 0.02;
+    if (!this.isProcessing) {
+      this.isProcessing = true;
+      // Pass the scenario so worker can adjust logic (pest, drought, etc.)
+      this.worker.postMessage({ width: w, height: h, zOff: this.zOff, inc: 0.05, scenario: this.scenario });
+      this.zOff += 0.02;
+    }
   }
 
   log(message, color = 'var(--text-secondary)') {
@@ -2874,30 +2862,78 @@ class Web3Demo {
 class BlogSystem {
   constructor() {
     this.container = document.getElementById('blog-grid');
+    this.searchInput = document.getElementById('blog-search');
     if (!this.container) return;
     this.posts = [];
+    this.lunrIndex = null;
     this.init();
   }
 
   async init() {
     try {
-      // Fetch dynamically generated blog list from blogs.json instead of mocked array
+      // Fetch dynamically generated blog list from blogs.json
       const response = await fetch('blogs.json');
       if (response.ok) {
         this.posts = await response.json();
+
+        // Build Lunr index
+        if (typeof lunr !== 'undefined') {
+          const self = this;
+          this.lunrIndex = lunr(function () {
+            this.ref('link');
+            this.field('title');
+            this.field('tag');
+            this.field('excerpt');
+
+            self.posts.forEach(function (doc) {
+              this.add(doc);
+            }, this);
+          });
+        }
       } else {
         console.error('Failed to load real blog data.');
       }
     } catch (e) {
       console.error('Error fetching blogs.json:', e);
     }
-    this.renderPosts();
+
+    this.renderPosts(this.posts);
+
+    if (this.searchInput) {
+      this.searchInput.addEventListener('input', (e) => {
+         const query = e.target.value.trim();
+         if (!query || !this.lunrIndex) {
+           this.renderPosts(this.posts);
+           return;
+         }
+
+         const results = this.lunrIndex.search(query);
+         const matchedLinks = results.map(r => r.ref);
+         const filteredPosts = this.posts.filter(p => matchedLinks.includes(p.link));
+
+         this.renderPosts(filteredPosts);
+      });
+
+      this.searchInput.addEventListener('focus', () => {
+         this.searchInput.style.boxShadow = '0 0 15px rgba(0, 255, 194, 0.4)';
+         this.searchInput.style.borderColor = 'var(--primary-color)';
+      });
+      this.searchInput.addEventListener('blur', () => {
+         this.searchInput.style.boxShadow = 'none';
+         this.searchInput.style.borderColor = 'rgba(0, 255, 194, 0.3)';
+      });
+    }
   }
 
-  renderPosts() {
+  renderPosts(postsToRender) {
     this.container.innerHTML = '';
 
-    this.posts.forEach(post => {
+    if (!postsToRender || postsToRender.length === 0) {
+       this.container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-muted);">No matching insights found.</div>';
+       return;
+    }
+
+    postsToRender.forEach(post => {
       const card = document.createElement('div');
       card.className = 'feature-card tilt-card';
       card.style.cssText = `
@@ -2926,12 +2962,7 @@ class BlogSystem {
       if (post.link) {
         card.style.cursor = 'pointer';
         card.addEventListener('click', () => {
-          window.open(post.link, '_blank');
-          if(window.plausible) window.plausible('Blog Read Click', {props: {title: post.title}});
-        });
-      } else {
-        card.addEventListener('click', () => {
-          alert(`Opening article: "${post.title}".\n\nIn a full deployment, this would load the markdown content.`);
+          window.open(post.link, '_self');
           if(window.plausible) window.plausible('Blog Read Click', {props: {title: post.title}});
         });
       }
@@ -2967,3 +2998,387 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// Feature: Real-time Core Web Vitals Monitoring
+class TelemetryMonitor {
+  constructor() {
+    this.panel = document.getElementById('telemetry-panel');
+    this.closeBtn = document.getElementById('close-telemetry');
+
+    this.elLCP = document.getElementById('vitals-lcp');
+    this.elFID = document.getElementById('vitals-fid');
+    this.elCLS = document.getElementById('vitals-cls');
+    this.elINP = document.getElementById('vitals-inp');
+
+    if (!this.panel) return;
+
+    this.init();
+  }
+
+  init() {
+    // Check if web-vitals is loaded
+    if (typeof webVitals === 'undefined') return;
+
+    // Toggle via keyboard shortcut (Ctrl+Shift+T)
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+        this.panel.style.display = this.panel.style.display === 'none' ? 'block' : 'none';
+      }
+    });
+
+    if (this.closeBtn) {
+      this.closeBtn.addEventListener('click', () => {
+        this.panel.style.display = 'none';
+      });
+    }
+
+    const updateUI = (metric) => {
+      let el, format;
+      switch(metric.name) {
+        case 'LCP':
+          el = this.elLCP;
+          format = (v) => (v / 1000).toFixed(2) + 's';
+          break;
+        case 'FID':
+          el = this.elFID;
+          format = (v) => v.toFixed(1) + 'ms';
+          break;
+        case 'CLS':
+          el = this.elCLS;
+          format = (v) => v.toFixed(3);
+          break;
+        case 'INP':
+          el = this.elINP;
+          format = (v) => v.toFixed(1) + 'ms';
+          break;
+      }
+
+      if (el) {
+        let color = 'var(--success-color)';
+        if (metric.rating === 'needs-improvement') color = 'var(--warning-color)';
+        if (metric.rating === 'poor') color = 'var(--error-color)';
+
+        el.innerHTML = `${metric.name}: <span style="color: ${color};">${format(metric.value)}</span>`;
+
+        // Also log to terminal if it exists
+        const tb = document.getElementById('terminal-body');
+        if (tb && window.coraxTerminal) {
+            window.coraxTerminal.typeLine(`[TELEMETRY] ${metric.name}: ${format(metric.value)} (${metric.rating})`, 10);
+        }
+      }
+    };
+
+    webVitals.onLCP(updateUI);
+    webVitals.onFID(updateUI);
+    webVitals.onCLS(updateUI);
+    webVitals.onINP(updateUI);
+  }
+}
+
+// Feature: Interactive 3D Cyber-Globe
+class CyberGlobe {
+  constructor(containerId) {
+    this.container = document.getElementById(containerId);
+    if (!this.container || typeof THREE === 'undefined') return;
+    this.init();
+  }
+
+  init() {
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(45, this.container.clientWidth / this.container.clientHeight, 0.1, 1000);
+    this.camera.position.z = 250;
+
+    this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+    this.container.appendChild(this.renderer.domElement);
+
+    this.globeGroup = new THREE.Group();
+    this.scene.add(this.globeGroup);
+
+    // Wireframe Globe
+    const globeGeo = new THREE.SphereGeometry(100, 32, 32);
+    const globeMat = new THREE.MeshBasicMaterial({
+      color: 0x00ffcc,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.1
+    });
+    this.globe = new THREE.Mesh(globeGeo, globeMat);
+    this.globeGroup.add(this.globe);
+
+    // Add Nodes
+    this.nodes = [];
+    const colors = [0x00ffcc, 0xffbd2e, 0xe81a73];
+    for (let i = 0; i < 50; i++) {
+      const phi = Math.acos(-1 + (2 * i) / 50);
+      const theta = Math.sqrt(50 * Math.PI) * phi;
+
+      const x = 100 * Math.cos(theta) * Math.sin(phi);
+      const y = 100 * Math.sin(theta) * Math.sin(phi);
+      const z = 100 * Math.cos(phi);
+
+      const nodeGeo = new THREE.SphereGeometry(1.5, 8, 8);
+      const nodeMat = new THREE.MeshBasicMaterial({ color: colors[i % 3] });
+      const node = new THREE.Mesh(nodeGeo, nodeMat);
+
+      node.position.set(x, y, z);
+      node.userData = { id: `Node-${Math.floor(Math.random()*9000)+1000}`, type: ['Compute', 'Validator', 'Relay'][i%3] };
+
+      this.nodes.push(node);
+      this.globeGroup.add(node);
+    }
+
+    // Connections
+    const lineMat = new THREE.LineBasicMaterial({ color: 0x00ffcc, transparent: true, opacity: 0.2 });
+    for (let i = 0; i < 20; i++) {
+      const p1 = this.nodes[Math.floor(Math.random() * this.nodes.length)].position;
+      const p2 = this.nodes[Math.floor(Math.random() * this.nodes.length)].position;
+
+      // Create arc
+      const curve = new THREE.QuadraticBezierCurve3(
+        p1,
+        p1.clone().add(p2).multiplyScalar(0.5).normalize().multiplyScalar(130),
+        p2
+      );
+      const lineGeo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(20));
+      const line = new THREE.Line(lineGeo, lineMat);
+      this.globeGroup.add(line);
+    }
+
+    // Interactivity
+    this.raycaster = new THREE.Raycaster();
+    this.mouse = new THREE.Vector2();
+    this.tooltip = document.getElementById('globe-tooltip');
+
+    this.container.addEventListener('mousemove', (e) => {
+      const rect = this.container.getBoundingClientRect();
+      this.mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      this.mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+      this.raycaster.setFromCamera(this.mouse, this.camera);
+      const intersects = this.raycaster.intersectObjects(this.nodes);
+
+      if (intersects.length > 0) {
+        document.body.style.cursor = 'pointer';
+        const obj = intersects[0].object;
+        obj.scale.set(1.5, 1.5, 1.5);
+
+        if (this.tooltip) {
+          this.tooltip.style.display = 'block';
+          this.tooltip.style.left = (e.clientX - rect.left + 15) + 'px';
+          this.tooltip.style.top = (e.clientY - rect.top + 15) + 'px';
+          this.tooltip.innerHTML = `ID: ${obj.userData.id}<br>Type: ${obj.userData.type}<br>Status: ACTIVE`;
+        }
+      } else {
+        document.body.style.cursor = 'default';
+        this.nodes.forEach(n => n.scale.set(1, 1, 1));
+        if (this.tooltip) this.tooltip.style.display = 'none';
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+    });
+
+    this.animate();
+  }
+
+  animate() {
+    requestAnimationFrame(this.animate.bind(this));
+    this.globeGroup.rotation.y += 0.002;
+    this.globeGroup.rotation.x += 0.001;
+    this.renderer.render(this.scene, this.camera);
+  }
+}
+
+// Feature: Live System Telemetry Dashboard
+class TelemetryChart {
+  constructor() {
+    this.ctx = document.getElementById('telemetryChart');
+    if (!this.ctx || typeof Chart === 'undefined') return;
+    this.init();
+  }
+
+  init() {
+    this.chart = new Chart(this.ctx, {
+      type: 'line',
+      data: {
+        labels: Array.from({length: 20}, (_, i) => ''),
+        datasets: [{
+          label: 'Swarm Consensus Latency (ms)',
+          data: Array.from({length: 20}, () => Math.random() * 50 + 20),
+          borderColor: '#00FFC2',
+          backgroundColor: 'rgba(0, 255, 194, 0.1)',
+          borderWidth: 2,
+          tension: 0.4,
+          fill: true,
+          pointRadius: 0
+        },
+        {
+          label: 'Edge AI Inference Load (%)',
+          data: Array.from({length: 20}, () => Math.random() * 30 + 50),
+          borderColor: '#1A73E8',
+          backgroundColor: 'rgba(26, 115, 232, 0.1)',
+          borderWidth: 2,
+          tension: 0.4,
+          fill: true,
+          pointRadius: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 0 }, // Handled manually
+        scales: {
+          x: { display: false },
+          y: {
+            display: true,
+            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            min: 0,
+            max: 100,
+            ticks: { color: '#6c757d', font: { family: 'monospace' } }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: { color: '#a0aec0', font: { family: 'monospace' } }
+          }
+        }
+      }
+    });
+
+    setInterval(() => this.updateData(), 1000);
+  }
+
+  updateData() {
+    // Latency
+    let currentData0 = this.chart.data.datasets[0].data;
+    currentData0.push(Math.max(10, currentData0[currentData0.length - 1] + (Math.random() - 0.5) * 20));
+    currentData0.shift();
+
+    // Inference Load
+    let currentData1 = this.chart.data.datasets[1].data;
+    let nextVal = currentData1[currentData1.length - 1] + (Math.random() - 0.5) * 15;
+    if (nextVal > 95) nextVal = 95;
+    if (nextVal < 20) nextVal = 20;
+    currentData1.push(nextVal);
+    currentData1.shift();
+
+    this.chart.update();
+  }
+}
+
+// Feature: Mouse-Tracking Glow Cards
+class GlowCards {
+  constructor() {
+    this.cards = document.querySelectorAll('.feature-card, .capability-card, .repo-card, .project-card');
+    if (!this.cards.length) return;
+    this.init();
+  }
+
+  init() {
+    this.cards.forEach(card => {
+      card.classList.add('glow-card');
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+  }
+}
+
+// Feature: GSAP Scroll-Driven Animations
+class ScrollAnimations {
+  constructor() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
+    this.init();
+  }
+
+  init() {
+    // 1. Animate section titles
+    gsap.utils.toArray('.section-title').forEach(title => {
+      gsap.fromTo(title,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: title,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+
+    // 2. Stagger feature cards
+    gsap.utils.toArray('.features-grid, .projects-grid').forEach(grid => {
+      const cards = grid.querySelectorAll('.feature-card, .capability-card, .repo-card, .project-card');
+      if (cards.length === 0) return;
+
+      gsap.fromTo(cards,
+        { opacity: 0, y: 50, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "back.out(1.2)",
+          scrollTrigger: {
+            trigger: grid,
+            start: "top 75%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+
+    // 3. Reveal SVG lines in Architecture Diagram without destroying stroke-dasharray
+    const svgLines = document.querySelectorAll('#architecture svg line');
+    if (svgLines.length > 0) {
+      gsap.fromTo(svgLines,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 2,
+          stagger: 0.2,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: '#architecture',
+            start: "top 60%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    }
+
+    // 4. Reveal Architecture Nodes
+    const archNodes = document.querySelectorAll('.arch-node');
+    if (archNodes.length > 0) {
+      gsap.fromTo(archNodes,
+        { opacity: 0, scale: 0, rotation: -45 },
+        {
+          opacity: 1,
+          scale: 1,
+          rotation: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "elastic.out(1, 0.5)",
+          scrollTrigger: {
+            trigger: '#architecture',
+            start: "top 60%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    }
+  }
+}
