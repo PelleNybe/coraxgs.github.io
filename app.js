@@ -1,4 +1,50 @@
 
+// Technical Improvement 5: TTL-based Local Storage Caching
+const CacheManager = {
+  set: (key, data, ttlMs) => {
+    const item = {
+      data,
+      timestamp: Date.now(),
+      ttl: ttlMs
+    };
+    localStorage.setItem(key, JSON.stringify(item));
+  },
+  get: (key) => {
+    const itemStr = localStorage.getItem(key);
+    if (!itemStr) return null;
+    const item = JSON.parse(itemStr);
+    if (Date.now() - item.timestamp > item.ttl) {
+      localStorage.removeItem(key);
+      return null;
+    }
+    return item.data;
+  },
+  remove: (key) => {
+    localStorage.removeItem(key);
+  }
+};
+
+
+// Technical Improvement 2: EventBus Architecture
+class EventBus {
+  constructor() {
+    this.events = {};
+  }
+  on(eventName, callback) {
+    if (!this.events[eventName]) {
+      this.events[eventName] = [];
+    }
+    this.events[eventName].push(callback);
+  }
+  emit(eventName, data) {
+    if (this.events[eventName]) {
+      this.events[eventName].forEach(callback => callback(data));
+    }
+  }
+}
+window.EventBus = new EventBus();
+
+
 // Feature: Web Components (Componentization)
 class ProjectCardElement extends HTMLElement {
   constructor() {
@@ -654,7 +700,7 @@ class CoraxWebsite {
     document.documentElement.setAttribute("data-theme", this.theme);
     localStorage.setItem("corax-theme", this.theme);
     this.updateThemeButton();
-    window.coraxEventBus.emit('themeChanged', this.theme);
+    window.EventBus.emit('themeChanged', this.theme);
 
     if (window.plausible) {
       window.plausible("Theme Toggle", { props: { theme: this.theme } });
@@ -1016,6 +1062,13 @@ class NeuralNetwork {
     this.windowHalfY = window.innerHeight / 2;
 
     this.init();
+    window.EventBus.on('themeChanged', (theme) => {
+      if(theme === 'light') {
+         this.canvas.style.filter = 'contrast(1.2) sepia(0) hue-rotate(0deg) saturate(1)';
+      } else {
+         this.canvas.style.filter = 'contrast(1.5) sepia(1) hue-rotate(100deg) saturate(2)';
+      }
+    });
     // this.initScrollAnimations();
 
     window.addEventListener('resize', this.onWindowResize.bind(this));
@@ -1262,8 +1315,27 @@ class CustomCursor {
     // Hover effects on links/buttons
     const interactiveElements = document.querySelectorAll('a, button, .tilt-card, input, textarea');
     interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      el.addEventListener('mouseenter', () => {
+        document.body.classList.add('cursor-hover');
+        this.cursor.setAttribute('data-text', el.tagName === 'A' ? 'OPEN' : 'CLICK');
+      });
+      el.addEventListener('mouseleave', () => {
+        document.body.classList.remove('cursor-hover');
+        this.cursor.removeAttribute('data-text');
+      });
+    });
+
+    // Drag effects for 3D containers
+    const draggableElements = document.querySelectorAll('#gapbot-3d-container, #hologram-container');
+    draggableElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        document.body.classList.add('cursor-drag');
+        this.cursor.setAttribute('data-text', 'DRAG');
+      });
+      el.addEventListener('mouseleave', () => {
+        document.body.classList.remove('cursor-drag');
+        this.cursor.removeAttribute('data-text');
+      });
     });
 
     // Add magnetic effect to CTA buttons
@@ -1496,19 +1568,42 @@ document.addEventListener('DOMContentLoaded', () => {
 // Feature 2: 3D GAPbot Wireframe (Three.js)
 
 function init3DGAPbot() {
+  if (window.gapbotInitialized) return;
+  window.gapbotInitialized = true;
   const container = document.getElementById('gapbot-3d-container');
   if (!container || typeof THREE === 'undefined') return;
 
   const scene = new THREE.Scene();
+  window.EventBus.on('themeChanged', (theme) => {
+    // Basic dynamic response to theme
+    if(theme === 'light') {
+       scene.background = new THREE.Color(0xf8f9fa);
+       if(container) container.style.background = 'radial-gradient(circle at center, rgba(0, 123, 181, 0.05), transparent 70%)';
+    } else {
+       scene.background = null;
+       if(container) container.style.background = 'radial-gradient(circle at center, rgba(0, 255, 194, 0.05), transparent 70%)';
+    }
+  });
   const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
   camera.position.set(12, 10, 18);
   camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   container.appendChild(renderer.domElement);
+
+  const resizeObserver = new ResizeObserver(entries => {
+    for (let entry of entries) {
+      const { width, height } = entry.contentRect;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    }
+  });
+  resizeObserver.observe(container);
 
   const robotGroup = new THREE.Group();
   scene.add(robotGroup);
@@ -1776,7 +1871,7 @@ function init3DGAPbot() {
 
   // T3: Optimize GAPbot rendering
   let isVisible = true;
-  const gapbotObserver = new IntersectionObserver((entries) => {
+  var gapbotObserver = new IntersectionObserver((entries) => {
     isVisible = entries[0].isIntersecting;
     if (isVisible) animate();
   }, { threshold: 0.1 });
@@ -1784,8 +1879,18 @@ function init3DGAPbot() {
 
   // Animation Loop
   let time = 0;
+  let isIntersecting = true;
+
+  var gapbotObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isIntersecting = entry.isIntersecting;
+      if (isIntersecting) animate();
+    });
+  }, { threshold: 0.1 });
+  gapbotObserver.observe(container);
+
   function animate() {
-    if (!isVisible) return;
+    if (!isVisible || !isIntersecting) return;
     requestAnimationFrame(animate);
 
     robotGroup.rotation.y += (targetRotation.y - robotGroup.rotation.y) * 0.1;
@@ -1834,6 +1939,22 @@ function initScrollAnimations() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
   gsap.registerPlugin(ScrollTrigger);
+
+  // Visual Improvement 3: GSAP Scroll Reveal Stagger
+  // Animate content blocks
+  gsap.utils.toArray('.content-block').forEach(block => {
+    gsap.from(block, {
+      scrollTrigger: {
+        trigger: block,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      },
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    });
+  });
 
   // Fade up headers
   gsap.utils.toArray('.section-title').forEach(title => {
@@ -2530,28 +2651,38 @@ class GitHubActivityFeed {
     try {
       this.container.innerHTML = '<div style="text-align: center; color: var(--primary-color);">Loading activity...</div>';
 
-      // Tech 1: LocalStorage Cache for GitHub Feed
-      const cached = localStorage.getItem('corax_gh_feed');
-      if (cached) {
-         const { data, timestamp } = JSON.parse(cached);
-         if (Date.now() - timestamp < 3600000) { // 1 hour TTL
-            this.renderEvents(data);
-            return;
-         }
+      // Use TTL CacheManager for GitHub Feed (1 hour TTL)
+      const cachedData = CacheManager.get('corax_gh_feed');
+      if (cachedData) {
+         this.renderEvents(cachedData);
+         return;
       }
 
-      let response = await fetch('https://api.github.com/orgs/PelleNybe/events');
-      if (!response.ok) {
-        response = await fetch('https://api.github.com/users/PelleNybe/events');
-      }
+      // Web Worker Implementation
+      if (window.Worker) {
+        const worker = new Worker('worker_github.js');
+        worker.postMessage({ action: 'fetchGitHubActivity' });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch GitHub activity');
+        worker.onmessage = (e) => {
+          if (e.data.status === 'success') {
+            const relevantEvents = e.data.data;
+            CacheManager.set('corax_gh_feed', relevantEvents, 3600000);
+            this.renderEvents(relevantEvents);
+          } else {
+            console.error('Worker error:', e.data.message);
+            this.container.innerHTML = '<div style="text-align: center; color: var(--error-color);">Unable to load activity feed.</div>';
+          }
+        };
+      } else {
+        // Fallback
+        let response = await fetch('https://api.github.com/orgs/PelleNybe/events');
+        if (!response.ok) response = await fetch('https://api.github.com/users/PelleNybe/events');
+        if (!response.ok) throw new Error('Failed to fetch GitHub activity');
+        const events = await response.json();
+        const relevantEvents = events.filter(e => ['PushEvent', 'PullRequestEvent', 'IssuesEvent', 'CreateEvent'].includes(e.type)).slice(0, 5);
+        CacheManager.set('corax_gh_feed', relevantEvents, 3600000);
+        this.renderEvents(relevantEvents);
       }
-
-      const events = await response.json();
-      localStorage.setItem('corax_gh_feed', JSON.stringify({ data: events, timestamp: Date.now() }));
-      this.renderEvents(events);
     } catch (error) {
       console.error('Error fetching GitHub activity:', error);
       this.container.innerHTML = '<div style="text-align: center; color: var(--error-color);">Unable to load activity feed.</div>';
@@ -2561,9 +2692,7 @@ class GitHubActivityFeed {
   renderEvents(events) {
     this.container.innerHTML = '';
 
-    const relevantEvents = events.filter(e =>
-      ['PushEvent', 'PullRequestEvent', 'IssuesEvent', 'CreateEvent'].includes(e.type)
-    ).slice(0, 5);
+    const relevantEvents = events;
 
     if (relevantEvents.length === 0) {
        this.container.innerHTML = '<div style="text-align: center; color: var(--text-muted);">No recent activity found.</div>';
@@ -2659,7 +2788,8 @@ class Web3Demo {
 
   init() {
     // T4: Auto-connect if previously connected
-    const savedAccount = localStorage.getItem('corax_web3_account');
+    // Use TTL CacheManager for Web3 Session (24 hours TTL)
+    const savedAccount = CacheManager.get('corax_web3_account');
     if (savedAccount && typeof window.ethereum !== 'undefined') {
        this.checkConnection();
     }
@@ -2677,7 +2807,7 @@ class Web3Demo {
           this.connectBtn.style.display = 'none';
           this.actionsDiv.style.display = 'flex';
 
-          localStorage.setItem('corax_web3_account', this.account);
+          CacheManager.set('corax_web3_account', this.account, 86400000);
           if(window.plausible) window.plausible('Wallet Connected');
         } catch (error) {
           console.error("User denied account access", error);
