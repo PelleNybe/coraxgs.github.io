@@ -86,22 +86,24 @@ Connect your MetaMask wallet directly in the browser to test signing cryptograph
 
 ---
 
-## 🏗️ v2.0 Visual & Technical Overhaul
+## 🏗️ v3.0 Visual & Technical Overhaul
 
 We've recently shipped massive updates to ensure optimal performance, accessibility, and breathtaking visual fidelity:
+
 
 <div align="center">
   <table style="border: none; width: 100%;">
     <tr>
-      <td align="center"><img src="images/v1_boot_screen.png" alt="Corax OS Boot Sequence" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>Corax OS Boot Sequence</b></td>
-      <td align="center"><img src="images/v2_main_hero.png" alt="Reactive Particle Swarm" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>Reactive Particle Swarm</b></td>
+      <td align="center"><img src="images/v3_hero_terminal.png" alt="Interactive CLI & Boot" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>Fully Interactive Browser CLI</b></td>
+      <td align="center"><img src="images/v3_globe.png" alt="3D Cyber-Globe" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>Real-time 3D Cyber-Globe Network</b></td>
     </tr>
     <tr>
-      <td align="center"><img src="images/v4_scrolled_nav.png" alt="Dynamic Floating Navbar" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>Dynamic Floating Navbar</b></td>
+      <td align="center"><img src="images/v3_dashboard.png" alt="Live Telemetry Dashboard" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>Live Telemetry Dashboard</b></td>
       <td align="center"><img src="images/v5_3d_parallax_card.png" alt="3D Parallax Depth Cards" width="100%" style="border-radius: 8px; border: 1px solid #333;" /><br><b>3D Parallax Depth Cards</b></td>
     </tr>
   </table>
 </div>
+
 
 ### 🛠️ Architecture Upgrades
 - **Dynamic Event Bus Architecture:** Robust global `EventBus` for decoupled state management across complex components.
@@ -163,6 +165,18 @@ Our flagship architecture involves **GAP Platform** (The Brain: a hybrid cloud/e
 
 
 ## 🧠 Latest Updates & Improvements
+
+### 🚀 v3.0 Ultimate Technical & Visual Upgrades (100% Functional)
+1. **Markdown to HTML Generator:** A custom Node.js build script (`marked`) that compiles real markdown files from `/blogs` into actual static `.html` pages.
+2. **Web Worker AI Offloading:** The heavy Perlin noise generation for the LiDAR depth map simulation is completely offloaded to a dedicated `worker.js`, guaranteeing buttery smooth main-thread performance.
+3. **Fully Interactive Browser CLI:** The terminal boot sequence is now an interactive shell accepting commands like `help`, `status`, `theme cyber`, and `telemetry`.
+4. **Client-Side Full-Text Search:** Integrated `lunr.js` to provide real-time, typo-tolerant search across the blog/insights grid.
+5. **Real-time Telemetry & Dashboarding:** Integrated `web-vitals` to track live LCP/FID/CLS, rendering them in a new UI panel and plotting simulated system latency via `Chart.js`.
+6. **Interactive 3D Cyber-Globe:** Added a global network section featuring a Three.js wireframe globe with raycaster-enabled active edge nodes.
+7. **Mouse-Tracking Glow Cards:** Advanced CSS mask compositing to create a beautiful reactive spotlight effect that strictly follows the cursor across feature cards.
+8. **Procedural Reactive Soundscape:** Web Audio API synth drones that modulate their low-pass filters and oscillator detuning based on live mouse X/Y coordinates.
+9. **GSAP Scroll Choreography:** Complex staggered animations, SVG line drawing, and dynamic reveals powered by `ScrollTrigger` as you traverse the application.
+
 
 In our continuous pursuit of excellence, we have recently integrated massive updates:
 

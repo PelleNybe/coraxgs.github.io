@@ -4,23 +4,23 @@
     "date": "2024-02-10",
     "tag": "Security",
     "readTime": "3 min",
-    "excerpt": "Why we are future-proofing our IoT communications now, and how we implemented PQC algorithms to sec...",
-    "link": "#"
+    "excerpt": "Why we are future-proofing our IoT communications now, and how we implemented PQC algorithms to secu...",
+    "link": "blogs_out/pqc-mqtt-integration.html"
   },
   {
     "title": "Swarm Consensus: Beyond Basic Algorithms",
     "date": "2024-02-28",
     "tag": "Robotics",
     "readTime": "3 min",
-    "excerpt": "Exploring our custom implementation of the Consensus-Based Bundle Algorithm (CBBA) for decentralize...",
-    "link": "#"
+    "excerpt": "Exploring our custom implementation of the Consensus-Based Bundle Algorithm (CBBA) for decentralized...",
+    "link": "blogs_out/swarm-consensus-cbba.html"
   },
   {
     "title": "Optimizing YOLOv8-Seg for Hailo-8L Edge Accelerators",
     "date": "2024-03-15",
     "tag": "Edge AI",
     "readTime": "3 min",
-    "excerpt": "A deep dive into how we achieved ultra-low latency inference for the GAPbot vision system without c...",
-    "link": "#"
+    "excerpt": "A deep dive into how we achieved ultra-low latency inference for the GAPbot vision system without co...",
+    "link": "blogs_out/yolov8-hailo8l-optimization.html"
   }
 ]
