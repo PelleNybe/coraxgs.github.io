@@ -1,4 +1,20 @@
 
+// Security Feature: Escape HTML to prevent XSS
+function escapeHTML(str) {
+  if (typeof str !== 'string') return str;
+  return str.replace(/[&<>'"]/g, function(tag) {
+    const charsToReplace = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    };
+    return charsToReplace[tag] || tag;
+  });
+}
+
+
 // Feature: Web Components (Componentization)
 class ProjectCardElement extends HTMLElement {
   constructor() {
@@ -437,7 +453,7 @@ class ProjectRenderer {
 
     this.errorContainer.innerHTML = `
       <h3>${errorTitle}</h3>
-      <p>${message}</p>
+      <p>${escapeHTML(message)}</p>
       <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
         ${errorDescription} <a href="https://github.com/PelleNybe" target="_blank" style="color: var(--primary-color);">${linkText}</a>
         directly to see all projects.
@@ -2616,9 +2632,9 @@ class GitHubActivityFeed {
         <div style="font-size: 1.5rem; width: 30px; text-align: center;">${icon}</div>
         <div style="flex: 1;">
           <div style="font-size: 0.9rem; color: var(--text-primary);">
-            ${actionText}
+            ${escapeHTML(actionText)}
             <a href="${url}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">
-              ${event.repo.name.replace('PelleNybe/', '')}
+              ${escapeHTML(event.repo.name.replace('PelleNybe/', ''))}
             </a>
           </div>
           <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">
@@ -2819,11 +2835,11 @@ class BlogSystem {
       card.innerHTML = `
         <div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-            <span class="tag" style="background: rgba(0, 255, 194, 0.1); color: var(--primary-color); border: 1px solid var(--primary-color);">${post.tag}</span>
+            <span class="tag" style="background: rgba(0, 255, 194, 0.1); color: var(--primary-color); border: 1px solid var(--primary-color);">${escapeHTML(post.tag)}</span>
             <span style="color: var(--text-muted); font-size: 0.8rem;">${post.date}</span>
           </div>
-          <h3 style="margin-bottom: 1rem; line-height: 1.4; font-size: 1.2rem;">${post.title}</h3>
-          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">${post.excerpt}</p>
+          <h3 style="margin-bottom: 1rem; line-height: 1.4; font-size: 1.2rem;">${escapeHTML(post.title)}</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">${escapeHTML(post.excerpt)}</p>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
           <span style="color: var(--text-muted); font-size: 0.8rem;">⏱️ ${post.readTime}</span>
@@ -2930,12 +2946,12 @@ class TelemetryMonitor {
         if (metric.rating === 'needs-improvement') color = 'var(--warning-color)';
         if (metric.rating === 'poor') color = 'var(--error-color)';
 
-        el.innerHTML = `${metric.name}: <span style="color: ${color};">${format(metric.value)}</span>`;
+        el.innerHTML = `${escapeHTML(metric.name)}: <span style="color: ${color};">${escapeHTML(String(format(metric.value)))}</span>`;
 
         // Also log to terminal if it exists
         const tb = document.getElementById('terminal-body');
         if (tb && window.coraxTerminal) {
-            window.coraxTerminal.typeLine(`[TELEMETRY] ${metric.name}: ${format(metric.value)} (${metric.rating})`, 10);
+            window.coraxTerminal.typeLine(`[TELEMETRY] ${escapeHTML(metric.name)}: ${escapeHTML(String(format(metric.value)))} (${escapeHTML(metric.rating)})`, 10);
         }
       }
     };
@@ -3042,7 +3058,7 @@ class CyberGlobe {
           this.tooltip.style.display = 'block';
           this.tooltip.style.left = (e.clientX - rect.left + 15) + 'px';
           this.tooltip.style.top = (e.clientY - rect.top + 15) + 'px';
-          this.tooltip.innerHTML = `ID: ${obj.userData.id}<br>Type: ${obj.userData.type}<br>Status: ACTIVE`;
+          this.tooltip.innerHTML = `ID: ${escapeHTML(String(obj.userData.id))}<br>Type: ${escapeHTML(String(obj.userData.type))}<br>Status: ACTIVE`;
         }
       } else {
         document.body.style.cursor = 'default';
