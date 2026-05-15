@@ -769,25 +769,27 @@ class CoraxWebsite {
       document.documentElement.clientHeight;
     const scrolled = Math.min((window.scrollY / windowHeight) * 100, 100);
 
-    let progressBar = document.getElementById("scroll-progress");
-    if (!progressBar) {
-      progressBar = document.createElement("div");
-      progressBar.id = "scroll-progress";
-      progressBar.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 0%;
-        height: 3px;
-        background: linear-gradient(90deg, #00ffcc, #0066ff);
-        z-index: 10001;
-        transition: width 0.2s ease;
-        pointer-events: none;
-      `;
-      document.body.appendChild(progressBar);
+    if (!this.progressBar) {
+      this.progressBar = document.getElementById("scroll-progress");
+      if (!this.progressBar) {
+        this.progressBar = document.createElement("div");
+        this.progressBar.id = "scroll-progress";
+        this.progressBar.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 0%;
+          height: 3px;
+          background: linear-gradient(90deg, #00ffcc, #0066ff);
+          z-index: 10001;
+          transition: width 0.2s ease;
+          pointer-events: none;
+        `;
+        document.body.appendChild(this.progressBar);
+      }
     }
 
-    progressBar.style.width = `${scrolled}%`;
+    this.progressBar.style.width = `${scrolled}%`;
   }
 
   toggleMobileMenu() {
