@@ -44,6 +44,20 @@ Experience a web platform that pushes the boundaries of modern browser capabilit
   <p><i>The highly interactive, immersive Corax CoLAB showcase platform.</i></p>
 </div>
 
+
+<div align="center">
+  <table style="border: none;">
+    <tr>
+      <td align="center"><b>Parallax & Glitch Hero</b><br>Featuring deep-tech aesthetic with floating elements and chromatic aberration text.</td>
+      <td align="center"><b>Advanced Dev Panel</b><br>Track real-time memory usage and Web Vitals (Ctrl+Shift+D).</td>
+    </tr>
+    <tr>
+      <td align="center"><b>Context-Aware Cursor</b><br>Cursor shape and icon dynamically adjust based on hovered elements.</td>
+      <td align="center"><b>Magnetic Interactions</b><br>Navigation links and buttons physically pull towards the cursor.</td>
+    </tr>
+  </table>
+</div>
+
 ### 🔥 World-Class Interactive Elements
 
 Click the dropdowns below to explore the technical demonstrations of what's possible on the modern web within this showcase:

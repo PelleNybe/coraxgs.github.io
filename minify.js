@@ -58,6 +58,12 @@ async function minifyFiles() {
       console.log('Worker.js copied.');
     }
 
+    // Copy search_worker.js
+    if (fs.existsSync('search_worker.js')) {
+      fs.copyFileSync('search_worker.js', 'dist/search_worker.js');
+      console.log('search_worker.js copied.');
+    }
+
     // Copy blogs.json
     if (fs.existsSync('blogs.json')) {
       fs.copyFileSync('blogs.json', 'dist/blogs.json');
