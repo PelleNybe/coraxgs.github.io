@@ -1,20 +1,5 @@
-feat: Implement 10 advanced technical and visual improvements v3.0
+Fix DOM-based XSS vulnerability in app.js
 
-Technical Improvements:
-- Tech 1: Lazy Initialization of WebGL Components using IntersectionObserver to drastically improve initial page load.
-- Tech 2: Web Worker Search Indexing for the blog functionality to offload work from the main thread.
-- Tech 3: IndexedDB Caching Layer with 1-hour TTL for GitHub API repositories to avoid rate limits and provide instant loading.
-- Tech 4: Advanced Performance Dev Panel toggled via Ctrl+Shift+D displaying Web Vitals and Memory usage.
-- Tech 5: Dynamic Link Prefetching using IntersectionObserver to inject <link rel="prefetch"> tags for internal links entering the viewport.
-
-Visual Improvements:
-- Vis 1: Magnetic Hover Effects on CTA buttons and navigation links via GSAP.
-- Vis 2: Scroll-Linked SVG Data Stream drawing an animated glowing path based on scroll depth.
-- Vis 3: Glitch & Chromatic Aberration Text Effects applied to the hero section title for a cyber aesthetic.
-- Vis 4: Parallax Depth Mapping adding floating elements to the hero section that move relative to mouse position.
-- Vis 5: Context-Aware Custom Cursor dynamically changing shapes and icons based on hovered elements (e.g., ↗, 3D, </>)
-
-Documentation & Build:
-- Updated README.md to describe the 10 new features under the new version v4.0.
-- Updated minify.js to bundle and serve search_worker.js.
-- Updated sw.js to cache the new worker.
+- Escaped all user inputs used in DOM insertions (`innerHTML`) by running `escapeHTML` helper method.
+- Addressed XSS vectors specifically in component templates: `ProjectCardElement.render()`, `log()`, `renderEvents()` and `renderPosts()`.
+- Addressed the vulnerability issue recorded in the `.jules/sentinel.md` journal.

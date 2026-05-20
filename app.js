@@ -35,14 +35,14 @@ class ProjectCardElement extends HTMLElement {
   }
 
   render() {
-    const name = this.getAttribute('name') || '';
-    const url = this.getAttribute('url') || '#';
-    const description = this.getAttribute('description') || '';
-    const stars = this.getAttribute('stars') || '0';
-    const language = this.getAttribute('language') || '';
-    const color = this.getAttribute('color') || '#ccc';
+    const name = escapeHTML(this.getAttribute('name') || '');
+    const url = escapeHTML(this.getAttribute('url') || '#');
+    const description = escapeHTML(this.getAttribute('description') || '');
+    const stars = escapeHTML(this.getAttribute('stars') || '0');
+    const language = escapeHTML(this.getAttribute('language') || '');
+    const color = escapeHTML(this.getAttribute('color') || '#ccc');
     let topics = this.getAttribute('topics') || '';
-    const tag = this.getAttribute('tag') || ''; // 'Featured' or 'Core'
+    const tag = escapeHTML(this.getAttribute('tag') || ''); // 'Featured' or 'Core'
 
     // Parse topics
     try {
@@ -53,9 +53,9 @@ class ProjectCardElement extends HTMLElement {
 
     let topicsHtml = '';
     if (Array.isArray(topics) && topics.length > 0) {
-      topicsHtml = topics.slice(0, 3).map(topic => `<span class="tag">${topic}</span>`).join('');
+      topicsHtml = topics.slice(0, 3).map(topic => `<span class="tag">${escapeHTML(topic)}</span>`).join('');
     } else if (language) {
-      topicsHtml = `<span class="tag">${language}</span>`;
+      topicsHtml = `<span class="tag">${language}</span>`; // already escaped
     }
 
     let languageHtml = '';
@@ -2441,7 +2441,7 @@ class AISimulator {
   log(message, color = 'var(--text-secondary)') {
     const div = document.createElement('div');
     div.style.color = color;
-    div.innerHTML = `<span style="opacity: 0.5;">[${new Date().toISOString().split('T')[1].slice(0,8)}]</span> ${message}`;
+    div.innerHTML = `<span style="opacity: 0.5;">[${new Date().toISOString().split('T')[1].slice(0,8)}]</span> ${escapeHTML(message)}`;
     this.logContainer.appendChild(div);
     if(this.logContainer.children.length > 20) {
         this.logContainer.removeChild(this.logContainer.firstChild);
@@ -2614,17 +2614,17 @@ class GitHubActivityFeed {
           break;
         case 'PullRequestEvent':
           icon = '🔄';
-          actionText = `${event.payload.action} pull request in `;
+          actionText = `${escapeHTML(event.payload.action)} pull request in `;
           if (event.payload.pull_request) url = event.payload.pull_request.html_url;
           break;
         case 'IssuesEvent':
           icon = '⚠️';
-          actionText = `${event.payload.action} issue in `;
+          actionText = `${escapeHTML(event.payload.action)} issue in `;
           if (event.payload.issue) url = event.payload.issue.html_url;
           break;
         case 'CreateEvent':
           icon = '✨';
-          actionText = `Created ${event.payload.ref_type} in `;
+          actionText = `Created ${escapeHTML(event.payload.ref_type)} in `;
           break;
       }
 
@@ -2633,7 +2633,7 @@ class GitHubActivityFeed {
         <div style="flex: 1;">
           <div style="font-size: 0.9rem; color: var(--text-primary);">
             ${escapeHTML(actionText)}
-            <a href="${url}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">
+            <a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">
               ${escapeHTML(event.repo.name.replace('PelleNybe/', ''))}
             </a>
           </div>
@@ -2836,13 +2836,13 @@ class BlogSystem {
         <div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
             <span class="tag" style="background: rgba(0, 255, 194, 0.1); color: var(--primary-color); border: 1px solid var(--primary-color);">${escapeHTML(post.tag)}</span>
-            <span style="color: var(--text-muted); font-size: 0.8rem;">${post.date}</span>
+            <span style="color: var(--text-muted); font-size: 0.8rem;">${escapeHTML(post.date)}</span>
           </div>
           <h3 style="margin-bottom: 1rem; line-height: 1.4; font-size: 1.2rem;">${escapeHTML(post.title)}</h3>
           <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">${escapeHTML(post.excerpt)}</p>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
-          <span style="color: var(--text-muted); font-size: 0.8rem;">⏱️ ${post.readTime}</span>
+          <span style="color: var(--text-muted); font-size: 0.8rem;">⏱️ ${escapeHTML(post.readTime)}</span>
           <span style="color: var(--primary-color); font-size: 0.9rem; font-weight: 500;">Read Article &rarr;</span>
         </div>
       `;

@@ -76,14 +76,14 @@ class BlogSystem {
       card.innerHTML = \`
         <div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-            <span class="tag" style="background: rgba(0, 255, 194, 0.1); color: var(--primary-color); border: 1px solid var(--primary-color);">\${post.tag}</span>
-            <span style="color: var(--text-muted); font-size: 0.8rem;">\${post.date}</span>
+            <span class="tag" style="background: rgba(0, 255, 194, 0.1); color: var(--primary-color); border: 1px solid var(--primary-color);">\${escapeHTML(post.tag)}</span>
+            <span style="color: var(--text-muted); font-size: 0.8rem;">\${escapeHTML(post.date)}</span>
           </div>
-          <h3 style="margin-bottom: 1rem; line-height: 1.4; font-size: 1.2rem;">\${post.title}</h3>
-          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">\${post.excerpt}</p>
+          <h3 style="margin-bottom: 1rem; line-height: 1.4; font-size: 1.2rem;">\${escapeHTML(post.title)}</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">\${escapeHTML(post.excerpt)}</p>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
-          <span style="color: var(--text-muted); font-size: 0.8rem;">⏱️ \${post.readTime}</span>
+          <span style="color: var(--text-muted); font-size: 0.8rem;">⏱️ \${escapeHTML(post.readTime)}</span>
           <span style="color: var(--primary-color); font-size: 0.9rem; font-weight: 500;">Read Article &rarr;</span>
         </div>
       \`;
