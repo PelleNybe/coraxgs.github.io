@@ -14,7 +14,7 @@ function noise(x, y, z) {
   y = y || 0;
   z = z || 0;
   if (perlin == null) {
-    perlin = new Array(PERLIN_SIZE + 1);
+    perlin = new Float32Array(PERLIN_SIZE + 1);
     for (let i = 0; i < PERLIN_SIZE + 1; i++) {
       perlin[i] = Math.random();
     }
