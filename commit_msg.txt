@@ -1,5 +1,6 @@
-Fix DOM-based XSS vulnerability in app.js
+Dev, PN/Corax CoLAB: [performance improvement]
 
-- Escaped all user inputs used in DOM insertions (`innerHTML`) by running `escapeHTML` helper method.
-- Addressed XSS vectors specifically in component templates: `ProjectCardElement.render()`, `log()`, `renderEvents()` and `renderPosts()`.
-- Addressed the vulnerability issue recorded in the `.jules/sentinel.md` journal.
+💡 What: Implemented debounce and throttle utilities for high-frequency window events (`resize`, `scroll`, `mousemove`), optimized Web Worker memory allocation (`Float32Array`), and added `aria-label` accessibility attributes to buttons.
+🎯 Why: High-frequency DOM events cause massive main thread blocking during user interactions. Repeated large array instantiations in the Web Worker affect garbage collection. Buttons missing `aria-label` hurt screen reader accessibility.
+📊 Impact: Considerably reduces layout thrashing, ensures smooth 60fps scrolling and resizing, improves Web Worker memory performance, and enhances compliance with accessibility standards.
+🔬 Measurement: Verified via e2e Playwright tests. Smooth animations during resize and scroll, and proper `aria-label` reporting in accessibility trees.

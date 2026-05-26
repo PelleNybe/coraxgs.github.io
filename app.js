@@ -1,4 +1,29 @@
 
+// Performance optimization: Throttle utility
+function throttle(func, limit) {
+  let inThrottle;
+  return function(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+
+// Debounce utility
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 // Security Feature: Escape HTML to prevent XSS
 function escapeHTML(str) {
   if (typeof str !== 'string') return str;
@@ -1036,8 +1061,8 @@ class NeuralNetwork {
     this.init();
     // this.initScrollAnimations();
 
-    window.addEventListener('resize', this.onWindowResize.bind(this));
-    window.addEventListener('mousemove', this.onMouseMove.bind(this));
+    window.addEventListener('resize', debounce(this.onWindowResize.bind(this), 200));
+    window.addEventListener('mousemove', throttle(this.onMouseMove.bind(this), 16));
 
     // V2: Click ripple
     this.rippleTime = 0;
@@ -1877,11 +1902,11 @@ function init3DGAPbot() {
 
   animate();
 
-  window.addEventListener('resize', () => {
+  window.addEventListener('resize', debounce(() => {
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(container.clientWidth, container.clientHeight);
-  });
+  }, 200));
 }
 
 
@@ -2084,11 +2109,11 @@ class HologramInteractive {
     };
     animate();
 
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', debounce(() => {
       this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-    });
+    }, 200));
   }
 
   createNode(id, x, y, z, geometry) {
@@ -2294,7 +2319,7 @@ class CoraxAudio {
 
   setupInteractions() {
     // 1. Scroll modulates filter frequency
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', throttle(() => {
       if (!this.context || this.isMuted) return;
 
       const scrollY = window.scrollY;
@@ -2310,7 +2335,7 @@ class CoraxAudio {
         const baseFreq = [50, 75, 100][i];
         osc.frequency.setTargetAtTime(baseFreq + (scrollRatio * 10), this.context.currentTime, 0.1);
       });
-    });
+    }, 50));
 
     // 2. UI Hover Effects (High tech blips)
     document.querySelectorAll('a, button, .holo-node, .config-btn').forEach(el => {
@@ -3067,11 +3092,11 @@ class CyberGlobe {
       }
     });
 
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', debounce(() => {
       this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-    });
+    }, 200));
 
     this.animate();
   }
