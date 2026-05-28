@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent-Commit Tracker - Transparency for AI-generated Code</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="nav-links">
+                <a href="../">&larr; Back to Corax CoLAB</a>
+            </div>
+            <h1>Agent-Commit Tracker</h1>
+        </header>
+
+        <main>
+            <section class="hero">
+                <h1>Bringing transparency to AI-generated code.</h1>
+                <p>A GitHub App that reads Pull Requests, extracts context (New vs. Ongoing Conversation), and posts a formatted Markdown report directly into the PR to aid reviewers in understanding AI contributions.</p>
+                <a href="#" class="btn">Install App</a>
+            </section>
+
+            <section class="features">
+                <h2>Features</h2>
+
+                <div class="feature-card">
+                    <h3>Context Extraction</h3>
+                    <p>Automatically distinguishes between new features and ongoing conversational updates by parsing AI instructions within PRs and Issues.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Formatted PR Reports</h3>
+                    <p>Posts a clean, easy-to-read Markdown report directly as a comment on the Pull Request, giving reviewers immediate insight into the AI's intent and changes.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Privacy First</h3>
+                    <p>Operates purely on webhook payloads. It never clones your repository, never stores source code, and retains no permanent user data.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Corax CoLAB. All rights reserved.</p>
+            <div>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

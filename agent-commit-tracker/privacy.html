@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Agent-Commit Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="nav-links">
+                <a href="index.html">&larr; Back to Agent-Commit Tracker</a>
+            </div>
+            <h1>Privacy Policy</h1>
+        </header>
+
+        <main class="content-section">
+            <p><strong>Effective Date:</strong> May 28, 2024</p>
+
+            <p>This Privacy Policy describes how the Agent-Commit Tracker GitHub App ("the App", "we", "our", or "us") collects, uses, and handles your information when you install and use it on your GitHub repositories.</p>
+
+            <h2>1. Information We Collect</h2>
+            <p>The App is designed with a strict privacy-first architecture. It only listens to webhook payloads triggered by specific events (Pull Request and Issue events) on the repositories where it is installed.</p>
+            <ul>
+                <li><strong>Webhook Data:</strong> We receive metadata associated with PR and Issue events, such as PR titles, descriptions, comments, and the associated AI instructions necessary to parse context.</li>
+            </ul>
+
+            <h2>2. "No Source Code" Guarantee</h2>
+            <p><strong>Data Access & Source Code:</strong> Agent-Commit Tracker operates strictly on Pull Request and Issue metadata provided via standard GitHub webhooks. The application does not request read access to repository source code, does not clone repositories, and does not store any proprietary code. It only parses the <code>pr_body</code> and commit messages to identify AI-context markers.</p>
+
+            <h2>3. Purpose of Use</h2>
+            <p><strong>Use of Information:</strong> The metadata extracted is used exclusively for its core functionality: generating and injecting the AI-context Markdown report into the active Pull Request. We do not sell, rent, or share this data with third parties. Furthermore, the data processed by Agent-Commit Tracker is not used to train any AI or machine learning models.</p>
+
+            <h2>4. Data Retention</h2>
+            <p><strong>Data Retention:</strong> Webhook payloads are processed in real-time (in-memory) on our secure infrastructure. We do not maintain a persistent database of your repository's activity, Pull Request contents, or commit histories. Transient operational logs may be kept temporarily for system debugging purposes only, and are strictly access-controlled and routinely purged.</p>
+
+            <h2>5. Third-Party Services</h2>
+            <p>The App interacts exclusively with the GitHub API to read event payloads and post comments. We do not share your data with any external third parties, advertisers, or analytics services.</p>
+
+            <h2>6. Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. If we make material changes, we will notify users by updating the effective date at the top of this policy and, if necessary, via the GitHub repository or application interface.</p>
+
+            <h2>7. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us by opening an issue on the <a href="https://github.com/PelleNybe/pellenybe.github.io">repository</a>.</p>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Corax CoLAB. All rights reserved.</p>
+            <div>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
