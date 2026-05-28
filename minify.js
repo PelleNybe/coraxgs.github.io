@@ -77,6 +77,12 @@ async function minifyFiles() {
     }
 
 
+    // Copy agent-commit-tracker
+    if (fs.existsSync('agent-commit-tracker')) {
+      copyDirSync('agent-commit-tracker', 'dist/agent-commit-tracker');
+      console.log('agent-commit-tracker copied.');
+    }
+
   } catch (error) {
     console.error('Error during minification:', error);
   }
