@@ -17,27 +17,33 @@
 
         <main>
             <section class="hero">
-                <h1>Bringing transparency to AI-generated code.</h1>
-                <p>A GitHub App that reads Pull Requests, extracts context (New vs. Ongoing Conversation), and posts a formatted Markdown report directly into the PR to aid reviewers in understanding AI contributions.</p>
+                <h1>Bridging the gap between AI generation and human review.</h1>
+                <p>Instantly track the prompt and context behind every AI-generated Pull Request.</p>
                 <a href="#" class="btn">Install App</a>
             </section>
 
+            <section class="content-section">
+                <h2>The Problem</h2>
+                <p>AI writes code fast, but reviewers lose the context. Was this PR generated from a quick fix prompt, or a long, complex architectural conversation?</p>
+            </section>
+
             <section class="features">
-                <h2>Features</h2>
+                <h2>The Solution / Features</h2>
+                <div class="feature-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div class="feature-card">
+                        <h3>Context is King</h3>
+                        <p>Automatically detects if the AI was acting on a "New" or "Ongoing" conversation.</p>
+                    </div>
 
-                <div class="feature-card">
-                    <h3>Context Extraction</h3>
-                    <p>Automatically distinguishes between new features and ongoing conversational updates by parsing AI instructions within PRs and Issues.</p>
-                </div>
+                    <div class="feature-card">
+                        <h3>Zero Friction</h3>
+                        <p>Powered by GitHub Webhooks. No local CI/CD installation required.</p>
+                    </div>
 
-                <div class="feature-card">
-                    <h3>Formatted PR Reports</h3>
-                    <p>Posts a clean, easy-to-read Markdown report directly as a comment on the Pull Request, giving reviewers immediate insight into the AI's intent and changes.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Privacy First</h3>
-                    <p>Operates purely on webhook payloads. It never clones your repository, never stores source code, and retains no permanent user data.</p>
+                    <div class="feature-card">
+                        <h3>Reviewer Friendly</h3>
+                        <p>Injects a clean, readable Markdown table directly into the PR thread showing the exact AI instruction.</p>
+                    </div>
                 </div>
             </section>
         </main>
