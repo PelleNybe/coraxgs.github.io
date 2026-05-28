@@ -55,6 +55,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="styles.css">
   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,6 +147,58 @@
           Visit Corax CoLAB
         </a>
       </div>
+    </div>
+  </section>
+
+
+  <!-- Featured Project Section -->
+  <section id="featured-project" style="padding-top: 4rem; padding-bottom: 2rem;">
+    <div class="featured-project-container">
+
+        <div class="header-section">
+            <div class="icon-container">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+            <div>
+                <h2 class="project-title">Agent-Commit Tracker</h2>
+                <p class="project-subtitle">Automated Transparency for AI-Generated Code</p>
+            </div>
+        </div>
+
+        <div class="tech-badges">
+            <span class="badge"><i class="fa-brands fa-python"></i> Python / FastAPI</span>
+            <span class="badge"><i class="fa-brands fa-google"></i> Google Cloud Run</span>
+            <span class="badge"><i class="fa-brands fa-github"></i> GitHub Webhooks</span>
+            <span class="badge"><i class="fa-solid fa-server"></i> Serverless</span>
+        </div>
+
+        <div class="project-description">
+            <p>As AI agents increasingly write our code, human reviewers lose the critical context behind the commits. I built the Agent-Commit Tracker to solve this blind spot. It is a production-grade, serverless microservice that intercepts GitHub webhooks in real-time, parsing hidden AI metadata to inject perfectly formatted context reports directly into Pull Requests.</p>
+        </div>
+
+        <ul class="features-list">
+            <li>
+                <i class="fa-solid fa-bolt"></i>
+                <strong>Zero Latency Parsing</strong>
+                <span>Built with Python and robust Regex, it instantly extracts embedded context markers from PR descriptions without delaying the CI/CD pipeline.</span>
+            </li>
+            <li>
+                <i class="fa-solid fa-cloud"></i>
+                <strong>100% Serverless</strong>
+                <span>Containerized and deployed on Google Cloud Run. It scales from zero to handle webhook spikes securely and cost-effectively.</span>
+            </li>
+            <li>
+                <i class="fa-solid fa-shield-halved"></i>
+                <strong>Enterprise Security</strong>
+                <span>Enforces strict validation of <code>X-Hub-Signature-256</code> headers to guarantee payload authenticity before any processing begins.</span>
+            </li>
+        </ul>
+
+        <div class="action-buttons">
+            <a href="https://github.com/PelleNybe/agent-commit-tracker" target="_blank" class="btn btn-primary"><i class="fa-brands fa-github"></i> Install GitHub App</a>
+            <a href="https://github.com/PelleNybe/agent-commit-tracker" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-code"></i> View Source Architecture</a>
+        </div>
+
     </div>
   </section>
 
@@ -432,15 +485,6 @@
       </p>
 
             <div class="projects-grid">
-        <project-card
-          name="Agent-Commit Tracker"
-          url="https://github.com/PelleNybe/agent-commit-tracker"
-          description="A production-grade, serverless GitHub App built with Python and FastAPI, deployed on Google Cloud Run for autonomous CI/CD webhook handling."
-          language="Python"
-          color="#3572A5"
-          topics='["Python", "FastAPI", "CI/CD", "Serverless"]'
-          tag="Developer Tool">
-        </project-card>
 
         <project-card
           name="Crypto MCP Server"
@@ -478,15 +522,6 @@
         <div class="project-card"><img src="images/1773185420660.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773185420660.png"></div>
         <div class="project-card"><img src="images/1773185446305.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773185446305.png"></div>
         <div class="project-card"><img src="images/1773242699963.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773242699963.png">
-        <project-card
-          name="Agent-Commit Tracker"
-          url="/agent-commit-tracker/"
-          description="Agent-Commit Tracker - An automated transparency microservice for AI-generated Pull Requests, built by Corax CoLAB."
-          language="HTML/CSS"
-          color="#e34c26"
-          topics='["AI", "GitHub App", "Transparency"]'
-          tag="Developer Tool">
-        </project-card>
 </div>
       </div>
     </section>

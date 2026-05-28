@@ -14,7 +14,7 @@
     "jsdom": "^29.1.0",
     "lunr": "^2.3.9",
     "marked": "^18.0.2",
-    "playwright": "^1.58.2",
+    "playwright": "^1.60.0",
     "terser": "^5.46.1",
     "web-vitals": "^5.2.0"
   }

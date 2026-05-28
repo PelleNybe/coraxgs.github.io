@@ -2430,3 +2430,196 @@ nav.scrolled {
 .glow-card:hover::after {
   opacity: 1;
 }
+
+/* Featured Project Section - Agent-Commit Tracker */
+.featured-project-container {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(0, 255, 194, 0.2);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    transition: var(--transition);
+}
+
+.featured-project-container:hover {
+    border-color: rgba(0, 255, 194, 0.4);
+    box-shadow: var(--shadow-glow);
+}
+
+#featured-project .header-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+#featured-project .icon-container {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(0, 255, 194, 0.1); /* Deep tech primary tint */
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 255, 194, 0.4);
+}
+
+#featured-project .icon-container i {
+    font-size: 32px;
+    color: var(--primary-color);
+}
+
+#featured-project .project-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+#featured-project .project-subtitle {
+    margin: 5px 0 0 0;
+    font-size: 16px;
+    color: var(--primary-color);
+    font-family: monospace;
+}
+
+#featured-project .tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+#featured-project .badge {
+    background-color: rgba(0, 255, 194, 0.05);
+    border: 1px solid rgba(0, 255, 194, 0.3);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: monospace;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+#featured-project .badge:hover {
+    background-color: rgba(0, 255, 194, 0.15);
+    border-color: var(--primary-color);
+}
+
+#featured-project .badge i {
+    font-size: 14px;
+    color: var(--primary-color);
+}
+
+#featured-project .project-description {
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+#featured-project .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 35px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+#featured-project .features-list li {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 255, 194, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+#featured-project .features-list li:hover {
+    border-color: rgba(0, 255, 194, 0.3);
+    background-color: rgba(0, 255, 194, 0.03);
+}
+
+#featured-project .features-list li i {
+    color: var(--primary-color);
+    font-size: 24px;
+}
+
+#featured-project .features-list li strong {
+    color: var(--text-primary);
+    font-size: 16px;
+}
+
+#featured-project .features-list li span {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#featured-project .action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+#featured-project .btn {
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+#featured-project .btn-primary {
+    background: var(--gradient-primary);
+    color: var(--dark-bg);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 255, 194, 0.2);
+}
+
+#featured-project .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 194, 0.4);
+}
+
+#featured-project .btn-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+#featured-project .btn-secondary:hover {
+    background-color: rgba(0, 255, 194, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #featured-project .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #featured-project .action-buttons {
+        flex-direction: column;
+    }
+    #featured-project .btn {
+        justify-content: center;
+    }
+    .featured-project-container {
+        padding: 20px;
+    }
+}
