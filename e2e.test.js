@@ -22,7 +22,7 @@ server.listen(8000);
 
     // Test 1: Page load & Title
     const title = await page.title();
-    if (!title.includes("Corax CoLAB")) throw new Error("Title mismatch");
+    if (!title.includes("Pelle Nyberg")) throw new Error("Title mismatch");
     console.log("✓ Page title correct");
 
     // Test 2: Hero Section
