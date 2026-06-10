@@ -2623,3 +2623,41 @@ nav.scrolled {
         padding: 20px;
     }
 }
+
+
+/* Accessibility Improvements */
+.skip-link:focus {
+  left: 50% !important;
+  transform: translateX(-50%);
+  top: 10px !important;
+  outline: 2px solid var(--primary-color) !important;
+  border-radius: 4px;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--primary-color) !important;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Ensure minimum touch target size for mobile */
+button,
+.nav-links a {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

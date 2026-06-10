@@ -71,6 +71,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link" style="position: absolute; left: -9999px; z-index: 999; padding: 1em; background: #000; color: #fff; text-decoration: none;">Skip to main content</a>
   <!-- V1: Advanced Loading Screen -->
   <div id="corax-os-boot" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--primary-color); font-family: monospace; transition: opacity 1s ease-out;">
     <div style="font-size: 2rem; font-weight: bold; margin-bottom: 2rem; text-shadow: 0 0 20px var(--primary-color);">CORAX_OS v2.0</div>
@@ -531,13 +532,13 @@
     <section id="gallery" style="margin-top: 4rem; text-align: center;">
       <h3 style="color: var(--text-secondary); margin-bottom: 2rem;">Platform Dashboard Previews</h3>
       <div class="projects-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
-        <div class="project-card"><img src="images/1773184753736.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773184753736.png" loading="lazy"></div>
-        <div class="project-card"><img src="images/1773184772226.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773184772226.png" loading="lazy"></div>
-        <div class="project-card"><img src="images/1773184783812.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773184783812.png" loading="lazy"></div>
-        <div class="project-card"><img src="images/1773184794241.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773184794241.png" loading="lazy"></div>
-        <div class="project-card"><img src="images/1773185420660.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773185420660.png" loading="lazy"></div>
-        <div class="project-card"><img src="images/1773185446305.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773185446305.png" loading="lazy"></div>
-        <div class="project-card"><img src="images/1773242699963.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Platform preview 1773242699963.png" loading="lazy"></div>
+        <div class="project-card"><img src="images/1773184753736.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Dashboard UI component demonstrating real-time data visualization" loading="lazy"></div>
+        <div class="project-card"><img src="images/1773184772226.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Dashboard UI component demonstrating real-time data visualization" loading="lazy"></div>
+        <div class="project-card"><img src="images/1773184783812.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Dashboard UI component demonstrating real-time data visualization" loading="lazy"></div>
+        <div class="project-card"><img src="images/1773184794241.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Dashboard UI component demonstrating real-time data visualization" loading="lazy"></div>
+        <div class="project-card"><img src="images/1773185420660.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Dashboard UI component demonstrating real-time data visualization" loading="lazy"></div>
+        <div class="project-card"><img src="images/1773185446305.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Dashboard UI component demonstrating real-time data visualization" loading="lazy"></div>
+        <div class="project-card"><img src="images/1773242699963.png" style="width: 100%; border-radius: var(--border-radius-small);" alt="Dashboard UI component demonstrating real-time data visualization" loading="lazy"></div>
       </div>
     </section>
 
@@ -589,6 +590,7 @@
 
     <div style="max-width: 600px; margin: 0 auto; margin-bottom: 2rem; position: relative;">
       <label for="blog-search" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Search insights</label>
+      <label for="blog-search" class="sr-only" style="position: absolute; left: -9999px;">Search insights</label>
       <input type="text" id="blog-search" aria-label="Search insights" placeholder="Search insights... (e.g. YOLOv8, MQTT)" style="width: 100%; padding: 12px 20px; font-size: 1rem; border-radius: 30px; border: 1px solid rgba(0,255,194,0.3); background: rgba(0,0,0,0.4); color: white; outline: none; transition: all 0.3s ease;">
       <span aria-hidden="true" style="position: absolute; right: 20px; top: 12px; opacity: 0.5;">🔍</span>
     </div>
@@ -879,7 +881,7 @@
       </div>
     </section>
 
-    <footer>
+      <footer>
       <div class="footer-content">
         <img src="images/coraxcolabloggarund.png" alt="Corax CoLAB Footer Logo" style="height: 60px; margin-bottom: 1rem;" loading="lazy"><br><div class="footer-links">
           <a href="https://coraxcolab.com" target="_blank">Corax CoLAB Website</a>
