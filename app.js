@@ -732,13 +732,13 @@ class CoraxWebsite {
     let ticking = false;
     window.addEventListener("scroll", () => {
       if (!ticking) {
-        requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
           this.handleScroll();
           ticking = false;
         });
         ticking = true;
       }
-    });
+    }, { passive: true });
 
     // Keyboard navigation
     document.addEventListener("keydown", (event) => {
@@ -995,6 +995,7 @@ class CoraxWebsite {
 
 // Initialize when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
+  performance.mark('app-start');
   // Set current year
   const yearElement = document.getElementById("year");
   if (yearElement) {
@@ -1061,8 +1062,8 @@ class NeuralNetwork {
     this.init();
     // this.initScrollAnimations();
 
-    window.addEventListener('resize', debounce(this.onWindowResize.bind(this), 200));
-    window.addEventListener('mousemove', throttle(this.onMouseMove.bind(this), 16));
+    window.addEventListener('resize', debounce(this.onWindowResize.bind(this), 200), { passive: true });
+    window.addEventListener('mousemove', throttle(this.onMouseMove.bind(this), 16), { passive: true });
 
     // V2: Click ripple
     this.rippleTime = 0;
@@ -1303,10 +1304,16 @@ class CustomCursor {
     loop();
 
     // Hover effects on links/buttons
-    const interactiveElements = document.querySelectorAll('a, button, .tilt-card, input, textarea');
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    // Optimized: Event delegation for hover states
+    document.body.addEventListener('mouseover', (e) => {
+      if (e.target.closest('a, button, .tilt-card, input, textarea, .config-btn, .sim-btn')) {
+        document.body.classList.add('cursor-hover');
+      }
+    });
+    document.body.addEventListener('mouseout', (e) => {
+      if (e.target.closest('a, button, .tilt-card, input, textarea, .config-btn, .sim-btn')) {
+        document.body.classList.remove('cursor-hover');
+      }
     });
 
     // Add magnetic effect to CTA buttons
@@ -1906,7 +1913,7 @@ function init3DGAPbot() {
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(container.clientWidth, container.clientHeight);
-  }, 200));
+  }, 200), { passive: true });
 }
 
 
@@ -2113,7 +2120,7 @@ class HologramInteractive {
       this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-    }, 200));
+    }, 200), { passive: true });
   }
 
   createNode(id, x, y, z, geometry) {
@@ -2337,10 +2344,16 @@ class CoraxAudio {
       });
     }, 50));
 
-    // 2. UI Hover Effects (High tech blips)
-    document.querySelectorAll('a, button, .holo-node, .config-btn').forEach(el => {
-      el.addEventListener('mouseenter', () => this.playBlip(600, 0.05, 'sine'));
-      el.addEventListener('click', () => this.playBlip(1200, 0.1, 'square'));
+    // Optimized: Event delegation for UI audio
+    document.body.addEventListener('mouseover', (e) => {
+      if (e.target.closest('a, button, .holo-node, .config-btn')) {
+        this.playBlip(600, 0.05, 'sine');
+      }
+    });
+    document.body.addEventListener('click', (e) => {
+      if (e.target.closest('a, button, .holo-node, .config-btn')) {
+        this.playBlip(1200, 0.1, 'square');
+      }
     });
 
     // Terminal typing sounds
@@ -3096,7 +3109,7 @@ class CyberGlobe {
       this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-    }, 200));
+    }, 200), { passive: true });
 
     this.animate();
   }
