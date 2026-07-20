@@ -7,10 +7,10 @@ text = text.replace(
     '<img src="images/logo.png" alt="Corax CoLAB Logo" style="height: 40px; margin-right: 10px;">\n        <span class="logo-text">Corax CoLAB</span>'
 )
 
-# Insert hero-bg.svg into hero-bg-video-placeholder
+# Insert hero-bg.svg into hero-bg-visuals
 text = text.replace(
-    '<div class="hero-bg-video-placeholder"></div>',
-    '<div class="hero-bg-video-placeholder" style="background-image: url(\'images/hero-bg.svg\'); background-size: cover; background-position: center; opacity: 0.5;"></div>'
+    '<div class="hero-bg-visuals"></div>',
+    '<div class="hero-bg-visuals" style="background-image: url(\'images/hero-bg.svg\'); background-size: cover; background-position: center; opacity: 0.5;"></div>'
 )
 
 # Insert capability SVGs

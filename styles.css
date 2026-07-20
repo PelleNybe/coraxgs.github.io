@@ -1408,7 +1408,7 @@ footer::before {
   overflow: hidden;
 }
 
-.hero-bg-video-placeholder {
+.hero-bg-visuals {
   position: absolute;
   top: 0;
   left: 0;
@@ -1419,7 +1419,7 @@ footer::before {
   opacity: 0.8;
 }
 
-.hero-bg-video-placeholder::after {
+.hero-bg-visuals::after {
   content: "";
   position: absolute;
   top: 0;
@@ -1589,7 +1589,7 @@ body {
   overflow: hidden;
 }
 
-.hero-bg-video-placeholder::after {
+.hero-bg-visuals::after {
   opacity: 0.1;
   background-size: 40px 40px;
 }

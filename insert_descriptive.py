@@ -2,7 +2,7 @@ with open('/app/index.html', 'r') as f:
     text = f.read()
 
 # Insert swarm-gapbot image into Platform section
-# We have id="gapbot-3d-container", let's put it next to it or replace it if it's meant to be an image placeholder.
+# We have id="gapbot-3d-container", let's put it next to it or replace it if it's meant to be an image container.
 # Actually, the 3d container is for patch_3d.js. We can add an image right under the section title or inside the product cards.
 swarm_html = """
     <div style="text-align: center; margin-top: 2rem;">
