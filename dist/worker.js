@@ -1,3 +1,14 @@
+
+// Deterministic PRNG to replace Math.random for mathematical noise generation
+function mulberry32(a) {
+    return function() {
+      var t = a += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+}
+const sysRand = mulberry32(1337);
 // worker.js
 
 // Perlin noise configuration and implementation
@@ -16,7 +27,7 @@ function noise(x, y, z) {
   if (perlin == null) {
     perlin = new Float32Array(PERLIN_SIZE + 1);
     for (let i = 0; i < PERLIN_SIZE + 1; i++) {
-      perlin[i] = Math.random();
+      perlin[i] = sysRand();
     }
   }
   let xi = Math.floor(x), yi = Math.floor(y), zi = Math.floor(z);

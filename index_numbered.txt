@@ -109,7 +109,7 @@
    109
    110	  <!-- Hero Section -->
    111	  <section class="hero">
-   112	    <div class="hero-bg-video-placeholder"></div>
+   112	    <div class="hero-bg-visuals"></div>
    113	    <div class="hero-bg-overlay"></div>
    114	    <div class="hero-content">
    115	      <div class="terminal-boot-container">
@@ -140,7 +140,7 @@
    140
    141	    <!-- Hero Section -->
    142	    <section class="hero">
-   143	      <div class="hero-bg-video-placeholder"></div>
+   143	      <div class="hero-bg-visuals"></div>
    144	      <div class="hero-bg-overlay"></div>
    145	      <div class="hero-content">
    146	        <h1>

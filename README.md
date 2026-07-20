@@ -260,7 +260,7 @@ Innovation thrives in the open. We believe in the power of open-source and activ
 
 ## ⚙️ Configuration
 
-If you'd like to run local tests or mock specific integrations, you can configure your environment via a `.env` file.
+If you'd like to run local tests or test specific integrations offline, you can configure your environment via a `.env` file.
 
 1. Copy the example configuration:
    ```bash

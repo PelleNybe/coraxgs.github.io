@@ -1,4 +1,15 @@
 
+// Deterministic PRNG to replace Math.random for visual consistency
+function mulberry32(a) {
+    return function() {
+      var t = a += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+}
+const sysRand = mulberry32(1337);
+
 // Performance optimization: Throttle utility
 function throttle(func, limit) {
   let inThrottle;
@@ -667,7 +678,7 @@ class CoraxWebsite {
       for (const step of steps) {
         bootFill.style.width = step.progress + '%';
         bootText.textContent = step.text;
-        await new Promise(r => setTimeout(r, 200 + Math.random() * 300));
+        await new Promise(r => setTimeout(r, 200 + sysRand() * 300));
       }
 
       bootScreen.style.opacity = '0';
@@ -1095,21 +1106,21 @@ class NeuralNetwork {
 
     for (let i = 0; i < this.particleCount; i++) {
       // Random positions in a sphere-like distribution
-      const r = 800 * Math.cbrt(Math.random());
-      const theta = Math.random() * 2 * Math.PI;
-      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 800 * Math.cbrt(sysRand());
+      const theta = sysRand() * 2 * Math.PI;
+      const phi = Math.acos(2 * sysRand() - 1);
 
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       positions[i * 3 + 2] = r * Math.cos(phi);
 
       // Mix colors
-      const mixedColor = colorPrimary.clone().lerp(colorSecondary, Math.random());
+      const mixedColor = colorPrimary.clone().lerp(colorSecondary, sysRand());
       colors[i * 3] = mixedColor.r;
       colors[i * 3 + 1] = mixedColor.g;
       colors[i * 3 + 2] = mixedColor.b;
 
-      sizes[i] = Math.random() * 2 + 1;
+      sizes[i] = sysRand() * 2 + 1;
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -1511,7 +1522,7 @@ class TerminalBoot {
       case 'fetch':
         await this.typeLine("Requesting stream from telemetry.coraxcolab.com...");
         await this.typeLine(`[${new Date().toISOString()}] Data packet received.`);
-        await this.typeLine(`Packet latency: ${Math.floor(Math.random()*20)}ms. Status: SECURE.`);
+        await this.typeLine(`Packet latency: ${Math.floor(sysRand()*20)}ms. Status: SECURE.`);
         break;
       case 'execute':
         await this.typeLine("Initializing main execution loop.");
@@ -2083,9 +2094,9 @@ class HologramInteractive {
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-      positions[i*3] = (Math.random() - 0.5) * 400;
-      positions[i*3+1] = Math.random() * 100 - 20;
-      positions[i*3+2] = (Math.random() - 0.5) * 400;
+      positions[i*3] = (sysRand() - 0.5) * 400;
+      positions[i*3+1] = sysRand() * 100 - 20;
+      positions[i*3+2] = (sysRand() - 0.5) * 400;
     }
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     const material = new THREE.PointsMaterial({ color: 0x00ffc2, size: 2, transparent: true, opacity: 0.5 });
@@ -2359,7 +2370,7 @@ class CoraxAudio {
     // Terminal typing sounds
     document.addEventListener('keydown', (e) => {
       if(e.target.id === 'terminal-input' && !this.isMuted) {
-        this.playBlip(800 + Math.random()*200, 0.02, 'triangle');
+        this.playBlip(800 + sysRand()*200, 0.02, 'triangle');
       }
     });
 
@@ -2441,19 +2452,32 @@ class AISimulator {
     this.animateDepthMap();
 
     // Production-ready loops simulation for dynamic logs instead of static hardcoded lines
+    this.lastFpsTime = performance.now();
+    this.frameCount = 0;
     setInterval(() => {
-      this.fps.textContent = `${Math.floor(Math.random() * 5 + 58)} FPS`;
+      const now = performance.now();
+      const dt = now - this.lastFpsTime;
+      if(dt > 0) {
+        const actualFps = Math.round((this.frameCount * 1000) / dt);
+        this.fps.textContent = `${actualFps} FPS`;
+      }
+      this.lastFpsTime = now;
+      this.frameCount = 0;
     }, 500);
 
     setInterval(() => {
         if(this.scenario === 'nominal') {
-            this.log(`> Process ${Math.floor(Math.random()*1000)}: Sensor reading OK (${(40 + Math.random()*5).toFixed(1)}% moisture).`);
+            const timeVal = performance.now();
+            const moisture = 40 + 5 * Math.sin(timeVal * 0.001);
+            const processId = Math.floor(1000 + (timeVal % 1000));
+            this.log(`> Process ${processId}: Sensor reading OK (${moisture.toFixed(1)}% moisture).`);
         }
     }, 3500);
   }
 
   animateDepthMap() {
     requestAnimationFrame(this.animateDepthMap.bind(this));
+    this.frameCount++;
 
     let w = this.canvas.width;
     let h = this.canvas.height;
@@ -3051,7 +3075,7 @@ class CyberGlobe {
       const node = new THREE.Mesh(nodeGeo, nodeMat);
 
       node.position.set(x, y, z);
-      node.userData = { id: `Node-${Math.floor(Math.random()*9000)+1000}`, type: ['Compute', 'Validator', 'Relay'][i%3] };
+      node.userData = { id: `Node-${Math.floor(sysRand()*9000)+1000}`, type: ['Compute', 'Validator', 'Relay'][i%3] };
 
       this.nodes.push(node);
       this.globeGroup.add(node);
@@ -3060,8 +3084,8 @@ class CyberGlobe {
     // Connections
     const lineMat = new THREE.LineBasicMaterial({ color: 0x00ffcc, transparent: true, opacity: 0.2 });
     for (let i = 0; i < 20; i++) {
-      const p1 = this.nodes[Math.floor(Math.random() * this.nodes.length)].position;
-      const p2 = this.nodes[Math.floor(Math.random() * this.nodes.length)].position;
+      const p1 = this.nodes[Math.floor(sysRand() * this.nodes.length)].position;
+      const p2 = this.nodes[Math.floor(sysRand() * this.nodes.length)].position;
 
       // Create arc
       const curve = new THREE.QuadraticBezierCurve3(
@@ -3131,13 +3155,14 @@ class TelemetryChart {
   }
 
   init() {
+    this.time = 0;
     this.chart = new Chart(this.ctx, {
       type: 'line',
       data: {
         labels: Array.from({length: 20}, (_, i) => ''),
         datasets: [{
           label: 'Swarm Consensus Latency (ms)',
-          data: Array.from({length: 20}, () => Math.random() * 50 + 20),
+          data: Array.from({length: 20}, (_, i) => 30 + 15 * Math.sin(i * 0.5) + 5 * Math.sin(i * 1.3)),
           borderColor: '#00FFC2',
           backgroundColor: 'rgba(0, 255, 194, 0.1)',
           borderWidth: 2,
@@ -3147,7 +3172,7 @@ class TelemetryChart {
         },
         {
           label: 'Edge AI Inference Load (%)',
-          data: Array.from({length: 20}, () => Math.random() * 30 + 50),
+          data: Array.from({length: 20}, (_, i) => 60 + 20 * Math.sin(i * 0.3) + 10 * Math.cos(i * 0.8)),
           borderColor: '#1A73E8',
           backgroundColor: 'rgba(26, 115, 232, 0.1)',
           borderWidth: 2,
@@ -3181,17 +3206,18 @@ class TelemetryChart {
   }
 
   updateData() {
-    // Latency
+    this.time += 1;
+
+    // Latency generated by interfering sine waves
     let currentData0 = this.chart.data.datasets[0].data;
-    currentData0.push(Math.max(10, currentData0[currentData0.length - 1] + (Math.random() - 0.5) * 20));
+    let nextLat = 30 + 15 * Math.sin(this.time * 0.5) + 5 * Math.sin(this.time * 1.3);
+    currentData0.push(nextLat);
     currentData0.shift();
 
-    // Inference Load
+    // Inference Load generated by interfering sine/cosine waves
     let currentData1 = this.chart.data.datasets[1].data;
-    let nextVal = currentData1[currentData1.length - 1] + (Math.random() - 0.5) * 15;
-    if (nextVal > 95) nextVal = 95;
-    if (nextVal < 20) nextVal = 20;
-    currentData1.push(nextVal);
+    let nextLoad = 60 + 20 * Math.sin(this.time * 0.3) + 10 * Math.cos(this.time * 0.8);
+    currentData1.push(nextLoad);
     currentData1.shift();
 
     this.chart.update();
