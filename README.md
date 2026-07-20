@@ -194,7 +194,7 @@ Our flagship architecture involves **GAP Platform** (The Brain: a hybrid cloud/e
 
 In our continuous pursuit of excellence, we have recently integrated massive updates:
 
-### 🚀 Technical Upgrades (100% Functional, No Mocks)
+### 🚀 Technical Upgrades (100% Functional)
 1.  **Robust GitHub Data Pipeline:** Implemented localStorage caching with exponential backoff retries for the GitHub Activity feed to bypass API rate limits securely.
 2.  **True Markdown Blog System:** `generate_blog_json.js` now automatically parses real markdown frontmatter from the `blogs/` directory during the build process (`npm run build`).
 3.  **Advanced Web Audio Context Manager:** Soundscape initializes only on user interaction respecting modern browser autoplay policies, providing a stable responsive audio experience.
