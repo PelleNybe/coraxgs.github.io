@@ -91,5 +91,5 @@
   
   <!-- Title -->
   <text x="400" y="50" font-family="Inter, sans-serif" font-size="36" font-weight="700" 
-        text-anchor="middle" fill="url(#blockchainGrad)">Web3 &amp;amp; Blockchain</text>
+        text-anchor="middle" fill="url(#blockchainGrad)">Web3 &amp; Blockchain</text>
 </svg>
