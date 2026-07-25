@@ -111,7 +111,8 @@ class ProjectCardElement extends HTMLElement {
        statItemHtml = `<span class="stat-item">⭐ ${stars}</span>`;
     }
 
-    this.shadowRoot.innerHTML = `
+    const template = document.createElement('template');
+    template.innerHTML = `
       <style>
         :host {
           display: block;
@@ -257,6 +258,7 @@ class ProjectCardElement extends HTMLElement {
         </div>
       </div>
     `;
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 }
 
@@ -501,7 +503,7 @@ class ProjectRenderer {
     this.loadingContainer.style.display = "none";
     this.errorContainer.style.display = "none";
     this.container.style.display = "grid";
-    this.container.innerHTML = "";
+    while(this.container.firstChild) this.container.removeChild(this.container.firstChild);
 
     if (!repos || repos.length === 0) {
       const noReposMessage = "No public repositories found.";
@@ -1438,7 +1440,7 @@ class TerminalBoot {
       "Connection established to main operations center."
     ];
     this.currentLine = 0;
-    this.container.innerHTML = ''; // Clear initial content
+    while(this.container.firstChild) this.container.removeChild(this.container.firstChild);
     this.init();
   }
 
@@ -1488,7 +1490,7 @@ class TerminalBoot {
         inputField.value = '';
         inputContainer.remove(); // Remove input to print response
 
-        await this.typeLine(`admin@corax:~# ${cmd}`, 10);
+        await this.typeLine(`admin@corax:~# ${escapeHTML(cmd)}`, 10);
         await this.processCommand(cmd);
 
         this.setupInput(); // Re-add input after response
@@ -1557,12 +1559,12 @@ class TerminalBoot {
         }
         break;
       case 'clear':
-        this.container.innerHTML = '';
+        while(this.container.firstChild) this.container.removeChild(this.container.firstChild);
         break;
       case '':
         break;
       default:
-        await this.typeLine(`Unknown command: ${cmd}. Type 'help' for options.`);
+        await this.typeLine(`Unknown command: ${escapeHTML(cmd)}. Type 'help' for options.`);
     }
   }
 }
@@ -2012,7 +2014,7 @@ class HologramInteractive {
 
     // Clear old HTML nodes
     const sceneDiv = document.querySelector('.holo-scene');
-    if (sceneDiv) sceneDiv.innerHTML = '';
+    if (sceneDiv) while(sceneDiv.firstChild) sceneDiv.removeChild(sceneDiv.firstChild);
 
     // Remove background grid from HTML since we will render it in WebGL
     const gridBg = this.container.querySelector('div[style*="background-image: linear-gradient"]');
@@ -2512,7 +2514,7 @@ class AISimulator {
   }
 
   async runScenario(type) {
-    this.logContainer.innerHTML = '';
+    while(this.logContainer.firstChild) this.logContainer.removeChild(this.logContainer.firstChild);
     this.log('> INITIALIZING PERLIN DEPTH MAP SENSORS...', 'var(--primary-color)');
     this.bbox.style.display = 'none';
     this.actionState.textContent = 'ANALYZING...';
@@ -2627,7 +2629,7 @@ class GitHubActivityFeed {
   }
 
   renderEvents(events) {
-    this.container.innerHTML = '';
+    while(this.container.firstChild) this.container.removeChild(this.container.firstChild);
 
     const relevantEvents = events.filter(e =>
       ['PushEvent', 'PullRequestEvent', 'IssuesEvent', 'CreateEvent'].includes(e.type)
@@ -2876,7 +2878,7 @@ class BlogSystem {
   }
 
   renderPosts(postsToRender) {
-    this.container.innerHTML = '';
+    while(this.container.firstChild) this.container.removeChild(this.container.firstChild);
 
     if (!postsToRender || postsToRender.length === 0) {
        this.container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-muted);">No matching insights found.</div>';
