@@ -66,9 +66,14 @@ function noise(x, y, z) {
 }
 
 self.onmessage = function(e) {
-  const { width, height, zOff, inc, scenario } = e.data;
+  const { width, height, zOff, inc, scenario, buffer } = e.data;
   const size = width * height * 4;
-  const pixels = new Uint8ClampedArray(size);
+  let pixels;
+  if (buffer && buffer.byteLength === size) {
+    pixels = new Uint8ClampedArray(buffer);
+  } else {
+    pixels = new Uint8ClampedArray(size);
+  }
 
   let xOff = 0;
   for (let x = 0; x < width; x++) {
