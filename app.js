@@ -2478,6 +2478,7 @@ class AISimulator {
   }
 
   animateDepthMap() {
+    if (!this.isVisible) return;
     requestAnimationFrame(this.animateDepthMap.bind(this));
     this.frameCount++;
 
@@ -2490,6 +2491,7 @@ class AISimulator {
         const { pixels } = e.data;
         let imgData = new ImageData(pixels, w, h);
         this.ctx.putImageData(imgData, 0, 0);
+        this.workerBuffer = pixels.buffer; // Save buffer for reuse
         this.isProcessing = false;
       };
     }
@@ -2497,7 +2499,14 @@ class AISimulator {
     if (!this.isProcessing) {
       this.isProcessing = true;
       // Pass the scenario so worker can adjust logic (pest, drought, etc.)
-      this.worker.postMessage({ width: w, height: h, zOff: this.zOff, inc: 0.05, scenario: this.scenario });
+      const msg = { width: w, height: h, zOff: this.zOff, inc: 0.05, scenario: this.scenario };
+      if (this.workerBuffer && this.workerBuffer.byteLength === w * h * 4) {
+        msg.buffer = this.workerBuffer;
+        this.worker.postMessage(msg, [this.workerBuffer]);
+        this.workerBuffer = null;
+      } else {
+        this.worker.postMessage(msg);
+      }
       this.zOff += 0.02;
     }
   }
@@ -3137,10 +3146,18 @@ class CyberGlobe {
       this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
     }, 200), { passive: true });
 
+    this.isVisible = true;
+    this.observer = new IntersectionObserver((entries) => {
+      this.isVisible = entries[0].isIntersecting;
+      if (this.isVisible) this.animate();
+    }, { threshold: 0.1 });
+    this.observer.observe(this.container);
+
     this.animate();
   }
 
   animate() {
+    if (!this.isVisible) return;
     requestAnimationFrame(this.animate.bind(this));
     this.globeGroup.rotation.y += 0.002;
     this.globeGroup.rotation.x += 0.001;
