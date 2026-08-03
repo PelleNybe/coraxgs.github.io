@@ -76,7 +76,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
-  <a href="#main-content" class="skip-link" style="position: absolute; left: -9999px; z-index: 999; padding: 1em; background: #000; color: #fff; text-decoration: none;">Skip to main content</a>
+  <a href="#main-content" class="skip-link" tabindex="0">Skip to main content</a>
   <!-- V1: Advanced Loading Screen -->
   <div id="corax-os-boot" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--primary-color); font-family: monospace; transition: opacity 1s ease-out;">
     <div style="font-size: 2rem; font-weight: bold; margin-bottom: 2rem; text-shadow: 0 0 20px var(--primary-color);">CORAX_OS v2.0</div>
@@ -579,7 +579,6 @@
     </p>
 
     <div style="max-width: 600px; margin: 0 auto; margin-bottom: 2rem; position: relative;">
-      <label for="blog-search" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Search insights</label>
       <label for="blog-search" class="sr-only" style="position: absolute; left: -9999px;">Search insights</label>
       <input type="text" id="blog-search" aria-label="Search insights" placeholder="Discover insights via tags (e.g. YOLOv8, MQTT, GAP)" style="width: 100%; padding: 12px 20px; font-size: 1rem; border-radius: 30px; border: 1px solid rgba(0,255,194,0.3); background: rgba(0,0,0,0.4); color: white; outline: none; transition: all 0.3s ease;">
       <span aria-hidden="true" style="position: absolute; right: 20px; top: 12px; opacity: 0.5;">🔍</span>
