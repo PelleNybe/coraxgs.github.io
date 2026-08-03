@@ -16,3 +16,4 @@ Checked code changes. Tests pass. Ready for commit.
 - Implemented further performance optimizations: Added conditions to `setInterval` callbacks for AI simulation logs, preventing execution when the component is not visible on screen.
 - Stopped Telemetry Chart background updates when the telemetry panel is hidden, significantly reducing CPU usage when tracking is inactive.
 - Enhanced `sw.js` with dynamic runtime caching to properly store new assets offline for full PWA robustness.
+- Optimized `GitHubActivityFeed` to utilize the existing `GitHubAPI.fetchWithCache` class instead of raw `fetch()`. This provides a global memory cache (TTL) and critical exponential backoff/rate-limiting logic when contacting the GitHub API.

@@ -2623,16 +2623,18 @@ class GitHubActivityFeed {
          }
       }
 
-      let response = await fetch('https://api.github.com/orgs/PelleNybe/events');
-      if (!response.ok) {
-        response = await fetch('https://api.github.com/users/PelleNybe/events');
+      const githubApi = new GitHubAPI("PelleNybe");
+      let events;
+      try {
+        events = await githubApi.fetchWithCache("https://api.github.com/orgs/PelleNybe/events");
+      } catch (err) {
+        try {
+          events = await githubApi.fetchWithCache("https://api.github.com/users/PelleNybe/events");
+        } catch (e) {
+          this.container.innerHTML = "<div style=\"text-align: center; color: var(--error-color);\">Unable to load activity feed.</div>";
+          return;
+        }
       }
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch GitHub activity');
-      }
-
-      const events = await response.json();
       localStorage.setItem('corax_gh_feed', JSON.stringify({ data: events, timestamp: Date.now() }));
       this.renderEvents(events);
     } catch (error) {
