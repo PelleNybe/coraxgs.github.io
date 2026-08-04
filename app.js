@@ -2442,7 +2442,8 @@ class AISimulator {
     this.ctx.imageSmoothingEnabled = false;
 
     // Bind buttons
-    document.querySelectorAll('.sim-btn').forEach(btn => {
+    const simBtns = document.querySelectorAll('.sim-btn');
+    simBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         const type = e.target.dataset.scenario;
         this.scenario = type;
