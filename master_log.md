@@ -18,3 +18,4 @@ Checked code changes. Tests pass. Ready for commit.
 - Enhanced `sw.js` with dynamic runtime caching to properly store new assets offline for full PWA robustness.
 - Optimized `GitHubActivityFeed` to utilize the existing `GitHubAPI.fetchWithCache` class instead of raw `fetch()`. This provides a global memory cache (TTL) and critical exponential backoff/rate-limiting logic when contacting the GitHub API.
 - Optimized image loading logic: the initial viewport images (logo, hero SVGs) are now eagerly loaded (`loading="eager"`) while off-screen dashboard previews remain lazy loaded. This improves LCP metrics.
+- Refactored list rendering (`GitHubActivityFeed`, `ProjectRenderer`, `BlogRenderer`) to utilize `DocumentFragment`. This prevents excessive layout trashing by batching DOM insertions into a single operation rather than appending each node individually in a loop.
