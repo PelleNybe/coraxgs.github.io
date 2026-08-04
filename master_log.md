@@ -17,3 +17,4 @@ Checked code changes. Tests pass. Ready for commit.
 - Stopped Telemetry Chart background updates when the telemetry panel is hidden, significantly reducing CPU usage when tracking is inactive.
 - Enhanced `sw.js` with dynamic runtime caching to properly store new assets offline for full PWA robustness.
 - Optimized `GitHubActivityFeed` to utilize the existing `GitHubAPI.fetchWithCache` class instead of raw `fetch()`. This provides a global memory cache (TTL) and critical exponential backoff/rate-limiting logic when contacting the GitHub API.
+- Optimized image loading logic: the initial viewport images (logo, hero SVGs) are now eagerly loaded (`loading="eager"`) while off-screen dashboard previews remain lazy loaded. This improves LCP metrics.
