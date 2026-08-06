@@ -20,3 +20,4 @@ Checked code changes. Tests pass. Ready for commit.
 - Optimized image loading logic: the initial viewport images (logo, hero SVGs) are now eagerly loaded (`loading="eager"`) while off-screen dashboard previews remain lazy loaded. This improves LCP metrics.
 - Refactored list rendering (`GitHubActivityFeed`, `ProjectRenderer`, `BlogRenderer`) to utilize `DocumentFragment`. This prevents excessive layout trashing by batching DOM insertions into a single operation rather than appending each node individually in a loop.
 - Optimized DOM node queries by caching previously selected elements into memory maps (`moduleBtns`) rather than running `document.querySelectorAll()` repeatedly during dynamic user interactions (such as the GAPbot configurator button clicks). This minimizes Reflow and Repaint calculations within the browser engine.
+- Enhanced accessibility by adding dynamic `aria-expanded` state to the mobile navigation toggle button in `app.js` and `index.html`.
