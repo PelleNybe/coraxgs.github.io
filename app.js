@@ -1433,11 +1433,11 @@ class TerminalBoot {
     this.container = document.getElementById(elementId);
     if (!this.container) return;
     this.lines = [
-      "Initializing Corax OS v2.0 environment...",
-      "Mounting storage arrays...",
-      "[OK] Database connection active.",
-      "[OK] Live sensor data streaming configured.",
-      "Connection established to main operations center."
+      "Initializing Corax OS environment...",
+      "Mounting local execution context...",
+      `[OK] Client hardware concurrency detected.`,
+      "[OK] Live sensor stream configured.",
+      "Awaiting instructions. Type 'help' to begin."
     ];
     this.currentLine = 0;
     while(this.container.firstChild) this.container.removeChild(this.container.firstChild);
@@ -1517,14 +1517,16 @@ class TerminalBoot {
         break;
       case 'nodes':
         await this.typeLine("Querying active endpoints...");
-        await this.typeLine("Node-1: Online (Uptime 45d)");
-        await this.typeLine("Node-2: Online (Uptime 23d)");
-        await this.typeLine("Database Shard A: Synced");
+        const connectionInfo = navigator.connection ? navigator.connection.effectiveType : 'unknown';
+        const cores = navigator.hardwareConcurrency || 'unknown';
+        await this.typeLine(`Local Node: Online (Cores: ${cores})`);
+        await this.typeLine(`Network Link: ${connectionInfo}`);
+        await this.typeLine(`Web Worker: ${window.coraxWorkerLoad ? 'Active' : 'Standby'}`);
         break;
       case 'fetch':
         await this.typeLine("Requesting stream from telemetry.coraxcolab.com...");
         await this.typeLine(`[${new Date().toISOString()}] Data packet received.`);
-        await this.typeLine(`Packet latency: ${Math.floor(sysRand()*20)}ms. Status: SECURE.`);
+        await this.typeLine(`Packet latency: ${window.coraxLastLatency ? window.coraxLastLatency.toFixed(1) : 16}ms. Status: SECURE.`);
         break;
       case 'execute':
         await this.typeLine("Initializing main execution loop.");
@@ -2731,6 +2733,22 @@ class GitHubActivityFeed {
 
 // Feature: Web3 Integration Demo
 class Web3Demo {
+  async doCheckConnection() {
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+      if (accounts.length > 0) {
+        this.account = accounts[0];
+        this.statusText.textContent = `Connected: ${this.account.substring(0, 6)}...${this.account.substring(38)}`;
+        this.statusText.style.color = 'var(--success-color)';
+        this.connectBtn.style.display = 'none';
+        this.actionsDiv.style.display = 'flex';
+      } else {
+        localStorage.removeItem('corax_web3_account');
+      }
+    } catch (e) {
+      console.error("Silent reconnect failed", e);
+    }
+  }
   constructor() {
     this.connectBtn = document.getElementById('connect-wallet-btn');
     this.signBtn = document.getElementById('sign-message-btn');
@@ -2747,7 +2765,8 @@ class Web3Demo {
     // T4: Auto-connect if previously connected
     const savedAccount = localStorage.getItem('corax_web3_account');
     if (savedAccount && typeof window.ethereum !== 'undefined') {
-       this.checkConnection();
+       // this.checkConnection() should be called from the instance, but it's defined globally? Wait, let's see.
+      this.doCheckConnection();
     }
 
     this.connectBtn.addEventListener('click', async () => {
