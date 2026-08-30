@@ -21,3 +21,5 @@ Checked code changes. Tests pass. Ready for commit.
 - Refactored list rendering (`GitHubActivityFeed`, `ProjectRenderer`, `BlogRenderer`) to utilize `DocumentFragment`. This prevents excessive layout trashing by batching DOM insertions into a single operation rather than appending each node individually in a loop.
 - Optimized DOM node queries by caching previously selected elements into memory maps (`moduleBtns`) rather than running `document.querySelectorAll()` repeatedly during dynamic user interactions (such as the GAPbot configurator button clicks). This minimizes Reflow and Repaint calculations within the browser engine.
 - Enhanced accessibility by adding dynamic `aria-expanded` state to the mobile navigation toggle button in `app.js` and `index.html`.
+- Refactored Web3 Demo to ensure robust `doCheckConnection()` scoping.
+- Terminal boot sequence now prints active client hardware and connection statuses (`navigator.hardwareConcurrency`, `navigator.connection`) instead of fake uptime indicators.

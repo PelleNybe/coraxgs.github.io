@@ -1,16 +1,8 @@
 const { chromium } = require('playwright');
 const http = require('http');
-const serveStatic = require('serve-static');
-const finalhandler = require('finalhandler');
 
-const serve = serveStatic('.', { 'index': ['index.html'] });
-
-const server = http.createServer(function onRequest (req, res) {
-  serve(req, res, finalhandler(req, res));
-});
-
-server.listen(8000, async () => {
-  console.log("Server listening on port 8000");
+(async () => {
+  console.log("Connecting to existing port 8000");
   try {
     const browser = await chromium.launch();
     const page = await browser.newPage();
@@ -21,7 +13,5 @@ server.listen(8000, async () => {
     console.log('Verification screenshot saved');
   } catch(e) {
     console.error(e);
-  } finally {
-    server.close();
   }
-});
+})();
